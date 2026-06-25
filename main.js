@@ -1,21 +1,5 @@
-const toggle = document.querySelector('.nav-toggle');
-const nav = document.querySelector('.site-nav');
 
-toggle.addEventListener('click', () => {
-  const open = nav.classList.toggle('open');
-  toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-});
-
-document.querySelectorAll('.site-nav a').forEach(link => {
-  link.addEventListener('click', () => nav.classList.remove('open'));
-});
-
-document.getElementById('year').textContent = new Date().getFullYear();
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+const year=document.querySelector('#year'); if(year) year.textContent=new Date().getFullYear();
+function feather(){ const f=document.createElement('div'); f.className='feather'; f.textContent='🪶'; f.style.left=Math.random()*100+'vw'; f.style.animationDuration=8+Math.random()*8+'s'; f.style.fontSize=12+Math.random()*18+'px'; document.body.appendChild(f); setTimeout(()=>f.remove(),17000)}
+setInterval(feather,1400);
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href'); if(id.length>1){e.preventDefault(); document.querySelector(id)?.scrollIntoView({behavior:'smooth'})}}));
