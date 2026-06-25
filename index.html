@@ -4,107 +4,127 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>R.A. Crawford | The War of Feather and Shadow</title>
-  <meta name="description" content="Official website of fantasy author R.A. Crawford, author of The War of Feather and Shadow, Book One of The Raven Cycle." />
+  <meta name="description" content="Official author website of R.A. Crawford, author of The War of Feather and Shadow, Book One of The Raven Cycle." />
   <meta property="og:title" content="R.A. Crawford | The War of Feather and Shadow" />
   <meta property="og:description" content="A crown divides. A bloodline rises. A war begins." />
   <meta property="og:image" content="assets/cover.jpg" />
-  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#08090d" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="page-noise"></div>
-  <header class="site-header" id="top">
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div id="feathers" aria-hidden="true"></div>
+
+  <header class="site-header">
     <a class="brand" href="#top" aria-label="R.A. Crawford home">R.A. Crawford</a>
-    <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
-    <nav class="site-nav">
+    <button class="nav-toggle" aria-expanded="false" aria-label="Open navigation">☰</button>
+    <nav class="nav" aria-label="Main navigation">
       <a href="#book">Book</a>
+      <a href="#series">Series</a>
       <a href="#world">World</a>
       <a href="#author">Author</a>
-      <a href="#newsletter">Newsletter</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <main>
-    <section class="hero">
+  <main id="top">
+    <section class="hero section" aria-labelledby="hero-title">
+      <div class="hero-bg"></div>
       <div class="hero-copy reveal">
         <p class="eyebrow">Book One of The Raven Cycle</p>
-        <h1>The War of<br><span>Feather and Shadow</span></h1>
+        <h1 id="hero-title">The War of Feather and Shadow</h1>
         <p class="tagline">A crown divides. A bloodline rises. A war begins.</p>
-        <p class="intro">Enter a dark epic fantasy of five houses, one crown, and a destiny written in wing and blood.</p>
-        <div class="actions">
-          <a class="button primary" href="#book">Explore the Book</a>
-          <a class="button ghost" href="#author">Meet the Author</a>
+        <p class="intro">Welcome to the official home of <strong>R.A. Crawford</strong>, author of dark epic fantasy where ancient houses, ravens, bloodlines, and destiny collide.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#book">Explore the Book</a>
+          <a class="btn ghost" href="#author">Meet the Author</a>
         </div>
       </div>
-      <div class="hero-art reveal delay-1" aria-hidden="true">
-        <img src="assets/author.jpg" alt="R.A. Crawford author portrait" />
-        <div class="sigil">✦</div>
+      <div class="hero-art reveal delay-1">
+        <div class="portrait-frame">
+          <img src="assets/author.jpg" alt="R.A. Crawford seated in a warm library setting with a raven, notebook, and typewriter" />
+        </div>
       </div>
     </section>
 
-    <section class="book-section" id="book">
+    <section id="book" class="book section split" aria-labelledby="book-title">
       <div class="book-cover reveal">
         <img src="assets/cover.jpg" alt="Book cover for The War of Feather and Shadow by R.A. Crawford" />
+        <div class="cover-shine" aria-hidden="true"></div>
       </div>
-      <div class="book-copy reveal delay-1">
+      <div class="section-copy reveal delay-1">
         <p class="eyebrow">Featured Novel</p>
-        <h2>The War of Feather and Shadow</h2>
-        <h3>Book One • The Raven Cycle</h3>
-        <p>When ancient rivalries awaken and forgotten bloodlines return, five great houses stand on the edge of collapse. As ravens gather over kingdoms already divided, unlikely heroes must decide whether destiny is something they inherit—or something they forge.</p>
-        <p class="quote">“Five houses. One crown. One destiny.”</p>
-        <div class="actions">
-          <a class="button primary" href="#newsletter">Get Updates</a>
-          <a class="button ghost" href="#contact">Invite R.A. Crawford</a>
+        <h2 id="book-title">The War of Feather and Shadow</h2>
+        <p class="subhead">Five Houses. One Crown. One Destiny.</p>
+        <p>When ancient rivalries awaken and forgotten bloodlines rise, five great houses stand on the edge of collapse. As ravens gather over kingdoms already divided, unlikely heroes must decide whether destiny is something they inherit—or something they forge.</p>
+        <p class="note">Launch details, purchase links, sample chapters, and reviews can be added here as soon as they are ready.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#contact">Join Updates</a>
+          <a class="btn ghost" href="#world">Enter the World</a>
         </div>
       </div>
     </section>
 
-    <section class="world-section" id="world">
-      <p class="eyebrow reveal">The World</p>
-      <h2 class="reveal">The Raven Cycle Begins</h2>
+    <section id="series" class="section series" aria-labelledby="series-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">The Series</p>
+        <h2 id="series-title">The Raven Cycle</h2>
+        <p>Epic fantasy built around divided crowns, ancient bloodlines, and the shadow of wings over war-torn kingdoms.</p>
+      </div>
       <div class="cards">
-        <article class="card reveal"><span>01</span><h3>The Five Houses</h3><p>Old power, fractured loyalties, and banners raised beneath a darkening sky.</p></article>
-        <article class="card reveal delay-1"><span>02</span><h3>The Crown</h3><p>A symbol of unity becomes the spark that threatens to set the realm aflame.</p></article>
-        <article class="card reveal delay-2"><span>03</span><h3>The Ravens</h3><p>Omens, guardians, messengers—some wings carry secrets sharper than steel.</p></article>
+        <article class="card reveal"><span>Book One</span><h3>The War of Feather and Shadow</h3><p>A crown divides. A bloodline rises. A war begins.</p></article>
+        <article class="card reveal delay-1"><span>Book Two</span><h3>Coming Soon</h3><p>The next chapter of The Raven Cycle will appear here when announced.</p></article>
+        <article class="card reveal delay-2"><span>Reader Extras</span><h3>Lore & Bonus Content</h3><p>Maps, houses, characters, and exclusive updates for the Raven's Flock.</p></article>
       </div>
     </section>
 
-    <section class="author-section" id="author">
-      <div class="author-image reveal"><img src="assets/author.jpg" alt="R.A. Crawford seated at a writing desk" /></div>
-      <div class="author-copy reveal delay-1">
+    <section id="world" class="section world" aria-labelledby="world-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">The World</p>
+        <h2 id="world-title">Feather. Shadow. Crown.</h2>
+        <p>Build this section into a reader portal with maps, character profiles, house sigils, timelines, and spoiler-free lore.</p>
+      </div>
+      <div class="world-grid">
+        <div class="world-card reveal"><h3>The Five Houses</h3><p>Powerful families bound by ambition, legacy, and the price of loyalty.</p></div>
+        <div class="world-card reveal delay-1"><h3>The Ravens</h3><p>Symbols, omens, weapons, and witnesses to the war that is coming.</p></div>
+        <div class="world-card reveal delay-2"><h3>The Crown</h3><p>A throne that divides bloodlines and reshapes the fate of kingdoms.</p></div>
+        <div class="world-card reveal delay-3"><h3>The Map</h3><p>A future home for geography, travel routes, cities, and battlefield lore.</p></div>
+      </div>
+    </section>
+
+    <section id="author" class="section author split" aria-labelledby="author-title">
+      <div class="section-copy reveal">
         <p class="eyebrow">Meet the Author</p>
-        <h2>R.A. Crawford</h2>
-        <p>R.A. Crawford writes immersive fantasy filled with ancient kingdoms, political intrigue, unforgettable characters, and worlds where every choice carries a cost.</p>
-        <p>Inspired by mythology, history, and the timeless struggle between light and shadow, his stories explore loyalty, sacrifice, bloodline, and the price of power.</p>
+        <h2 id="author-title">R.A. Crawford</h2>
+        <p>R.A. Crawford writes immersive epic fantasy filled with ancient kingdoms, political intrigue, unforgettable characters, and worlds where every choice carries a cost.</p>
+        <p>Inspired by mythology, history, gothic atmosphere, and the timeless struggle between light and shadow, his stories explore loyalty, sacrifice, destiny, and the dangerous hunger for power.</p>
+      </div>
+      <div class="author-quote reveal delay-1">
+        <blockquote>“Stories are more than words—they are worlds waiting to be discovered.”</blockquote>
       </div>
     </section>
 
-    <section class="newsletter" id="newsletter">
-      <div class="reveal">
+    <section id="contact" class="section newsletter" aria-labelledby="newsletter-title">
+      <div class="newsletter-box reveal">
         <p class="eyebrow">Join the Raven's Flock</p>
-        <h2>Be first to receive book news, bonus lore, and launch updates.</h2>
-        <form class="signup" action="mailto:rc.facade@gmail.com" method="post" enctype="text/plain">
-          <input type="email" name="email" placeholder="Your email address" aria-label="Email address" required>
-          <button type="submit">Join</button>
+        <h2 id="newsletter-title">Be first to hear what rises from the shadows.</h2>
+        <p>Use this section for your newsletter link, launch updates, bonus chapters, preorder news, and exclusive lore.</p>
+        <form class="signup" onsubmit="event.preventDefault(); alert('Newsletter form placeholder — connect MailerLite, Beehiiv, or ConvertKit here.');">
+          <label class="sr-only" for="email">Email address</label>
+          <input id="email" type="email" placeholder="you@example.com" required />
+          <button class="btn primary" type="submit">Join Updates</button>
         </form>
-        <p class="note">Newsletter service integration can be added later with MailerLite, ConvertKit, or Beehiiv.</p>
       </div>
-    </section>
-
-    <section class="contact" id="contact">
-      <p class="eyebrow reveal">Contact</p>
-      <h2 class="reveal">For interviews, events, reviews, or reader messages.</h2>
-      <a class="button primary reveal" href="mailto:rc.facade@gmail.com">Email R.A. Crawford</a>
     </section>
   </main>
 
-  <footer>
+  <footer class="footer">
     <p>© <span id="year"></span> R.A. Crawford. All rights reserved.</p>
-    <a href="#top">Back to top ↑</a>
+    <p><a href="mailto:contact@racrawfordauthor.com">contact@racrawfordauthor.com</a></p>
   </footer>
 
   <script src="main.js"></script>
