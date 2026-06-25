@@ -1,8 +1,12 @@
-# R.A. Crawford Author Website - V3
+# R.A. Crawford Author Website
 
-Upload all files in this folder to the root of your GitHub repository.
+Official author website for R.A. Crawford and *The War of Feather and Shadow*.
 
-Files must remain in the root:
+## Upload to GitHub
+
+Upload all files in this folder to the root of the GitHub repository, replacing the old files.
+
+Files must stay in the root:
 
 - index.html
 - styles.css
@@ -11,6 +15,4 @@ Files must remain in the root:
 - assets/author.jpg
 - assets/cover.jpg
 
-Custom domain:
-
-racrawfordauthor.com
+After upload, GitHub Pages will redeploy automatically.

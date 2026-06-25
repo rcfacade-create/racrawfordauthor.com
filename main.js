@@ -1,5 +1,21 @@
-const toggle=document.querySelector('.nav-toggle');const nav=document.querySelector('.nav');toggle?.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',open?'true':'false')});document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
-document.getElementById('year').textContent=new Date().getFullYear();
-const glow=document.querySelector('.cursor-glow');window.addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'});
-const io=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')})},{threshold:.15});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-const feathers=document.getElementById('feathers');function makeFeather(){const f=document.createElement('div');f.className='feather';f.textContent='❧';f.style.left=Math.random()*100+'vw';f.style.setProperty('--drift',(Math.random()*220-110)+'px');f.style.animationDuration=(8+Math.random()*9)+'s';f.style.opacity=(.18+Math.random()*.28).toString();feathers.appendChild(f);setTimeout(()=>f.remove(),18000)}setInterval(makeFeather,900);for(let i=0;i<8;i++)setTimeout(makeFeather,i*300);
+const toggle = document.querySelector('.nav-toggle');
+const nav = document.querySelector('.site-nav');
+
+toggle.addEventListener('click', () => {
+  const open = nav.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+
+document.querySelectorAll('.site-nav a').forEach(link => {
+  link.addEventListener('click', () => nav.classList.remove('open'));
+});
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
