@@ -1,13 +1,19 @@
-# R.A. Crawford Author Website v5
+# R.A. Crawford Author Website v6
 
-Upload all unzipped files to the root of the GitHub repository `racrawfordauthor.com`.
+Upload the unzipped contents of this folder to the root of the GitHub repository.
 
-Includes:
-- Homepage
-- About page
-- Books page
-- World page
-- Brand page
-- Contact page
-- Assets folder
-- CNAME for racrawfordauthor.com
+Required structure:
+
+- index.html
+- styles.css
+- main.js
+- CNAME
+- assets/author.jpg
+- assets/cover.jpg
+- about.html
+- books.html
+- world.html
+- brand.html
+- contact.html
+
+The custom domain is configured in CNAME as racrawfordauthor.com.
