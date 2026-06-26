@@ -1,31 +1,37 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About | R.A. Crawford</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="index.html"><span class="brand-mark">♜</span><span class="brand-text">R.A. Crawford<span class="brand-sub">Epic Fantasy Author</span></span></a>
-    <nav class="nav"><a href="index.html">Home</a><a class="active" href="about.html">About</a><a href="books.html">Books</a><a href="world.html">World</a><a href="contact.html">Contact</a></nav>
+  <div id="feather-layer" aria-hidden="true"></div>
+  <header class="site-header compact">
+    <a class="brand" href="index.html"><span class="brand-mark">✦</span><span><strong>R.A. Crawford</strong><em>Epic Fantasy Author</em></span></a>
+    <button class="nav-toggle" aria-label="Open navigation">☰</button>
+    <nav class="site-nav"><a href="index.html">Home</a><a href="books.html">Books</a><a href="world.html">World</a><a class="active" href="about.html">About</a><a href="contact.html">Contact</a></nav>
   </header>
-  <main>
-    <section class="page-hero"><div class="eyebrow">About the Author</div><h1>R.A. Crawford</h1></section>
-    <section class="section split">
-      <div class="reveal">
-        <p class="quote">Stories are not just written. They are discovered, survived, and carried back from the dark.</p>
-        <p class="section-lead">R.A. Crawford writes epic fantasy filled with ancient houses, political intrigue, academy secrets, forbidden legacy, and characters shaped by loyalty, betrayal, and destiny.</p>
-        <p class="muted">This website is the official home of <em>The Raven Cycle</em>, beginning with <em>The War of Feather and Shadow</em>.</p>
+  <main class="page section">
+    <div class="page-heading reveal"><h1>About the Author</h1><div class="ornament"></div></div>
+    <section class="about-layout reveal">
+      <div class="about-copy">
+        <p>R.A. Crawford is the author of the epic fantasy series <em>The Raven's Heir Trilogy</em>.</p>
+        <p>Inspired by mythology, history, loyalty, betrayal, and the shadows between, R.A. crafts stories of power, legacy, and the choices that shape worlds.</p>
+        <p>When not writing, he can be found building, creating, or exploring the realms of stories in every form.</p>
+        <blockquote>I didn't want to just tell you one story,<br>I wanted to invite you to a new world<br>where stories are made, legends are born<br>and legacy's created.</blockquote>
       </div>
-      <img class="portrait about-portrait reveal" src="assets/author.jpg" alt="R.A. Crawford author portrait">
+      <figure class="author-frame">
+        <img src="assets/author.jpg" alt="R.A. Crawford author portrait" />
+        <figcaption>R.A. Crawford</figcaption>
+      </figure>
     </section>
   </main>
-  <footer class="site-footer"><span>© <span id="year"></span> R.A. Crawford</span><span>The Raven Cycle</span></footer>
+  <footer class="site-footer">© 2026 R.A. Crawford. All rights reserved.</footer>
   <script src="main.js"></script>
 </body>
 </html>
