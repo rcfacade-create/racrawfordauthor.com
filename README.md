@@ -1,1 +1,2 @@
-// JavaScript is embedded inline in each HTML file.
+const btn=document.querySelector('.menu-btn');const links=document.querySelector('.links');if(btn&&links){btn.addEventListener('click',()=>links.classList.toggle('open'))}
+const layer=document.querySelector('.feathers');if(layer){const chars=['🪶','⌁','🪶','🪶'];for(let i=0;i<18;i++){const f=document.createElement('span');f.className='feather';f.textContent=chars[i%chars.length];f.style.left=Math.random()*100+'vw';f.style.setProperty('--drift',(Math.random()*220-110)+'px');f.style.animationDuration=(12+Math.random()*16)+'s';f.style.animationDelay=(-Math.random()*20)+'s';f.style.fontSize=(18+Math.random()*28)+'px';f.style.opacity=.35+Math.random()*.5;layer.appendChild(f)}}
