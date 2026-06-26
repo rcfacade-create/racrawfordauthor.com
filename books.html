@@ -1,31 +1,70 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>About | R.A. Crawford</title>
-  <meta name="description" content="Official website of R.A. Crawford, author of The War of Feather and Shadow.">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Books | R.A. Crawford</title>
+  <meta name="description" content="Explore the books and trilogy by R.A. Crawford, author of The Raven's Heir." />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<div class="site-bg">
   <div class="feathers" aria-hidden="true"></div>
-  <header class="header">
-    <nav class="nav">
-      <a class="brand" href="index.html"><span class="brand-mark">◆</span><span>R.A. Crawford<small>Epic Fantasy Author</small></span></a>
-      <button class="menu-btn" aria-label="Open menu">☰</button>
-      <div class="links">
-        <a class="" href="index.html">Home</a>
-        <a class="" href="books.html">Books</a>
-        <a class="" href="world.html">World</a>
-        <a class="active" href="about.html">About</a>
-        <a class="" href="contact.html">Contact</a>
-      </div>
-    </nav>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">◆</span>
+        <span>R.A. Crawford <small>Epic Fantasy Author</small></span>
+      </a>
+      <button class="menu-button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav">☰</button>
+      <nav class="site-nav" id="site-nav">
+        <a href="index.html">Home</a>
+        <a class="active" href="books.html">Books</a>
+        <a href="world.html">World</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
   </header>
-<main><section class="page-hero"><h1>About the Author</h1><p>Meet R.A. Crawford, author of epic fantasy and creator of The Raven’s Heir Trilogy.</p><div class="rule"></div></section><section class="section"><div class="wrap about-grid"><div class="copy"><p>R.A. Crawford writes epic fantasy shaped by myth, history, political intrigue and the shadows between power and legacy.</p><p>His work explores loyalty, betrayal, inheritance, sacrifice and the choices that shape worlds.</p><p>When not writing, he can be found building, creating, sketching, and exploring the realms of stories in every form.</p><div class="author-quote">I didn’t want to just tell you one story. I wanted to invite you to a new world where stories are made, legends are born and legacies are created.</div></div><div class="portrait-card"><img src="assets/author.jpg" alt="R.A. Crawford author portrait"></div></div></section></main>
-  <footer class="footer">© 2026 R.A. Crawford. All rights reserved.</footer>
-</div>
-<script src="main.js"></script>
+  <main>
+    <section class="hero hero-subpage">
+      <div class="hero-copy">
+        <p class="eyebrow">The Raven's Heir Trilogy</p>
+        <h1>Books</h1>
+        <p class="hero-text">A trilogy of inherited power, shattered loyalties, and the battles that rage when old oaths break.</p>
+      </div>
+    </section>
+    <section class="section section-split">
+      <div class="panel image-panel">
+        <img src="assets/cover.jpg" alt="The Raven's Heir book cover" />
+      </div>
+      <div class="panel">
+        <p class="eyebrow">Featured Release</p>
+        <h2>The Raven's Heir</h2>
+        <p>First in the trilogy. A hidden heir must navigate treacherous courts and ancient prophecy after a raven’s call pulls him into conflict.</p>
+        <p>Expect intense political intrigue, immersive worldbuilding, and the slow burn of betrayal unfolding at every turn.</p>
+        <a class="btn primary" href="contact.html">Request an Excerpt</a>
+      </div>
+    </section>
+    <section class="section section-feature">
+      <div class="cards-grid">
+        <article class="card">
+          <h3>Book Two</h3>
+          <p>The Ashen Crown: Wounds deepen as alliances fracture and the throne becomes the greatest danger of all.</p>
+        </article>
+        <article class="card">
+          <h3>Book Three</h3>
+          <p>The Shadow Keep: Final gambits, blood-soaked secrets, and the fate of the realm decided in darkness.</p>
+        </article>
+        <article class="card">
+          <h3>Why Read</h3>
+          <p>Dark fantasy with elegant prose, unforgettable stakes, and a world that keeps readers returning for more.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <p>© <span id="year"></span> R.A. Crawford. All rights reserved.</p>
+  </footer>
+  <script src="main.js"></script>
 </body>
 </html>
