@@ -1,19 +1,4 @@
-# R.A. Crawford Author Website v2.0
+# R.A. Crawford Author Website - Fixed Version
 
-Clean rebuild for GitHub Pages.
-
-Upload the unzipped contents to the repository root.
-
-Required structure:
-
-- index.html
-- about.html
-- books.html
-- world.html
-- contact.html
-- styles.css
-- main.js
-- CNAME
-- assets/author.jpg
-- assets/cover.jpg
-- assets/map.png
+This version uses inline CSS and JavaScript in every page so GitHub Pages cannot fail because of missing stylesheet paths.
+Upload all unzipped contents to the root of your GitHub repository.
