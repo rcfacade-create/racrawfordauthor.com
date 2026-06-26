@@ -1,5 +1,19 @@
-# R.A. Crawford Author Website — Phase 1.4
+# R.A. Crawford Author Website v2.0
 
-Stable fantasy author site with original author portrait and original map.
+Clean rebuild for GitHub Pages.
 
-Upload all unzipped contents to the root of the GitHub repository.
+Upload the unzipped contents to the repository root.
+
+Required structure:
+
+- index.html
+- about.html
+- books.html
+- world.html
+- contact.html
+- styles.css
+- main.js
+- CNAME
+- assets/author.jpg
+- assets/cover.jpg
+- assets/map.png
