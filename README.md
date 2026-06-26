@@ -1,20 +1,5 @@
-# R.A. Crawford Author Website — Phase 1.1
+# R.A. Crawford Author Website - Phase 1.3
 
-Stable GitHub Pages version.
+Stable foundation with falling feathers, smaller author portrait, fixed About page, and working map path.
 
-Upload the unzipped contents to the root of the repository.
-
-Expected structure:
-- index.html
-- about.html
-- books.html
-- world.html
-- contact.html
-- CNAME
-- assets/author.jpg
-- assets/cover.jpg
-- assets/map.jpg
-- css/styles.css
-- js/main.js
-
-After uploading, check GitHub Actions and wait for the latest deployment to show a green tick.
+Upload the unzipped contents to the root of the GitHub repository.
