@@ -1,5 +1,24 @@
+const year = document.querySelector('#year');
+if (year) year.textContent = new Date().getFullYear();
 
-const year=document.querySelector('#year'); if(year) year.textContent=new Date().getFullYear();
-function feather(){ const f=document.createElement('div'); f.className='feather'; f.textContent='🪶'; f.style.left=Math.random()*100+'vw'; f.style.animationDuration=8+Math.random()*8+'s'; f.style.fontSize=12+Math.random()*18+'px'; document.body.appendChild(f); setTimeout(()=>f.remove(),17000)}
-setInterval(feather,1400);
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href'); if(id.length>1){e.preventDefault(); document.querySelector(id)?.scrollIntoView({behavior:'smooth'})}}));
+function createFeather(){
+  const feather = document.createElement('div');
+  feather.className = 'feather' + (Math.random() > .55 ? ' alt' : '');
+  feather.textContent = Math.random() > .5 ? '🪶' : '﹆';
+  feather.style.left = Math.random() * 100 + 'vw';
+  feather.style.fontSize = (14 + Math.random() * 20) + 'px';
+  feather.style.animationDuration = (9 + Math.random() * 10) + 's';
+  feather.style.setProperty('--drift', ((Math.random() * 260) - 130) + 'px');
+  feather.style.setProperty('--spin', (180 + Math.random() * 520) + 'deg');
+  document.body.appendChild(feather);
+  setTimeout(() => feather.remove(), 21000);
+}
+setInterval(createFeather, 950);
+for(let i=0;i<6;i++) setTimeout(createFeather, i*450);
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting) entry.target.classList.add('in');
+  });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
