@@ -594,4 +594,96 @@ body {
 .location-page,
 .courtyard-page {
   padding-top: 3.5rem;
+}/* Aerie Dominion top navigation */
+
+.aerie-top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(5, 5, 5, 0.92);
+  border-bottom: 1px solid rgba(200, 163, 90, 0.35);
+  backdrop-filter: blur(10px);
+}
+
+.aerie-top-nav-inner {
+  width: min(1200px, 92vw);
+  margin: 0 auto;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.aerie-top-brand {
+  color: var(--aerie-gold);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.aerie-top-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.aerie-top-links a {
+  color: var(--aerie-parchment);
+  text-decoration: none;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.aerie-top-links a:hover {
+  color: var(--aerie-gold);
+}
+
+.aerie-location-nav {
+  width: min(1200px, 92vw);
+  margin: 0 auto;
+  padding: 0 0 0.65rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.aerie-location-nav a {
+  color: rgba(231, 218, 194, 0.75);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+}
+
+.aerie-location-nav a:hover {
+  color: var(--aerie-gold);
+}
+
+.archives-page,
+.location-page,
+.courtyard-page {
+  padding-top: 3.5rem;
+}
+
+@media (max-width: 700px) {
+  .aerie-top-nav-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 0;
+  }
+
+  .aerie-top-links {
+    gap: 0.75rem;
+  }
+
+  .aerie-location-nav {
+    justify-content: flex-start;
+    padding-bottom: 1rem;
+  }
 }
