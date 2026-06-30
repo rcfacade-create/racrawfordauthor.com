@@ -10,7 +10,7 @@ if (enterAethelmarButton) {
 
     setTimeout(() => {
       window.location.href = "academy.html";
-    }, 1200);
+    }, 1750);
   });
 }
 
