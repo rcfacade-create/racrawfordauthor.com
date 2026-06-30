@@ -686,4 +686,30 @@ body {
     justify-content: flex-start;
     padding-bottom: 1rem;
   }
+}.aerie-top-links a.is-active,
+.aerie-location-nav a.is-active {
+  color: var(--aerie-gold);
+  text-shadow: 0 0 16px rgba(200, 163, 90, 0.45);
+}
+
+.aerie-top-links a.is-active::after,
+.aerie-location-nav a.is-active::after {
+  content: "";
+  display: block;
+  height: 1px;
+  margin-top: 0.25rem;
+  background: var(--aerie-gold);
+  box-shadow: 0 0 10px rgba(200, 163, 90, 0.45);
+}.aerie-top-links a.is-active,
+.aerie-location-nav a.is-active {
+  color: #050505;
+  background: var(--aerie-gold);
+  padding: 0.35rem 0.55rem;
+  border-radius: 2px;
+  box-shadow: 0 0 18px rgba(200, 163, 90, 0.45);
+}
+
+.aerie-top-links a.is-active::after,
+.aerie-location-nav a.is-active::after {
+  display: none;
 }
