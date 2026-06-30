@@ -413,4 +413,88 @@ body {
   .great-ash-symbol {
     font-size: 7rem;
   }
+}.location-page {
+  width: min(1200px, 92vw);
+  margin: 0 auto;
+  padding: 5rem 0;
+}
+
+.location-hero {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.location-hero h1 {
+  margin: 0;
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.location-record {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  border: 1px solid rgba(200, 163, 90, 0.45);
+  background:
+    radial-gradient(circle at top right, rgba(111, 63, 181, 0.16), transparent 32%),
+    linear-gradient(135deg, rgba(18, 14, 12, 0.95), rgba(0, 0, 0, 0.95));
+  padding: 2rem;
+}
+
+.location-record-image {
+  min-height: 420px;
+  background:
+    radial-gradient(circle at center, rgba(200, 163, 90, 0.12), transparent 45%),
+    linear-gradient(135deg, rgba(20, 17, 14, 0.95), rgba(0, 0, 0, 0.95));
+  border: 1px solid rgba(200, 163, 90, 0.35);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.location-record-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.location-record-copy h2 {
+  margin: 0 0 1.2rem;
+  color: var(--aerie-white);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.location-record-copy p {
+  color: var(--aerie-parchment);
+  font-size: 1.1rem;
+  line-height: 1.65;
+}
+
+.restricted-note {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid rgba(111, 63, 181, 0.55);
+  color: var(--aerie-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.85rem;
+  background: rgba(111, 63, 181, 0.08);
+}
+
+@media (max-width: 850px) {
+  .location-record {
+    grid-template-columns: 1fr;
+  }
+}.location-card.locked {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.location-card.locked:hover {
+  transform: translateY(-4px);
+  border-color: var(--aerie-gold);
+  box-shadow: 0 0 25px rgba(200, 163, 90, 0.2);
 }
