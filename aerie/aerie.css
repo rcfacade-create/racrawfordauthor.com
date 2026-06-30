@@ -590,4 +590,16 @@ body {
     justify-content: flex-start;
     padding-bottom: 1rem;
   }
+}.aerie-top-nav-inner {
+  min-height: 58px;
+}
+
+.aerie-location-nav {
+  padding-bottom: 0.65rem;
+}
+
+.archives-page,
+.location-page,
+.courtyard-page {
+  padding-top: 3.5rem;
 }
