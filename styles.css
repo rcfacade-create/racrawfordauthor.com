@@ -420,3 +420,11 @@ img {
 .small-note a {
   color: #c8a35a;
 }
+.gilded-gazette-embed {
+  margin-top: 2rem;
+}
+
+.gilded-gazette-embed .ml-embedded {
+  max-width: 520px;
+  margin: 0 auto;
+}
