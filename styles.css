@@ -347,3 +347,29 @@ img {
     grid-template-columns: 1fr;
   }
 }
+.aerie-entry-button {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 1rem 1.6rem;
+  border: 1px solid #c8a35a;
+  color: #c8a35a;
+  background: rgba(0, 0, 0, 0.65);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-family: Georgia, "Times New Roman", serif;
+  transition: all 0.3s ease;
+}
+
+.aerie-entry-button:hover {
+  background: #c8a35a;
+  color: #050505;
+  box-shadow: 0 0 25px rgba(200, 163, 90, 0.35);
+}.hero-actions-aerie {
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+.hero-actions-aerie .aerie-entry-button {
+  min-width: 320px;
+}
