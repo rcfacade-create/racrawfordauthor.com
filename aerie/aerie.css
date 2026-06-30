@@ -615,7 +615,7 @@ body {
   opacity: 0.35;
 }
 
-<<<<<<< HEAD
+
 .sealed-archive-card:hover {
   transform: translateY(-4px);
   border-color: rgba(200, 163, 90, 0.85);
@@ -649,7 +649,7 @@ body {
   font-size: 0.75rem;
   background: rgba(111, 63, 181, 0.1);
   text-align: center;
-=======
+
 .aerie-top-links a.is-active::after,
 .aerie-location-nav a.is-active::after {
   display: none;
@@ -780,6 +780,5 @@ body {
   to {
     opacity: 0;
     transform: translateY(-12px);
-  }
->>>>>>> development
+  }  }
 }
