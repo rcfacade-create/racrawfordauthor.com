@@ -16,21 +16,31 @@
   <link rel="stylesheet" href="aerie.css" />
 </head>
 
-<body>
-  <header class="aerie-topbar">
+<body class="aerie-page">
+  <header class="aerie-top-nav">
     <a class="aerie-brand" href="index.html">The Aerie Dominion</a>
 
-    <nav class="aerie-top-links">
+    <nav class="aerie-main-nav" aria-label="Aerie main navigation">
       <a href="../index.html">Main Site</a>
       <a href="index.html">Gates</a>
       <a href="academy.html">Courtyard</a>
       <a href="archives.html">Archives</a>
     </nav>
+
+    <nav class="aerie-location-nav" aria-label="Aethelmar location navigation">
+      <a href="great-hall.html">Great Hall</a>
+      <a href="crow-tower.html">Crow</a>
+      <a href="owl-tower.html">Owl</a>
+      <a href="hawk-tower.html">Hawk</a>
+      <a href="falcon-tower.html">Falcon</a>
+      <a href="swan-tower.html">Swan</a>
+      <a href="raven-tower.html">Raven</a>
+    </nav>
   </header>
 
   <main class="trial-page">
     <section class="trial-shell">
-      <p class="aerie-eyebrow">Aethelmar Academy Intake Assessment</p>
+      <p class="aerie-kicker">Aethelmar Academy Intake Assessment</p>
       <h1>Trial of the Houses</h1>
 
       <p class="trial-intro">
@@ -56,9 +66,9 @@
       </div>
 
       <div id="trial-result" class="trial-panel hidden">
-        <p class="aerie-eyebrow">Assessment Complete</p>
+        <p class="aerie-kicker">Assessment Complete</p>
         <h2 id="result-title"></h2>
-        <p id="result-text"></p>
+        <div id="result-text"></div>
 
         <div class="trial-result-stats" id="result-stats"></div>
 
@@ -152,18 +162,33 @@
       const results = {
         Crow: {
           title: "House Crow Initiate",
-          text: "You are observant, careful, and dangerous in silence. House Crow would teach you how to move unseen, listen between lies, and turn secrets into weapons."
+          status: "Accepted — Shadow Path",
+          strength: "Secrets, stealth, memory, and silent observation",
+          warning: "Trust is useful. Attachment is dangerous.",
+          note: "The Hall of Chronicles has marked you as one who notices what others bury.",
+          text: "You are observant, careful, and dangerous in silence. House Crow would teach you how to move unseen, listen between lies, and turn secrets into weapons.",
+          share: "I was placed in House Crow by the Trial of the Houses."
         },
         Owl: {
           title: "House Owl Archive Adept",
-          text: "You are drawn to knowledge, symbols, and the hidden structure of things. House Owl would place you among scholars, magi, and keepers of dangerous truths."
+          status: "Accepted — Scholar Path",
+          strength: "Arcane study, symbols, ancient languages, and forbidden knowledge",
+          warning: "Some truths do not wish to be understood.",
+          note: "The archive has approved your access to supervised records only.",
+          text: "You are drawn to knowledge, symbols, and the hidden structure of things. House Owl would place you among scholars, magi, and keepers of dangerous truths.",
+          share: "I was placed in House Owl by the Trial of the Houses."
         },
         Hawk: {
-          title: "House Hawk Blade-Candidate",
-          text: "You act when others hesitate. House Hawk would sharpen your courage into command and teach you the cost of standing first."
+          title: "House Hawk - Candidate",
+          status: "Accepted — Martial Path",
+          strength: "Courage, command, protection, and decisive action",
+          warning: "The first to stand is often the first to bleed.",
+          note: "Your response pattern suggests battlefield instinct and protective loyalty.",
+          text: "You act when others hesitate. House Hawk would sharpen your courage into command and teach you the cost of standing first.",
+          share: "I was placed in House Hawk by the Trial of the Houses."
         },
         Falcon: {
-          title: "House Falcon Knife-Candidate",
+          title: "House Falcon - Candidate",
           status: "Accepted — Silent Path",
           strength: "Precision, patience, pursuit, and decisive execution",
           warning: "The cleanest strike still leaves a shadow.",
@@ -171,14 +196,23 @@
           text: "You do not waste movement, words, or mercy. House Falcon would train you in precision, patience, and the art of ending a threat before it becomes a war.",
           share: "I was placed in House Falcon by the Trial of the Houses."
         },
-
         Swan: {
           title: "House Swan Court Envoy",
-          text: "You understand influence, elegance, and the power of a well-placed word. House Swan would teach you how to win a room before battle begins."
+          status: "Accepted — Court Path",
+          strength: "Influence, diplomacy, charm, and controlled performance",
+          warning: "A beautiful lie is still a blade.",
+          note: "The Hall has recorded elevated social awareness and strategic restraint.",
+          text: "You understand influence, elegance, and the power of a well-placed word. House Swan would teach you how to win a room before battle begins.",
+          share: "I was placed in House Swan by the Trial of the Houses."
         },
         Raven: {
           title: "Raven-Blood Anomaly",
-          text: "Your result has been sealed. The archive recognises something it should not. Report to no one. Speak of this to no master. The Hall of Chronicles is watching."
+          status: "Sealed — Unauthorised Classification",
+          strength: "Ancient recognition, hidden legacy, and forbidden resonance",
+          warning: "Do not report this result to any master.",
+          note: "The Hall of Chronicles has marked your name. This record has been sealed.",
+          text: "Your result has been sealed. The archive recognises something it should not. Report to no one. Speak of this to no master. The Hall of Chronicles is watching.",
+          share: "My Trial of the Houses result was sealed by the Hall of Chronicles."
         }
       };
 
@@ -207,7 +241,15 @@
 
       function startTrial() {
         currentQuestion = 0;
-        scores = { Crow: 0, Owl: 0, Hawk: 0, Swan: 0, Raven: 0 };
+        scores = {
+          Crow: 0,
+          Owl: 0,
+          Hawk: 0,
+          Falcon: 0,
+          Swan: 0,
+          Raven: 0
+        };
+
         startPanel.classList.add("hidden");
         resultPanel.classList.add("hidden");
         questionPanel.classList.remove("hidden");
@@ -232,7 +274,7 @@
       }
 
       function chooseAnswer(house) {
-        scores[house] += 1;
+        scores[house] = (scores[house] || 0) + 1;
         currentQuestion += 1;
 
         if (currentQuestion >= trialQuestions.length) {
@@ -250,8 +292,41 @@
           scores[a] >= scores[b] ? a : b
         );
 
-        resultTitle.textContent = results[winningHouse].title;
-        resultText.textContent = results[winningHouse].text;
+        const result = results[winningHouse];
+
+        resultTitle.textContent = result.title;
+
+        resultText.innerHTML = `
+          <div class="academy-result-card ${winningHouse.toLowerCase()}-result">
+            <p class="result-seal">Aethelmar Academy Assessment Record</p>
+
+            <div class="result-card-row">
+              <span>Status</span>
+              <strong>${result.status}</strong>
+            </div>
+
+            <div class="result-card-row">
+              <span>Strength</span>
+              <strong>${result.strength}</strong>
+            </div>
+
+            <div class="result-card-row warning-row">
+              <span>Warning</span>
+              <strong>${result.warning}</strong>
+            </div>
+
+            <div class="archive-note">
+              <p class="aerie-kicker">Archive Note</p>
+              <p>${result.note}</p>
+            </div>
+
+            <p class="result-description">${result.text}</p>
+
+            <div class="share-result-box">
+              <p>${result.share}</p>
+            </div>
+          </div>
+        `;
 
         resultStats.innerHTML = Object.entries(scores)
           .map(([house, score]) => `<p><strong>${house}:</strong> ${score}</p>`)
