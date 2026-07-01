@@ -43,7 +43,7 @@
         <h2>Begin Your Assessment</h2>
         <p>
           Your answers will determine whether your nature leans toward Crow, Owl,
-          Hawk, Swan, or something more dangerous.
+          Hawk, Falcon, Swan, or something more dangerous.
         </p>
         <button class="aerie-button" id="start-trial">Begin the Trial</button>
       </div>
@@ -82,6 +82,7 @@
             { text: "The shadows between the guards and where they fail to look.", house: "Crow" },
             { text: "The carved symbols above the archway and what language they use.", house: "Owl" },
             { text: "The strength of the hinges, the height of the walls, and the best way through.", house: "Hawk" },
+            { text: "The relaxed guard, the rooflines, and the cleanest angle of attack.", house: "Falcon" },
             { text: "The students watching from the courtyard and who already holds influence.", house: "Swan" },
             { text: "The strange pull beneath the stone, like something old has noticed me.", house: "Raven" }
           ]
@@ -93,6 +94,7 @@
             { text: "A black cloak with hidden pockets.", house: "Crow" },
             { text: "A sealed scroll written in a dead hand.", house: "Owl" },
             { text: "A short blade balanced perfectly for close fighting.", house: "Hawk" },
+            { text: "A narrow throwing blade wrapped in dark leather.", house: "Falcon" },
             { text: "A silver ring that opens certain doors if worn with confidence.", house: "Swan" },
             { text: "A cracked feather charm he tries to hide from me.", house: "Raven" }
           ]
@@ -104,6 +106,7 @@
             { text: "To know what others would rather keep buried.", house: "Crow" },
             { text: "To understand the laws beneath the world.", house: "Owl" },
             { text: "To protect what matters and break what threatens it.", house: "Hawk" },
+            { text: "To remove a threat before it becomes a battle.", house: "Falcon" },
             { text: "To shape the room before anyone realises it has changed.", house: "Swan" },
             { text: "To return what was stolen, even if the world fears it.", house: "Raven" }
           ]
@@ -115,6 +118,7 @@
             { text: "Listen at the door, check for traps, then pick the quietest lock.", house: "Crow" },
             { text: "Record the markings and research the seal properly.", house: "Owl" },
             { text: "Force it open if the danger behind it needs facing.", house: "Hawk" },
+            { text: "Mark every entrance, exit, and blind spot before touching the door.", house: "Falcon" },
             { text: "Find someone with authority and persuade them to open it for me.", house: "Swan" },
             { text: "Place my hand on the seal and see whether it recognises me.", house: "Raven" }
           ]
@@ -126,6 +130,7 @@
             { text: "Learn the rival’s weakness and make sure they regret it later.", house: "Crow" },
             { text: "Expose the rule they broke and turn the academy against them.", house: "Owl" },
             { text: "Step in immediately, even if it starts a fight.", house: "Hawk" },
+            { text: "Wait, watch, and make sure the rival never feels safe again.", house: "Falcon" },
             { text: "Smile, intervene gracefully, and make the crowd side with me.", house: "Swan" },
             { text: "Something in me answers before I choose, and the courtyard goes quiet.", house: "Raven" }
           ]
@@ -137,6 +142,7 @@
             { text: "My name, if secrecy keeps the truth alive.", house: "Crow" },
             { text: "My certainty, if the truth proves larger than I understood.", house: "Owl" },
             { text: "My safety, if others need someone to stand first.", house: "Hawk" },
+            { text: "My mercy, if the truth demands a cleaner ending.", house: "Falcon" },
             { text: "My reputation, if losing it wins the larger game.", house: "Swan" },
             { text: "Everything, if the truth has been buried in my blood.", house: "Raven" }
           ]
@@ -156,6 +162,16 @@
           title: "House Hawk Blade-Candidate",
           text: "You act when others hesitate. House Hawk would sharpen your courage into command and teach you the cost of standing first."
         },
+        Falcon: {
+          title: "House Falcon Knife-Candidate",
+          status: "Accepted — Silent Path",
+          strength: "Precision, patience, pursuit, and decisive execution",
+          warning: "The cleanest strike still leaves a shadow.",
+          note: "Your response pattern suggests controlled instinct, sharp focus, and comfort with difficult orders.",
+          text: "You do not waste movement, words, or mercy. House Falcon would train you in precision, patience, and the art of ending a threat before it becomes a war.",
+          share: "I was placed in House Falcon by the Trial of the Houses."
+        },
+
         Swan: {
           title: "House Swan Court Envoy",
           text: "You understand influence, elegance, and the power of a well-placed word. House Swan would teach you how to win a room before battle begins."
@@ -171,6 +187,7 @@
         Crow: 0,
         Owl: 0,
         Hawk: 0,
+        Falcon: 0,
         Swan: 0,
         Raven: 0
       };

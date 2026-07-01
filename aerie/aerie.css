@@ -902,3 +902,88 @@ body {
   color: rgba(245, 239, 226, 0.78);
   line-height: 1.7;
 }
+.academy-result-card {
+  margin: 1.5rem auto 0;
+  padding: 1.6rem;
+  border: 1px solid rgba(200, 163, 90, 0.42);
+  background:
+    linear-gradient(135deg, rgba(200, 163, 90, 0.08), transparent 42%),
+    rgba(0, 0, 0, 0.52);
+  text-align: left;
+  box-shadow: inset 0 0 24px rgba(200, 163, 90, 0.06);
+}
+
+.result-seal {
+  margin: 0 0 1.2rem;
+  color: var(--aerie-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.result-card-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-top: 1px solid rgba(200, 163, 90, 0.18);
+}
+
+.result-card-row span {
+  color: rgba(245, 239, 226, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.76rem;
+}
+
+.result-card-row strong {
+  color: rgba(245, 239, 226, 0.9);
+  font-weight: 500;
+}
+
+.warning-row strong {
+  color: var(--aerie-gold);
+}
+
+.archive-note {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(200, 163, 90, 0.24);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.archive-note p:last-child {
+  margin-bottom: 0;
+}
+
+.result-description {
+  margin-top: 1.2rem;
+}
+
+.share-result-box {
+  margin-top: 1.4rem;
+  padding: 1rem;
+  border-left: 3px solid var(--aerie-gold);
+  background: rgba(200, 163, 90, 0.08);
+}
+
+.share-result-box p {
+  margin: 0;
+  color: rgba(245, 239, 226, 0.88);
+  font-style: italic;
+}
+
+.raven-result {
+  border-color: rgba(200, 163, 90, 0.72);
+  box-shadow:
+    0 0 28px rgba(200, 163, 90, 0.16),
+    inset 0 0 28px rgba(200, 163, 90, 0.1);
+}
+
+@media (max-width: 640px) {
+  .result-card-row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+}
