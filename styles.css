@@ -478,3 +478,15 @@ img {
 .text-link:hover {
   text-decoration: underline;
 }
+.feature-link-grid {
+  align-items: stretch;
+}
+
+.feature-link-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.feature-link-card .text-link {
+  margin-top: auto;
+}
