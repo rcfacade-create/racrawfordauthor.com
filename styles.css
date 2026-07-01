@@ -444,3 +444,37 @@ img {
 .shop-hero .hero-copy {
   max-width: 760px;
 }
+.gazette-hero .hero-copy {
+  max-width: 850px;
+}
+
+.dispatch-grid {
+  align-items: stretch;
+}
+
+.dispatch-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.dispatch-date {
+  margin: 0 0 0.8rem;
+  color: #c8a35a;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.78rem;
+}
+
+.text-link {
+  margin-top: auto;
+  display: inline-block;
+  color: #c8a35a;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.85rem;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
