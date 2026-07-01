@@ -428,3 +428,19 @@ img {
   max-width: 520px;
   margin: 0 auto;
 }
+.shop-feature .image-panel img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+}
+
+.shop-quote {
+  margin-top: 1.25rem;
+  font-style: italic;
+  color: var(--accent, #c8a35a);
+}
+
+.shop-hero .hero-copy {
+  max-width: 760px;
+}
