@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Trial of the Houses | The Aerie Dominion</title>
+
+  <meta
+    name="description"
+    content="Take the Trial of the Houses and discover where Aethelmar Academy would place you within The Aerie Dominion."
+  />
+
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/favicon.svg" />
+  <link rel="stylesheet" href="aerie.css" />
+</head>
+
+<body>
+  <header class="aerie-topbar">
+    <a class="aerie-brand" href="index.html">The Aerie Dominion</a>
+
+    <nav class="aerie-top-links">
+      <a href="../index.html">Main Site</a>
+      <a href="index.html">Gates</a>
+      <a href="academy.html">Courtyard</a>
+      <a href="archives.html">Archives</a>
+    </nav>
+  </header>
+
+  <main class="trial-page">
+    <section class="trial-shell">
+      <p class="aerie-eyebrow">Aethelmar Academy Intake Assessment</p>
+      <h1>Trial of the Houses</h1>
+
+      <p class="trial-intro">
+        Every new student who passes through the Iron Gates is watched, weighed,
+        and quietly tested. Answer honestly. The Hall of Chronicles remembers more
+        than you think.
+      </p>
+
+      <div id="trial-start" class="trial-panel">
+        <h2>Begin Your Assessment</h2>
+        <p>
+          Your answers will determine whether your nature leans toward Crow, Owl,
+          Hawk, Swan, or something more dangerous.
+        </p>
+        <button class="aerie-button" id="start-trial">Begin the Trial</button>
+      </div>
+
+      <div id="trial-question" class="trial-panel hidden">
+        <p class="trial-progress" id="trial-progress"></p>
+        <h2 id="question-title"></h2>
+        <p id="question-text"></p>
+        <div id="answer-list" class="answer-list"></div>
+      </div>
+
+      <div id="trial-result" class="trial-panel hidden">
+        <p class="aerie-eyebrow">Assessment Complete</p>
+        <h2 id="result-title"></h2>
+        <p id="result-text"></p>
+
+        <div class="trial-result-stats" id="result-stats"></div>
+
+        <div class="trial-actions">
+          <button class="aerie-button" id="restart-trial">Take the Trial Again</button>
+          <a class="aerie-button aerie-button-secondary" href="../index.html#gazette">
+            Join The Gilded Gazette
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const trialQuestions = [
+        {
+          title: "The Iron Gates",
+          text: "The academy gates open, but no one welcomes you. What do you notice first?",
+          answers: [
+            { text: "The shadows between the guards and where they fail to look.", house: "Crow" },
+            { text: "The carved symbols above the archway and what language they use.", house: "Owl" },
+            { text: "The strength of the hinges, the height of the walls, and the best way through.", house: "Hawk" },
+            { text: "The students watching from the courtyard and who already holds influence.", house: "Swan" },
+            { text: "The strange pull beneath the stone, like something old has noticed me.", house: "Raven" }
+          ]
+        },
+        {
+          title: "Hemming’s Counter",
+          text: "Hemming offers you one item. The first is paid for. The next will cost you. What do you take?",
+          answers: [
+            { text: "A black cloak with hidden pockets.", house: "Crow" },
+            { text: "A sealed scroll written in a dead hand.", house: "Owl" },
+            { text: "A short blade balanced perfectly for close fighting.", house: "Hawk" },
+            { text: "A silver ring that opens certain doors if worn with confidence.", house: "Swan" },
+            { text: "A cracked feather charm he tries to hide from me.", house: "Raven" }
+          ]
+        },
+        {
+          title: "The First Lesson",
+          text: "A master asks what power is for. How do you answer?",
+          answers: [
+            { text: "To know what others would rather keep buried.", house: "Crow" },
+            { text: "To understand the laws beneath the world.", house: "Owl" },
+            { text: "To protect what matters and break what threatens it.", house: "Hawk" },
+            { text: "To shape the room before anyone realises it has changed.", house: "Swan" },
+            { text: "To return what was stolen, even if the world fears it.", house: "Raven" }
+          ]
+        },
+        {
+          title: "The Locked Archive",
+          text: "You find a sealed archive door. No one is nearby. What do you do?",
+          answers: [
+            { text: "Listen at the door, check for traps, then pick the quietest lock.", house: "Crow" },
+            { text: "Record the markings and research the seal properly.", house: "Owl" },
+            { text: "Force it open if the danger behind it needs facing.", house: "Hawk" },
+            { text: "Find someone with authority and persuade them to open it for me.", house: "Swan" },
+            { text: "Place my hand on the seal and see whether it recognises me.", house: "Raven" }
+          ]
+        },
+        {
+          title: "The Courtyard Challenge",
+          text: "A rival student humiliates someone weaker in front of everyone. What do you do?",
+          answers: [
+            { text: "Learn the rival’s weakness and make sure they regret it later.", house: "Crow" },
+            { text: "Expose the rule they broke and turn the academy against them.", house: "Owl" },
+            { text: "Step in immediately, even if it starts a fight.", house: "Hawk" },
+            { text: "Smile, intervene gracefully, and make the crowd side with me.", house: "Swan" },
+            { text: "Something in me answers before I choose, and the courtyard goes quiet.", house: "Raven" }
+          ]
+        },
+        {
+          title: "The Final Question",
+          text: "The Hall of Chronicles asks what you would risk for the truth.",
+          answers: [
+            { text: "My name, if secrecy keeps the truth alive.", house: "Crow" },
+            { text: "My certainty, if the truth proves larger than I understood.", house: "Owl" },
+            { text: "My safety, if others need someone to stand first.", house: "Hawk" },
+            { text: "My reputation, if losing it wins the larger game.", house: "Swan" },
+            { text: "Everything, if the truth has been buried in my blood.", house: "Raven" }
+          ]
+        }
+      ];
+
+      const results = {
+        Crow: {
+          title: "House Crow Initiate",
+          text: "You are observant, careful, and dangerous in silence. House Crow would teach you how to move unseen, listen between lies, and turn secrets into weapons."
+        },
+        Owl: {
+          title: "House Owl Archive Adept",
+          text: "You are drawn to knowledge, symbols, and the hidden structure of things. House Owl would place you among scholars, magi, and keepers of dangerous truths."
+        },
+        Hawk: {
+          title: "House Hawk Blade-Candidate",
+          text: "You act when others hesitate. House Hawk would sharpen your courage into command and teach you the cost of standing first."
+        },
+        Swan: {
+          title: "House Swan Court Envoy",
+          text: "You understand influence, elegance, and the power of a well-placed word. House Swan would teach you how to win a room before battle begins."
+        },
+        Raven: {
+          title: "Raven-Blood Anomaly",
+          text: "Your result has been sealed. The archive recognises something it should not. Report to no one. Speak of this to no master. The Hall of Chronicles is watching."
+        }
+      };
+
+      let currentQuestion = 0;
+      let scores = {
+        Crow: 0,
+        Owl: 0,
+        Hawk: 0,
+        Swan: 0,
+        Raven: 0
+      };
+
+      const startPanel = document.getElementById("trial-start");
+      const questionPanel = document.getElementById("trial-question");
+      const resultPanel = document.getElementById("trial-result");
+      const startButton = document.getElementById("start-trial");
+      const restartButton = document.getElementById("restart-trial");
+      const progress = document.getElementById("trial-progress");
+      const questionTitle = document.getElementById("question-title");
+      const questionText = document.getElementById("question-text");
+      const answerList = document.getElementById("answer-list");
+      const resultTitle = document.getElementById("result-title");
+      const resultText = document.getElementById("result-text");
+      const resultStats = document.getElementById("result-stats");
+
+      function startTrial() {
+        currentQuestion = 0;
+        scores = { Crow: 0, Owl: 0, Hawk: 0, Swan: 0, Raven: 0 };
+        startPanel.classList.add("hidden");
+        resultPanel.classList.add("hidden");
+        questionPanel.classList.remove("hidden");
+        showQuestion();
+      }
+
+      function showQuestion() {
+        const question = trialQuestions[currentQuestion];
+
+        progress.textContent = `Question ${currentQuestion + 1} of ${trialQuestions.length}`;
+        questionTitle.textContent = question.title;
+        questionText.textContent = question.text;
+        answerList.innerHTML = "";
+
+        question.answers.forEach((answer) => {
+          const button = document.createElement("button");
+          button.className = "answer-button";
+          button.textContent = answer.text;
+          button.addEventListener("click", () => chooseAnswer(answer.house));
+          answerList.appendChild(button);
+        });
+      }
+
+      function chooseAnswer(house) {
+        scores[house] += 1;
+        currentQuestion += 1;
+
+        if (currentQuestion >= trialQuestions.length) {
+          showResult();
+        } else {
+          showQuestion();
+        }
+      }
+
+      function showResult() {
+        questionPanel.classList.add("hidden");
+        resultPanel.classList.remove("hidden");
+
+        const winningHouse = Object.keys(scores).reduce((a, b) =>
+          scores[a] >= scores[b] ? a : b
+        );
+
+        resultTitle.textContent = results[winningHouse].title;
+        resultText.textContent = results[winningHouse].text;
+
+        resultStats.innerHTML = Object.entries(scores)
+          .map(([house, score]) => `<p><strong>${house}:</strong> ${score}</p>`)
+          .join("");
+      }
+
+      startButton.addEventListener("click", startTrial);
+      restartButton.addEventListener("click", startTrial);
+    });
+  </script>
+</body>
+</html>
