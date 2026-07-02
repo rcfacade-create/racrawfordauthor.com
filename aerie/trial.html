@@ -83,6 +83,47 @@
   </main>
 
   <script>
+const houseSigils = {
+  Crow: "/aerie/assets/sigils/crow.png",
+  Owl: "/aerie/assets/sigils/owl.png",
+  Hawk: "/aerie/assets/sigils/hawk.png",
+  Falcon: "/aerie/assets/sigils/falcon.png",
+  Swan: "/aerie/assets/sigils/swan.png",
+  Raven: "/aerie/assets/sigils/raven.png"
+};
+
+const houseThemes = {
+  Crow: {
+    accent: "#7c6a58",
+    glow: "rgba(124, 106, 88, 0.28)",
+    tint: "rgba(124, 106, 88, 0.10)"
+  },
+  Owl: {
+    accent: "#b8a98c",
+    glow: "rgba(184, 169, 140, 0.28)",
+    tint: "rgba(184, 169, 140, 0.10)"
+  },
+  Hawk: {
+    accent: "#b88a52",
+    glow: "rgba(184, 138, 82, 0.28)",
+    tint: "rgba(184, 138, 82, 0.10)"
+  },
+  Falcon: {
+    accent: "#c8a35a",
+    glow: "rgba(200, 163, 90, 0.32)",
+    tint: "rgba(200, 163, 90, 0.12)"
+  },
+  Swan: {
+    accent: "#d8c9b3",
+    glow: "rgba(216, 201, 179, 0.30)",
+    tint: "rgba(216, 201, 179, 0.10)"
+  },
+  Raven: {
+    accent: "#8e6ad9",
+    glow: "rgba(142, 106, 217, 0.30)",
+    tint: "rgba(142, 106, 217, 0.12)"
+  }
+};
     document.addEventListener("DOMContentLoaded", function () {
       const trialQuestions = [
         {
@@ -284,58 +325,106 @@
         }
       }
 
-      function showResult() {
-        questionPanel.classList.add("hidden");
-        resultPanel.classList.remove("hidden");
+     function showResult() {
+  questionPanel.classList.add("hidden");
+  resultPanel.classList.remove("hidden");
 
-        const winningHouse = Object.keys(scores).reduce((a, b) =>
-          scores[a] >= scores[b] ? a : b
-        );
+  const rankedHouses = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const winningHouse = rankedHouses[0][0];
+  const result = results[winningHouse];
 
-        const result = results[winningHouse];
+  const theme = houseThemes[winningHouse] || {
+    accent: "#c8a35a",
+    glow: "rgba(200, 163, 90, 0.30)",
+    tint: "rgba(200, 163, 90, 0.10)"
+  };
 
-        resultTitle.textContent = result.title;
+  const sigilSrc = houseSigils[winningHouse] || "";
 
-        resultText.innerHTML = `
-          <div class="academy-result-card ${winningHouse.toLowerCase()}-result">
-            <p class="result-seal">Aethelmar Academy Assessment Record</p>
+  const sigilMarkup = sigilSrc
+  ? `<div class="result-sigil-wrap">
+       <img class="result-sigil" src="${sigilSrc}" alt="House ${winningHouse} sigil">
+     </div>`
+  : `<div class="result-house-mark">${winningHouse.charAt(0)}</div>`;
 
-            <div class="result-card-row">
-              <span>Status</span>
-              <strong>${result.status}</strong>
-            </div>
+  const statsMarkup = Object.entries(scores)
+    .map(([house, value]) => {
+      const cleanScore = Number.isNaN(value) ? 0 : value;
+      const isWinner = house === winningHouse ? " winner" : "";
 
-            <div class="result-card-row">
-              <span>Strength</span>
-              <strong>${result.strength}</strong>
-            </div>
+      return `
+        <div class="result-stat${isWinner}">
+          <span class="result-stat-name">${house}</span>
+          <strong class="result-stat-value">${cleanScore}</strong>
+        </div>
+      `;
+    })
+    .join("");
 
-            <div class="result-card-row warning-row">
-              <span>Warning</span>
-              <strong>${result.warning}</strong>
-            </div>
+  resultTitle.textContent = "";
 
-            <div class="archive-note">
-              <p class="aerie-kicker">Archive Note</p>
-              <p>${result.note}</p>
-            </div>
+  resultText.innerHTML = `
+    <div class="result-card-deluxe" style="
+      --house-accent: ${theme.accent};
+      --house-glow: ${theme.glow};
+      --house-tint: ${theme.tint};
+    ">
+      <div class="result-card-header">
+        <p class="result-seal">Aethelmar Academy Assessment Record</p>
+        ${sigilMarkup}
+        <h3>${result.title}</h3>
+        <p class="result-status">${result.status || "Assessment Complete"}</p>
+      </div>
 
-            <p class="result-description">${result.text}</p>
+      <div class="result-divider"></div>
 
-            <div class="share-result-box">
-              <p>${result.share}</p>
-            </div>
-          </div>
-        `;
+      <div class="result-copy">
+        <p>${result.text}</p>
+      </div>
 
-        resultStats.innerHTML = Object.entries(scores)
-          .map(([house, score]) => `<p><strong>${house}:</strong> ${score}</p>`)
-          .join("");
+      <div class="result-divider"></div>
+
+      <div class="result-stats-heading">House Weights Recorded</div>
+
+      <div class="result-stat-grid">
+        ${statsMarkup}
+      </div>
+
+      <div class="share-result-box">
+        <p class="share-label">Academy Record Line</p>
+        <p>${result.share || `I was placed in House ${winningHouse} by the Trial of the Houses.`}</p>
+      </div>
+    </div>
+  `;
+
+  resultStats.innerHTML = "";
+  // Add copy button inside the share box
+  const shareBox = resultText.querySelector('.share-result-box');
+  if (shareBox) {
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'aerie-button';
+    copyBtn.type = 'button';
+    copyBtn.textContent = 'Copy result text';
+    copyBtn.addEventListener('click', () => {
+      const shareText = `${result.share} — ${result.title}`;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(shareText).then(() => {
+          copyBtn.textContent = 'Copied!';
+          setTimeout(() => (copyBtn.textContent = 'Copy result text'), 2000);
+        });
       }
+    });
+    shareBox.appendChild(copyBtn);
+  }
 
-      startButton.addEventListener("click", startTrial);
-      restartButton.addEventListener("click", startTrial);
+}
+
+      // Wire event listeners
+      startButton.addEventListener('click', startTrial);
+      restartButton.addEventListener('click', startTrial);
+
     });
   </script>
 </body>
 </html>
+  

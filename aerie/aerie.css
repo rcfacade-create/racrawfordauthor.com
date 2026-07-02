@@ -663,7 +663,7 @@ body {
     radial-gradient(circle at center, rgba(200, 163, 90, 0.3), transparent 24%),
     radial-gradient(circle at center, rgba(111, 63, 181, 0.45), transparent 45%);
   opacity: 0;
-  transform: scale(0.85);
+  transform: scale(0.65);
   transition: opacity 1.2s ease, transform 1.6s ease;
   z-index: 0;
 }
@@ -986,4 +986,530 @@ body {
     grid-template-columns: 1fr;
     gap: 0.35rem;
   }
+}.academy-result-card {
+  position: relative;
+  margin: 1.5rem auto 0;
+  padding: 2rem;
+  border: 1px solid rgba(200, 163, 90, 0.55);
+  background:
+    radial-gradient(circle at top, rgba(200, 163, 90, 0.16), transparent 18rem),
+    linear-gradient(135deg, rgba(200, 163, 90, 0.08), transparent 45%),
+    rgba(0, 0, 0, 0.62);
+  text-align: left;
+  box-shadow:
+    0 0 36px rgba(0, 0, 0, 0.7),
+    inset 0 0 28px rgba(200, 163, 90, 0.08);
+  overflow: hidden;
+}
+
+.academy-result-card::before,
+.academy-result-card::after {
+  content: "";
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  border: 1px solid rgba(200, 163, 90, 0.18);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.academy-result-card::before {
+  top: -75px;
+  left: -75px;
+}
+
+.academy-result-card::after {
+  bottom: -75px;
+  right: -75px;
+}
+
+.result-card-header {
+  text-align: center;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(200, 163, 90, 0.24);
+  margin-bottom: 1.3rem;
+}
+
+.result-seal {
+  margin: 0 0 1rem;
+  color: var(--aerie-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+}
+
+.result-house-mark {
+  width: 74px;
+  height: 74px;
+  margin: 0 auto 1rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(200, 163, 90, 0.7);
+  border-radius: 50%;
+  color: var(--aerie-gold);
+  font-size: 2.4rem;
+  font-weight: 700;
+  box-shadow:
+    0 0 24px rgba(200, 163, 90, 0.22),
+    inset 0 0 18px rgba(200, 163, 90, 0.1);
+}
+
+.result-card-header h3 {
+  margin: 0;
+  color: var(--aerie-gold);
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+}
+
+.result-status {
+  margin: 0.7rem auto 0;
+  display: inline-block;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid rgba(200, 163, 90, 0.38);
+  color: rgba(245, 239, 226, 0.88);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  background: rgba(200, 163, 90, 0.08);
+}
+
+.result-card-grid {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.result-card-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(200, 163, 90, 0.16);
+}
+
+.result-card-row span {
+  color: rgba(245, 239, 226, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.76rem;
+}
+
+.result-card-row strong {
+  color: rgba(245, 239, 226, 0.9);
+  font-weight: 500;
+}
+
+.warning-row strong {
+  color: var(--aerie-gold);
+}
+
+.archive-note {
+  margin-top: 1.4rem;
+  padding: 1.1rem;
+  border: 1px solid rgba(200, 163, 90, 0.28);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.archive-note p:last-child {
+  margin-bottom: 0;
+}
+
+.result-description {
+  margin-top: 1.3rem;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.share-result-box {
+  margin-top: 1.4rem;
+  padding: 1rem;
+  border-left: 3px solid var(--aerie-gold);
+  background: rgba(200, 163, 90, 0.08);
+}
+
+.share-result-box p {
+  margin: 0;
+  color: rgba(245, 239, 226, 0.88);
+  font-style: italic;
+}
+
+.raven-result {
+  border-color: rgba(200, 163, 90, 0.85);
+  background:
+    radial-gradient(circle at top, rgba(200, 163, 90, 0.2), transparent 16rem),
+    radial-gradient(circle at bottom, rgba(90, 0, 0, 0.22), transparent 18rem),
+    rgba(0, 0, 0, 0.72);
+  box-shadow:
+    0 0 42px rgba(200, 163, 90, 0.18),
+    inset 0 0 36px rgba(200, 163, 90, 0.12);
+}
+
+.raven-result .result-house-mark {
+  border-radius: 4px;
+  transform: rotate(45deg);
+}
+
+.raven-result .result-house-mark::first-letter {
+  transform: rotate(-45deg);
+}
+
+@media (max-width: 640px) {
+  .academy-result-card {
+    padding: 1.3rem;
+  }
+
+  .result-card-row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .result-house-mark {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+}.result-card-deluxe {
+  background:
+    radial-gradient(circle at top center, var(--house-tint), transparent 55%),
+    rgba(0, 0, 0, 0.72);
+  border: 1px solid rgba(200, 163, 90, 0.35);
+  box-shadow:
+    0 0 0 1px rgba(200, 163, 90, 0.08) inset,
+    0 0 38px var(--house-glow);
+  padding: 2.2rem 2rem;
+  max-width: 880px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+.result-card-deluxe::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(200, 163, 90, 0.12);
+  pointer-events: none;
+}
+
+.result-card-header h3 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--house-accent);
+  margin: 0.5rem 0 0.5rem;
+  line-height: 1.08;
+}
+
+.result-seal {
+  color: var(--aerie-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.result-status {
+  color: #f3eadf;
+  opacity: 0.95;
+  font-size: 1.05rem;
+  margin-top: 0.5rem;
+}
+
+.result-sigil-wrap {
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 1rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(200, 163, 90, 0.45);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, var(--house-tint), rgba(0, 0, 0, 0.35));
+  box-shadow:
+    0 0 22px var(--house-glow),
+    inset 0 0 18px rgba(200, 163, 90, 0.08);
+  overflow: hidden;
+}
+
+.result-sigil {
+  width: 86px;
+  height: 86px;
+  max-width: 86px;
+  max-height: 86px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 0 10px var(--house-glow));
+}
+
+.result-house-mark {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 1rem;
+  border: 1px solid rgba(200, 163, 90, 0.45);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--house-accent);
+  font-size: 2rem;
+  font-weight: 700;
+  box-shadow: 0 0 18px var(--house-glow);
+}
+
+.result-card-deluxe .result-sigil {
+  transform: scale(0.65);
+  transform-origin: center;
+}
+.result-divider {
+  width: 140px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--house-accent),
+    transparent
+  );
+  margin: 1.6rem auto;
+}
+
+.result-copy {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.result-copy p {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #f1e7da;
+}
+
+.result-stats-heading {
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--aerie-gold);
+  margin-bottom: 1rem;
+}
+
+.result-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.result-stat {
+  border: 1px solid rgba(200, 163, 90, 0.22);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 0.9rem 0.8rem;
+  text-align: center;
+}
+
+.result-stat.winner {
+  border-color: var(--house-accent);
+  box-shadow: 0 0 18px var(--house-glow);
+  background: var(--house-tint);
+}
+
+.result-stat-name {
+  display: block;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #d8c9b5;
+  margin-bottom: 0.45rem;
+}
+
+.result-stat-value {
+  display: block;
+  font-size: 1.35rem;
+  color: #fff8ef;
+}
+
+.share-result-box {
+  margin-top: 1.8rem;
+  border: 1px solid rgba(200, 163, 90, 0.18);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1rem 1.1rem;
+  text-align: center;
+}
+
+.share-label {
+  color: var(--aerie-gold);
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  margin-bottom: 0.6rem;
+}
+
+.share-result-box p:last-child {
+  margin: 0;
+  color: #f0e6d8;
+  font-style: italic;
+}
+
+@media (max-width: 700px) {
+  .result-card-deluxe {
+    padding: 1.6rem 1.1rem;
+  }
+
+  .result-card-header h3 {
+    font-size: 2rem;
+  }
+
+  .result-copy p {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .result-sigil-wrap {
+    width: 88px;
+    height: 88px;
+  }
+
+  .result-sigil {
+    width: 58px;
+    height: 58px;
+  }
+}.result-card-deluxe {
+  overflow: hidden;
+}
+
+.result-card-header {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result-sigil-wrap {
+  width: 118px !important;
+  height: 118px !important;
+  max-width: 118px !important;
+  max-height: 118px !important;
+  margin: 0.75rem auto 1rem !important;
+  display: grid !important;
+  place-items: center !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(200, 163, 90, 0.45);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  box-shadow:
+    0 0 22px var(--house-glow),
+    inset 0 0 18px rgba(200, 163, 90, 0.1);
+}
+
+.result-sigil-wrap img,
+.result-sigil {
+  width: 70px !important;
+  height: 70px !important;
+  max-width: 70px !important;
+  max-height: 70px !important;
+  object-fit: contain !important;
+  display: block !important;
+  transform: none !important;
+}/* Force House sigils to stay small inside assessment cards */
+.result-card-deluxe .result-card-header .result-sigil-wrap {
+  width: 120px !important;
+  height: 120px !important;
+  max-width: 120px !important;
+  max-height: 120px !important;
+  margin: 0.8rem auto 1rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(200, 163, 90, 0.5) !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  box-shadow:
+    0 0 22px var(--house-glow),
+    inset 0 0 18px rgba(200, 163, 90, 0.12) !important;
+}
+
+.result-card-deluxe .result-card-header .result-sigil-wrap .result-sigil {
+  width: 88px !important;
+  height: 88px !important;
+  max-width: 88px !important;
+  max-height: 88px !important;
+  object-fit: contain !important;
+  display: block !important;
+  position: static !important;
+  transform: none !important;
+}
+/* Final forced sigil display */
+.result-card-deluxe .result-sigil-wrap {
+  width: 150px !important;
+  height: 150px !important;
+  margin: 0.8rem auto 1rem !important;
+
+  display: block !important;
+  overflow: hidden !important;
+
+  border-radius: 50% !important;
+  border: 1px solid rgba(200, 163, 90, 0.5) !important;
+
+  background-color: rgba(0, 0, 0, 0.55) !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: 260px auto !important;
+
+  box-shadow:
+    0 0 22px var(--house-glow),
+    inset 0 0 18px rgba(200, 163, 90, 0.12) !important;
+}
+
+.result-card-deluxe .result-sigil {
+  display: none !important;
+}
+
+/* Final sigil badge fix — shows full crest, not cropped circle */
+.result-card-deluxe .result-sigil-wrap {
+  width: 170px !important;
+  height: 170px !important;
+  max-width: 170px !important;
+  max-height: 170px !important;
+  min-width: 170px !important;
+  min-height: 170px !important;
+  margin: 0.8rem auto 1.2rem !important;
+
+  display: block !important;
+  overflow: visible !important;
+
+  border-radius: 0 !important;
+  border: none !important;
+
+  background-color: transparent !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: contain !important;
+
+  box-shadow: none !important;
+}
+/* Final crest badge fix for Trial result cards */
+.result-card-deluxe .result-sigil-wrap {
+  width: 180px !important;
+  height: auto !important;
+  max-width: 180px !important;
+  margin: 0.8rem auto 1.2rem !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  overflow: visible !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.result-card-deluxe .result-sigil-wrap .result-sigil,
+.result-card-deluxe img.result-sigil {
+  display: block !important;
+  width: 180px !important;
+  height: auto !important;
+  max-width: 180px !important;
+  max-height: 180px !important;
+  object-fit: contain !important;
+  position: static !important;
+  transform: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
