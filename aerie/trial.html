@@ -346,7 +346,12 @@ const houseThemes = {
        <img class="result-sigil" src="${sigilSrc}" alt="House ${winningHouse} sigil">
      </div>`
   : `<div class="result-house-mark">${winningHouse.charAt(0)}</div>`;
+const shareLine = `${result.share || `I was placed in House ${winningHouse} by the Trial of the Houses.`} — ${result.title}`;
 
+const fullShareText = `${shareLine}
+
+Take the Trial of the Houses:
+https://racrawfordauthor.com/aerie/trial.html`;
   const statsMarkup = Object.entries(scores)
     .map(([house, value]) => {
       const cleanScore = Number.isNaN(value) ? 0 : value;
@@ -398,6 +403,23 @@ const houseThemes = {
   `;
 
   resultStats.innerHTML = "";
+  const copyButton = document.querySelector(".copy-result-button");
+const copyConfirmation = document.getElementById("copy-confirmation");
+
+if (copyButton) {
+  copyButton.addEventListener("click", async () => {
+    const shareText = `${copyButton.dataset.share}
+Take the Trial of the Houses:
+https://racrawfordauthor.com/aerie/trial.html`;
+
+    try {
+      await navigator.clipboard.writeText(shareText);
+      copyConfirmation.textContent = "Result copied to clipboard.";
+    } catch (error) {
+      copyConfirmation.textContent = "Copy failed. Highlight the text above and copy it manually.";
+    }
+  });
+}
   // Add copy button inside the share box
   const shareBox = resultText.querySelector('.share-result-box');
   if (shareBox) {

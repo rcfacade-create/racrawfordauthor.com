@@ -1513,3 +1513,14 @@ body {
   border: none !important;
   box-shadow: none !important;
 }
+.copy-result-button {
+  margin-top: 1rem;
+}
+
+.copy-confirmation {
+  min-height: 1.2rem;
+  margin-top: 0.8rem;
+  color: var(--aerie-gold);
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+}
