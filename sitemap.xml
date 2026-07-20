@@ -1,23 +1,102 @@
-const raw=[
-[1,"Corvane the Whisper Saint","The Whisper Saint","Crow",3,4,"Whisper","Weakens the enemy total in his Clash by 1."],[2,"Maera Blacktongue","Mistress of Deception","Crow",2,5,"Blacktongue","Gains +2 power in a contested Clash."],[3,"Old Fenric Crow-Eye","Keeper of Secrets","Crow",2,2,"Crow-Eye","Gains +1 for every other friendly Crow here."],[4,"The Nameless Jackdaw","The Greatest Thief","Crow",2,6,"Jackdaw's Theft","Gains +1 when faster than every enemy here."],
-[5,"Aurelian Firstblood","The First Raven King","Raven",5,3,"Firstblood","Gains +2 as your first card in a Clash."],[6,"Queen Elsinor of the Black Crown","Matriarch of the Bloodline","Raven",4,4,"Black Crown","Gains +1 for every other friendly Raven here."],[7,"Prince Vaelor the Unseated","The King Who Walked Away","Raven",4,4,"Walked Away","Gains +2 while his Clash is behind."],[8,"The Raven Child","Child of Prophecy","Raven",1,4,"Prophecy","Gains +1 for each completed round."],
-[9,"Queen Aurelia Swan-Gold","The Golden Diplomat","Swan",2,4,"Golden Diplomacy","Courtly speed can break a tied Clash."],[10,"Lord Cassivar of the White Table","Master Negotiator","Swan",2,5,"White Table","Gains +1 for every friendly faction here."],[11,"Seraphine","The Perfumed Blade","Swan",3,6,"Perfumed Blade","Gains +2 when she is the fastest card here."],[12,"Maribel","The Treaty-Breaker","Swan",2,5,"Broken Accord","A swift spoiler for contested Clashes."],
-[13,"Magister Orun Star-Eyed","Seer of Ancient Truths","Owl",2,3,"Star-Eyed","Gains +2 from round four onward."],[14,"Ysmeria of the Moon Archive","Guardian of Forgotten Lore","Owl",3,4,"Forgotten Lore","Gains +1 for each other friendly faction here."],[15,"Mirrorwen Glassfeather","Mistress of Reflection","Owl",2,5,"Glassfeather","Copies up to 3 power from the strongest enemy."],[16,"Edrin the Hollow-Eyed","Scholar of Forbidden Memory","Owl",3,1,"Forbidden Memory","Gains +1 for every other card in his Clash."],
-[17,"Ser Kaedran Swiftkill","The Deadliest Duellist","Falcon",5,7,"Swiftkill","Gains +2 when facing exactly one enemy."],[18,"Liora Redglove","Champion of the Crimson Lists","Falcon",6,5,"Crimson Lists","Gains +1 for every other friendly Falcon here."],[19,"Garron Highperch","The Watcher","Falcon",4,5,"High Perch","A balanced watcher with high initiative."],[20,"The Sable Falconer","Master of Legendary Beasts","Falcon",4,6,"Sable Bond","Gains +1 for every other friendly Falcon here."],
-[21,"Marshal Hadrik Ironwing","Greatest Commander of Hawk","Hawk",7,3,"Ironwing Command","Gains +1 for every other friendly card here."],[22,"General Maelra Stormbanner","Breaker of Sieges","Hawk",6,4,"Stormbanner","Gains +2 when three or more cards contest the Clash."],[23,"Torren Broadshield","The Shield That Never Yielded","Hawk",8,2,"Broadshield","His power cannot be reduced below 8."],[24,"Ivara Sky-Marshal","Commander of the Tianma Legions","Hawk",5,7,"Tianma Legions","Fast command makes her a powerful tie-breaker."]];
-const cards=raw.map(([id,name,role,faction,strength,speed,ability,rules])=>({id,name,role,faction,strength,speed,ability,rules,image:`assets/cards/bf-${String(id).padStart(3,"0")}.webp`}));
-const names=["The Iron Gate","The Moon Archive","The Shattered Crown"],S={round:0,max:6,active:false,selected:null,hand:[],enemy:[],lanes:names.map(name=>({name,player:[],enemy:[]}))},$=id=>document.getElementById(id);
-function shuffle(a){a=[...a];for(let i=a.length-1;i;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function start(){const d=shuffle(cards);Object.assign(S,{round:1,active:true,selected:null,hand:d.slice(0,8),enemy:d.slice(8,16),lanes:names.map(name=>({name,player:[],enemy:[]}))});$("start").textContent="Restart Match";status("Choose a legend, then commit it to a Clash.");render()}
-function power(c,side,i){const l=S.lanes[i],a=l[side],other=l[side==="player"?"enemy":"player"],all=[...a,...other],f=new Set(a.map(x=>x.faction));let p=c.strength,behind=a.reduce((n,x)=>n+x.strength,0)<other.reduce((n,x)=>n+x.strength,0);if(c.id===2&&other.length)p+=2;if([3,6,18,20].includes(c.id))p+=Math.max(0,a.filter(x=>x.faction===c.faction).length-1);if(c.id===4&&other.length&&c.speed>Math.max(...other.map(x=>x.speed)))p++;if(c.id===5&&a[0]===c)p+=2;if(c.id===7&&behind)p+=2;if(c.id===8)p+=S.round-1;if(c.id===10)p+=f.size;if(c.id===11&&c.speed===Math.max(...all.map(x=>x.speed)))p+=2;if(c.id===13&&S.round>=4)p+=2;if(c.id===14)p+=Math.max(0,f.size-1);if(c.id===15&&other.length)p+=Math.min(3,Math.max(...other.map(x=>x.strength))-1);if(c.id===16)p+=all.length-1;if(c.id===17&&other.length===1)p+=2;if(c.id===21)p+=a.length-1;if(c.id===22&&all.length>=3)p+=2;return Math.max(c.id===23?8:0,p)}
-function totals(i){const l=S.lanes[i],sum=side=>({power:l[side].reduce((n,c)=>n+power(c,side,i),0),speed:l[side].reduce((n,c)=>n+c.speed,0)}),p=sum("player"),e=sum("enemy");p.power=Math.max(0,p.power-l.enemy.filter(c=>c.id===1).length);e.power=Math.max(0,e.power-l.player.filter(c=>c.id===1).length);return{player:p,enemy:e}}
-function winner(i){const t=totals(i);return t.player.power!==t.enemy.power?(t.player.power>t.enemy.power?"player":"enemy"):t.player.speed!==t.enemy.speed?(t.player.speed>t.enemy.speed?"player":"enemy"):"tie"}
-function aiLane(){return S.lanes.map((_,i)=>({i,n:totals(i).player.power-totals(i).enemy.power+Math.random()*5})).sort((a,b)=>b.n-a.n)[0].i}
-function play(i){if(!S.active||!S.selected)return;const mine=S.selected,foe=S.enemy[Math.floor(Math.random()*S.enemy.length)],j=aiLane();S.hand=S.hand.filter(c=>c!==mine);S.enemy=S.enemy.filter(c=>c!==foe);S.lanes[i].player.push(mine);S.lanes[j].enemy.push(foe);S.selected=null;let msg=`${mine.name} enters ${names[i]}. Blackwing reveals ${foe.name} at ${names[j]}.`;if(S.round>=S.max){S.active=false;msg+=` ${result()}`}else S.round++;status(msg);render()}
-function result(){const w=S.lanes.map((_,i)=>winner(i)),p=w.filter(x=>x==="player").length,e=w.filter(x=>x==="enemy").length;return p>e?`You claim ${p} Clashes. The field is yours.`:e>p?`Blackwing claims ${e} Clashes.`:"The field ends in deadlock."}
-function status(x){$("status").textContent=x}
-function side(label,list,total,who,i){return`<div class="side"><span>${label} · ${total.power} power · ${total.speed} speed</span><div class="played">${list.length?list.map(c=>`<div class="mini" title="${c.name}"><img src="${c.image}" alt="${c.name}"><b>${power(c,who,i)}</b></div>`).join(""):'<i class="empty">No legends committed</i>'}</div></div>`}
-function render(){$("round").textContent=S.round?`Round ${Math.min(S.round,S.max)} / ${S.max}`:"Round —";$("board").innerHTML="";S.lanes.forEach((l,i)=>{const t=totals(i),x=document.createElement("article");x.className=`lane${S.active&&S.selected?" selectable":""}`;x.innerHTML=`<h3>${l.name} · ${winner(i)==="tie"?"Even":winner(i)==="player"?"You lead":"Blackwing leads"}</h3>${side("Blackwing",l.enemy,t.enemy,"enemy",i)}${side("You",l.player,t.player,"player",i)}`;x.onclick=()=>play(i);$("board").append(x)});$("hand").innerHTML="";if(!S.hand.length)$("hand").innerHTML='<i class="empty">Your hand is waiting.</i>';S.hand.forEach(c=>{let b=document.createElement("button");b.className=`hand-card${S.selected===c?" selected":""}`;b.disabled=!S.active;b.innerHTML=`<img src="${c.image}" alt=""><span>${c.name} · ${c.strength}/${c.speed}</span>`;b.onclick=()=>{S.selected=S.selected===c?null:c;$("help").textContent=S.selected?`${c.name} selected. Choose a Clash.`:"Select a card, then select a Clash.";render()};$("hand").append(b)});let w=S.lanes.map((_,i)=>winner(i));$("you-score").textContent=w.filter(x=>x==="player").length;$("ai-score").textContent=w.filter(x=>x==="enemy").length}
-function archive(filter="All"){$("cards").innerHTML="";cards.filter(c=>filter==="All"||c.faction===filter).forEach(c=>{let b=document.createElement("button");b.innerHTML=`<img loading="lazy" src="${c.image}" alt="${c.name} card front"><span>BF-${String(c.id).padStart(3,"0")} · ${c.name}</span>`;b.onclick=()=>open(c);$("cards").append(b)})}
-function open(c){$("large-card").src=c.image;$("large-card").alt=`${c.name} card front`;$("card-code").textContent=`BF-${String(c.id).padStart(3,"0")} · ${c.faction}`;$("card-name").textContent=c.name;$("card-role").textContent=`${c.role} · ${c.strength} Strength · ${c.speed} Speed`;$("card-rule").textContent=`${c.ability}: ${c.rules}`;$("dialog").showModal()}
-["All",...new Set(cards.map(c=>c.faction))].forEach((f,i)=>{let b=document.createElement("button");b.textContent=f;b.className=i?"":"active";b.onclick=()=>{$("filters").querySelectorAll("button").forEach(x=>x.classList.remove("active"));b.classList.add("active");archive(f)};$("filters").append(b)});$("start").onclick=start;$("close").onclick=()=>$("dialog").close();$("dialog").onclick=e=>{if(e.target===$("dialog"))$("dialog").close()};archive();render();
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://racrawfordauthor.com/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/books.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/world.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/updates.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/shop.html</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/about.html</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/contact.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/aerie/index.html</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/aerie/academy.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/aerie/archives.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/aerie/master-blueprint.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/aerie/stables.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/aerie/great-courtyard.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/aerie/hall-of-chronicles.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/aerie/great-hall.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/aerie/crow-tower.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/aerie/owl-tower.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/aerie/hawk-tower.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/aerie/swan-tower.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://racrawfordauthor.com/aerie/raven-tower.html</loc>
+    <priority>0.6</priority>
+  </url>
+</urlset>
