@@ -30,6 +30,12 @@
 .blackwing-reveal img{display:block;width:clamp(180px,23vw,250px);aspect-ratio:63/88;object-fit:cover;border:1px solid var(--line)}
 .blackwing-reveal strong{color:var(--pale);text-align:center;text-transform:uppercase;letter-spacing:.08em}
 .blackwing-arrival{animation:blackwingArrival .9s ease-out}
+.game-outcome{position:fixed;z-index:110;inset:50% auto auto 50%;display:grid;justify-items:center;gap:.75rem;width:min(88vw,520px);padding:2rem;background:radial-gradient(circle at 50% 15%,rgba(200,163,90,.16),transparent 50%),rgba(5,6,7,.98);border:1px solid var(--gold);box-shadow:0 0 0 100vmax rgba(0,0,0,.82),0 24px 90px #000;transform:translate(-50%,-50%);text-align:center;animation:outcomeReveal .5s ease-out both}
+.game-outcome>span{color:var(--gold);text-transform:uppercase;letter-spacing:.2em;font-size:.7rem}
+.game-outcome>strong{color:var(--pale);font-size:clamp(2.6rem,9vw,5.5rem);line-height:.9;letter-spacing:.08em}
+.game-outcome.lose>strong{color:#b8b2aa}.game-outcome.draw>strong{color:var(--gold)}
+.game-outcome p{margin:0 0 .4rem;color:var(--muted)}
 @keyframes blackwingReveal{from{opacity:0;transform:translate(-50%,-46%) scale(.9)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
 @keyframes blackwingArrival{0%,100%{box-shadow:inset 0 0 0 0 transparent}35%{box-shadow:inset 0 0 0 3px var(--gold),inset 0 0 40px rgba(200,163,90,.28)}}
+@keyframes outcomeReveal{from{opacity:0;transform:translate(-50%,-45%) scale(.88)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
 @media(max-width:650px){.hand{min-height:285px}.hand-card{flex-basis:155px}.mini{width:58px}}
