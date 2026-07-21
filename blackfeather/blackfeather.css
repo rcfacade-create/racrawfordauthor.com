@@ -19,3 +19,17 @@
 .site-footer p{margin:0}
 @media(max-width:980px){.site-header .site-nav{gap:14px}.site-header .site-nav a{font-size:.75rem}}
 @media(max-width:780px){.site-header .header-inner{align-items:flex-start}.site-header .site-nav{display:none;width:100%;flex-direction:column;align-items:flex-start;padding-top:16px}.site-header .site-nav.open{display:flex}.site-header .menu-button{display:block}}
+
+/* Larger playable cards and a readable Blackwing turn sequence. */
+.hand{gap:1rem;min-height:315px;padding:1.15rem}
+.hand-card{flex-basis:clamp(165px,19vw,220px)}
+.hand-card span{padding:6px;font-size:.72rem}
+.mini{width:clamp(58px,7vw,86px)}
+.blackwing-reveal{position:fixed;z-index:100;inset:50% auto auto 50%;display:grid;justify-items:center;gap:.45rem;width:min(86vw,330px);padding:1rem;background:rgba(5,6,7,.98);border:1px solid var(--gold);box-shadow:0 0 0 100vmax rgba(0,0,0,.72),0 24px 80px #000;transform:translate(-50%,-50%);animation:blackwingReveal .35s ease-out both;pointer-events:none}
+.blackwing-reveal span,.blackwing-reveal small{color:var(--gold);text-transform:uppercase;letter-spacing:.16em;font-size:.68rem}
+.blackwing-reveal img{display:block;width:clamp(180px,23vw,250px);aspect-ratio:63/88;object-fit:cover;border:1px solid var(--line)}
+.blackwing-reveal strong{color:var(--pale);text-align:center;text-transform:uppercase;letter-spacing:.08em}
+.blackwing-arrival{animation:blackwingArrival .9s ease-out}
+@keyframes blackwingReveal{from{opacity:0;transform:translate(-50%,-46%) scale(.9)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes blackwingArrival{0%,100%{box-shadow:inset 0 0 0 0 transparent}35%{box-shadow:inset 0 0 0 3px var(--gold),inset 0 0 40px rgba(200,163,90,.28)}}
+@media(max-width:650px){.hand{min-height:285px}.hand-card{flex-basis:155px}.mini{width:58px}}
