@@ -62,7 +62,7 @@
   document.querySelectorAll('[data-cart-open]').forEach(button => button.addEventListener('click', openCart));
   document.querySelectorAll('[data-cart-close]').forEach(button => button.addEventListener('click', closeCart));
   document.addEventListener('keydown', event => { if (event.key === 'Escape') closeCart(); });
-  document.querySelector('[data-checkout]').addEventListener('click', () => announce('Checkout will activate when the shop opens'));
+  document.querySelector('[data-checkout]').addEventListener('click', () => { window.location.href = 'index.html#gazette'; });
 
   document.querySelectorAll('[data-filter]').forEach(button => button.addEventListener('click', () => {
     document.querySelectorAll('[data-filter]').forEach(filter => filter.classList.remove('active'));
