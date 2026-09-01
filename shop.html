@@ -3,171 +3,139 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Hemming’s Provision Shop | R.A. Crawford</title>
-
-  <meta
-    name="description"
-    content="Visit Hemming’s Provision Shop, an in-world shop from R.A. Crawford’s dark fantasy series, stocked with weapons, cloaks, masks, scrolls, armour, relics, and future reader merchandise."
-  />
-
+  <meta name="description" content="Books, Blackfeather cards, archive prints and collector relics from the world of R.A. Crawford." />
   <meta property="og:title" content="Hemming’s Provision Shop | R.A. Crawford" />
-  <meta
-    property="og:description"
-    content="Step behind the Crow shelves and discover Hemming’s Provision Shop, an in-world store of weapons, cloaks, scrolls, armour, relics, and future reader merchandise."
-  />
+  <meta property="og:description" content="Enter Hemming’s hidden shop and browse books, games, prints and relics from the Aerie Dominion." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://racrawfordauthor.com/shop.html" />
   <meta property="og:image" content="https://racrawfordauthor.com/assets/hemmings-provision-shop.png" />
-
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Hemming’s Provision Shop" />
-  <meta
-    name="twitter:description"
-    content="Visit Hemming’s Provision Shop, an in-world store from R.A. Crawford’s dark fantasy series."
-  />
-  <meta name="twitter:image" content="https://racrawfordauthor.com/assets/hemmings-provision-shop.png" />
-
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="assets/favicon.svg" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="shop.css" />
 </head>
 
-<body>
-  <header class="site-header">
-    <a class="logo" href="index.html">R.A. Crawford</a>
+<body class="shop-page">
+  <div class="feathers" aria-hidden="true"></div>
 
-    <nav class="site-nav">
-      <a href="index.html">Home</a>
-      <a href="books.html">Books</a>
-      <a href="world.html">World</a>
-      <a href="updates.html">Updates</a>
-      <a href="shop.html">Shop</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">◆</span>
+        <span>R.A. Crawford<small>Epic Fantasy Author</small></span>
+      </a>
+      <button class="menu-button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav">☰</button>
+      <nav class="site-nav" id="site-nav">
+        <a href="index.html">Home</a><a href="books.html">Books</a><a href="world.html">World</a>
+        <a href="updates.html">Updates</a><a class="active" href="shop.html">Shop</a>
+        <a href="about.html">About</a><a href="contact.html">Contact</a>
+      </nav>
+      <button class="cart-button" type="button" data-cart-open aria-label="Open basket">
+        Basket <span class="cart-count" data-cart-count>0</span>
+      </button>
+    </div>
   </header>
 
   <main>
-    <section class="hero shop-hero">
-      <div class="hero-copy">
+    <section class="shop-hero">
+      <div class="shop-hero-art" aria-hidden="true"></div>
+      <div class="shop-hero-copy">
         <p class="eyebrow">Hidden behind the Crow shelves</p>
-        <h1>Hemming’s Provision Shop</h1>
-        <p>
-          A secret store of weapons, cloaks, masks, gauntlets, tools, relics,
-          scrolls, armour, jewellery, and strange things better left unnamed.
-        </p>
-
+        <h1>Hemming’s<br />Provision Shop</h1>
+        <p class="shop-intro">Books, cards, maps and curious relics gathered from across the Aerie Dominion. Mind what you touch. Hemming notices everything.</p>
         <div class="hero-actions">
-          <a class="button" href="index.html#gazette">Register Interest</a>
-          <a class="button button-secondary" href="aerie/index.html">Enter the Aerie Dominion</a>
+          <a class="btn primary" href="#catalogue">Browse the shelves</a>
+          <a class="btn" href="#keepers-pick">Keeper’s pick</a>
         </div>
+        <p class="preview-note"><span></span> Catalogue preview — checkout opens when the first stock arrives</p>
       </div>
     </section>
 
-    <section class="section">
-      <div class="feature-image-wrap">
-        <img
-          class="feature-image"
-          src="assets/hemmings-provision-shop.png"
-          alt="Hemming’s Provision Shop hidden within Aethelmar Academy"
-        />
+    <section class="shop-assurances" aria-label="Shop information">
+      <p><strong>From the Dominion</strong><span>Official R.A. Crawford wares</span></p>
+      <p><strong>Protected Trade</strong><span>Secure checkout at launch</span></p>
+      <p><strong>Gilded Dispatch</strong><span>UK delivery planned first</span></p>
+    </section>
+
+    <section class="section shop-catalogue" id="catalogue">
+      <div class="catalogue-heading">
+        <div><p class="eyebrow">The current inventory</p><h2>Browse the Shelves</h2></div>
+        <p>Each piece has been selected for the first opening of Hemming’s shop. Prices and availability remain provisional until trade begins.</p>
       </div>
-    </section>
 
-    <section class="section section-narrow">
-      <p class="eyebrow">Proprietor</p>
-      <h2>Hemming</h2>
-      <p>
-        Very small, sharp-eyed, and dressed in House Crow leathers, Hemming
-        keeps his shop hidden behind shifting bookcases and secret doors.
-        One violet eye watches every coin, every blade, and every bargain.
-      </p>
-      <p>
-        The shop itself moves like a sliding puzzle: walls of weapons, cloaks,
-        masks, gauntlets, tools, rope, instruments, jewellery, bags, packs,
-        scrolls, books, and stands of armour appearing where only shelves once stood.
-      </p>
+      <div class="shop-filters" role="group" aria-label="Filter products">
+        <button class="filter-button active" type="button" data-filter="all">All wares</button>
+        <button class="filter-button" type="button" data-filter="books">Books</button>
+        <button class="filter-button" type="button" data-filter="blackfeather">Blackfeather</button>
+        <button class="filter-button" type="button" data-filter="prints">Prints & maps</button>
+        <button class="filter-button" type="button" data-filter="relics">Relics</button>
+      </div>
 
-      <blockquote>
-        “First one’s on Master Grey. Next one, you’ll have to pay for.”
-      </blockquote>
-    </section>
-
-    <section class="section">
-      <p class="eyebrow">Future Wares</p>
-      <h2>What Will Be Sold Here</h2>
-
-      <div class="card-grid">
-        <article class="card">
-          <h3>Signed Books</h3>
-          <p>
-            Future signed editions, special copies, and reader exclusives from
-            The Raven’s Heir Trilogy.
-          </p>
+      <div class="product-grid" data-product-grid>
+        <article class="product-card" data-category="books" data-product-id="WFAS-PB-001" data-name="The War of Feather and Shadow — Book One Paperback" data-price="12.99">
+          <div class="product-image book-product"><img src="assets/cover.jpg" alt="Cover of The War of Feather and Shadow, Book One: The Raven’s Heir" /><span class="product-badge">Book One</span></div>
+          <div class="product-copy"><p class="product-type">The War of Feather and Shadow</p><h3>Book One: The Raven’s Heir — Paperback</h3><p class="product-description">The opening volume of Kael’s journey through blood, shadow and the broken legacy of House Raven.</p><div class="product-bottom"><strong>£12.99</strong><button type="button" data-add-to-cart>Add to basket</button></div></div>
         </article>
 
-        <article class="card">
-          <h3>Archive Prints</h3>
-          <p>
-            Royal Archive records, academy artwork, House imagery, and Hall of
-            Chronicles releases.
-          </p>
+        <article class="product-card" data-category="books" data-product-id="WFAS-SG-002" data-name="The War of Feather and Shadow — Book One Signed Edition" data-price="19.99">
+          <div class="product-image signed-product"><img src="assets/cover.jpg" alt="Signed edition of The War of Feather and Shadow, Book One: The Raven’s Heir" /><span class="product-badge gold">Signed</span></div>
+          <div class="product-copy"><p class="product-type">The War of Feather and Shadow</p><h3>Book One: The Raven’s Heir — Signed Edition</h3><p class="product-description">A signed paperback with an exclusive R.A. Crawford bookplate and numbered first-shop mark.</p><div class="product-bottom"><strong>£19.99</strong><button type="button" data-add-to-cart>Add to basket</button></div></div>
         </article>
 
-        <article class="card">
-          <h3>Maps & Relics</h3>
-          <p>
-            World maps, academy layouts, hidden archive records, and collector
-            pieces from the Aerie Dominion.
-          </p>
+        <article class="product-card coming-soon" data-category="blackfeather" data-product-id="BF-ST-001" data-name="Blackfeather Starter Set" data-price="24.99">
+          <div class="product-image card-product"><img src="blackfeather/assets/cards/bf-001.webp" alt="Blackfeather card from the starter set" /><img src="blackfeather/assets/cards/bf-006.webp" alt="Second Blackfeather card" /><span class="product-badge violet">Coming Soon</span></div>
+          <div class="product-copy"><p class="product-type">Blackfeather</p><h3>Starter Set</h3><p class="product-description">A two-player introductory set of legendary characters, house tactics and the black feather card back.</p><div class="product-bottom"><strong>Price TBC</strong><button type="button" disabled>In production</button></div></div>
         </article>
 
-        <article class="card">
-          <h3>Bookmarks</h3>
-          <p>
-            House-themed bookmarks, Raven designs, Crow sigils, and reader
-            keepsakes.
-          </p>
+        <article class="product-card coming-soon" data-category="blackfeather" data-product-id="BF-CL-002" data-name="Blackfeather Collector Pack" data-price="14.99">
+          <div class="product-image card-product collector"><img src="blackfeather/assets/cards/bf-017.webp" alt="Rare Blackfeather legend card" /><img src="blackfeather/assets/cards/bf-023.webp" alt="Blackfeather legend card" /><span class="product-badge violet">Coming Soon</span></div>
+          <div class="product-copy"><p class="product-type">Blackfeather</p><h3>Collector Pack</h3><p class="product-description">A limited selection of archive legends intended for collectors and expanded play.</p><div class="product-bottom"><strong>Price TBC</strong><button type="button" disabled>In production</button></div></div>
         </article>
 
-        <article class="card">
-          <h3>Artwork</h3>
-          <p>
-            Character pieces, locations, House symbols, tower artwork, and
-            illustrated moments from the series.
-          </p>
+        <article class="product-card" data-category="prints" data-product-id="AV-MP-001" data-name="Aerie Dominion Map — A2" data-price="18.00">
+          <div class="product-image map-product"><img src="assets/map.jpg" alt="Map of the Aerie Dominion" /><span class="product-badge">A2 Print</span></div>
+          <div class="product-copy"><p class="product-type">Cartographer’s archive</p><h3>Aerie Dominion Map</h3><p class="product-description">A detailed A2 wall map of the Dominion, its ancient cities, hidden roads and forbidden reaches.</p><div class="product-bottom"><strong>£18.00</strong><button type="button" data-add-to-cart>Add to basket</button></div></div>
         </article>
 
-        <article class="card">
-          <h3>Curious Finds</h3>
-          <p>
-            Limited pieces, strange objects, and small secrets that Hemming may
-            or may not admit to selling.
-          </p>
+        <article class="product-card" data-category="prints" data-product-id="AV-AR-004" data-name="Hall of Chronicles Archive Print" data-price="16.00">
+          <div class="product-image archive-product"><img src="assets/archives/ra-004-hall-of-chronicles.jpg" alt="Hall of Chronicles archive artwork" /><span class="product-badge">Archive IV</span></div>
+          <div class="product-copy"><p class="product-type">Royal Archive print</p><h3>Hall of Chronicles</h3><p class="product-description">An archival art print of the Academy’s guarded repository, prepared in the Royal Archive style.</p><div class="product-bottom"><strong>£16.00</strong><button type="button" data-add-to-cart>Add to basket</button></div></div>
+        </article>
+
+        <article class="product-card" data-category="relics" data-product-id="AV-BM-001" data-name="House Sigil Bookmark Set" data-price="8.50">
+          <div class="product-image sigil-product"><img src="aerie/assets/sigils/crow.png" alt="House Crow sigil" /><img src="aerie/assets/sigils/raven.png" alt="House Raven sigil" /><img src="aerie/assets/sigils/swan.png" alt="House Swan sigil" /><span class="product-badge">Six Houses</span></div>
+          <div class="product-copy"><p class="product-type">Reader’s relic</p><h3>House Sigil Bookmarks</h3><p class="product-description">A set of six heavy-card bookmarks bearing the known House sigils and their formal colours.</p><div class="product-bottom"><strong>£8.50</strong><button type="button" data-add-to-cart>Add to basket</button></div></div>
+        </article>
+
+        <article class="product-card featured-product coming-soon" id="keepers-pick" data-category="relics" data-product-id="AV-BD-001" data-name="The Keeper’s First Cache" data-price="49.99">
+          <div class="product-image cache-product"><img src="assets/hemmings-provision-shop.png" alt="Hemming’s Provision Shop collector cache" /><span class="product-badge violet">Coming Soon</span></div>
+          <div class="product-copy"><p class="product-type">Future collector bundle</p><h3>The Keeper’s First Cache</h3><p class="product-description">Signed book, Dominion map, House bookmark set and an exclusive Blackfeather collector pack, gathered into one future cache.</p><div class="product-bottom"><strong>Price TBC</strong><button type="button" disabled>Awaiting Blackfeather</button></div></div>
         </article>
       </div>
     </section>
 
-    <section class="section section-narrow">
-      <p class="eyebrow">Not Open for Trade Yet</p>
-      <h2>The Shelves Are Being Stocked</h2>
-      <p>
-        Hemming’s Provision Shop is not open for public trade yet. Join The
-        Gilded Gazette to hear when the first items are released.
-      </p>
+    <section class="section hemming-story">
+      <div class="story-image"><img src="assets/hemmings-provision-shop.png" alt="Hemming behind the counter of his hidden provision shop" /></div>
+      <div class="story-copy"><p class="eyebrow">The proprietor</p><h2>A Shop That Refuses to Stay Still</h2><p>Very small, sharp-eyed, and dressed in House Crow leathers, Hemming keeps his shop behind shifting bookcases and secret doors. One violet eye watches every coin, every blade and every bargain.</p><blockquote>“First one’s on Master Grey. Next one, you’ll have to pay for.”</blockquote></div>
+    </section>
 
-      <div class="hero-actions">
-        <a class="button" href="index.html#gazette">Join The Gilded Gazette</a>
-        <a class="button button-secondary" href="contact.html">Contact R.A. Crawford</a>
-      </div>
+    <section class="section shop-newsletter">
+      <p class="eyebrow">Receive the opening notice</p><h2>Join The Gilded Gazette</h2><p>Subscribers will hear first when the shelves open, signed copies arrive and limited Blackfeather packs are released.</p><a class="btn primary" href="index.html#gazette">Register for dispatches</a>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>&copy; 2026 R.A. Crawford. All rights reserved.</p>
-  </footer>
+  <aside class="cart-drawer" data-cart-drawer aria-hidden="true" aria-label="Shopping basket">
+    <div class="cart-header"><div><p class="eyebrow">Hemming’s ledger</p><h2>Your Basket</h2></div><button type="button" data-cart-close aria-label="Close basket">×</button></div>
+    <div class="cart-items" data-cart-items></div>
+    <div class="cart-empty" data-cart-empty><p>The ledger is empty.</p><span>Choose something from the shelves before Hemming changes his mind.</span></div>
+    <div class="cart-footer"><div><span>Provisional total</span><strong data-cart-total>£0.00</strong></div><button class="checkout-button" type="button" data-checkout>Register interest in these products</button><p>Payments are disabled during catalogue review. No order will be placed.</p></div>
+  </aside>
+  <button class="cart-backdrop" type="button" data-cart-close aria-label="Close basket" hidden></button>
+  <div class="shop-toast" data-shop-toast role="status" aria-live="polite"></div>
 
+  <footer class="site-footer"><p>&copy; <span id="year">2026</span> R.A. Crawford. All rights reserved.</p></footer>
   <script src="main.js"></script>
+  <script src="shop.js"></script>
 </body>
 </html>

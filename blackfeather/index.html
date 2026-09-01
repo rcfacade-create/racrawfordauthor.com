@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Blackfeather | Foundation Set</title>
+  <meta name="description" content="Play the Blackfeather Foundation Set prototype.">
+  <link rel="icon" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="blackfeather.css">
+</head>
+<body>
+  <div class="feathers" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html"><span class="brand-mark">◆</span><span>R.A. Crawford <small>Epic Fantasy Author</small></span></a>
+      <button class="menu-button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav">☰</button>
+      <nav class="site-nav" id="site-nav">
+        <a href="../index.html">Home</a><a href="../books.html">Books</a><a href="../world.html">World</a><a class="active" href="./">Blackfeather</a><a href="../updates.html">Updates</a><a href="../shop.html">Shop</a><a href="../about.html">About</a><a href="../contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero blackfeather-hero"><div class="hero-copy"><p class="eyebrow">Legends of Avis · Foundation Set I</p><h1>Blackfeather</h1><p class="hero-text">Three Clashes. Eight legends. One field left standing.</p><div class="hero-actions"><a class="btn primary" href="#game">Enter the Clash</a><a class="btn" href="#archive">View the Cards</a></div></div></section>
+    <section class="rules"><span><b>1</b> Choose a legend</span><span><b>2</b> Commit to a Clash</span><span><b>3</b> Reveal together</span><span><b>4</b> Claim two Clashes</span></section>
+    <section class="section" id="game">
+      <div class="title"><p class="kicker">Playable Prototype</p><h2>The Field of Three</h2><p>Play six rounds against the Blackwing. Strength claims a Clash; Speed breaks equal totals.</p></div>
+      <div class="game">
+        <div class="toolbar"><strong id="round">Round —</strong><p id="status" role="status">Begin a match to draw your legends.</p><button class="button" id="start">Begin Match</button></div>
+        <div class="score"><span>You <b id="you-score">0</b></span><span>Clashes claimed</span><span><b id="ai-score">0</b> Blackwing</span></div>
+        <div class="board" id="board"></div>
+        <div class="hand-head"><div><p class="kicker">Your Hand</p><h3>Choose a Legend</h3></div><p id="help">Select a card, then select a Clash.</p></div>
+        <div class="hand" id="hand"></div>
+      </div>
+    </section>
+    <section class="section" id="archive"><div class="title"><p class="kicker">Foundation Archive</p><h2>The First Twenty-Four</h2><p>Open any card to inspect the current card front.</p></div><div class="filters" id="filters"></div><div class="archive" id="cards"></div></section>
+  </main>
+  <dialog id="dialog"><button class="close" id="close" aria-label="Close">×</button><img id="large-card" alt=""><div><p class="kicker" id="card-code"></p><h2 id="card-name"></h2><p id="card-role"></p><p id="card-rule"></p></div></dialog>
+  <footer class="site-footer"><p>© <span id="year"></span> R.A. Crawford. All rights reserved. · Blackfeather: Legends of Avis</p></footer>
+  <script src="../main.js"></script>
+  <script src="blackfeather.js"></script>
+</body></html>
