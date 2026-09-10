@@ -490,3 +490,84 @@ img {
 .feature-link-card .text-link {
   margin-top: auto;
 }
+
+/* Book Two reservation */
+.preorder-callout,
+.preorder-panel {
+  text-align: center;
+  border: 1px solid rgba(200, 163, 90, 0.45);
+  background:
+    radial-gradient(circle at top, rgba(92, 60, 128, 0.18), transparent 46%),
+    linear-gradient(135deg, rgba(20, 15, 10, 0.94), rgba(0, 0, 0, 0.96));
+  padding: 42px 32px;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3);
+}
+
+.preorder-callout h2,
+.preorder-panel h2,
+.preorder-intro h2 {
+  color: var(--gold-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.preorder-intro {
+  align-items: start;
+}
+
+.preorder-benefits {
+  grid-template-columns: 1fr;
+}
+
+.preorder-form {
+  max-width: 620px;
+  margin: 30px auto 0;
+  display: grid;
+  gap: 12px;
+  text-align: left;
+}
+
+.preorder-form label {
+  color: var(--gold-soft);
+  letter-spacing: 0.06em;
+}
+
+.preorder-form input[type="text"],
+.preorder-form select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(200, 163, 90, 0.4);
+  background: rgba(0, 0, 0, 0.72);
+  color: var(--text);
+  font: inherit;
+}
+
+.preorder-form select option {
+  background: #0b0a08;
+  color: var(--text);
+}
+
+.preorder-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 10px 0;
+  color: var(--muted) !important;
+}
+
+.preorder-consent input {
+  margin-top: 6px;
+}
+
+.preorder-form .btn {
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.preorder-form .small-note {
+  text-align: center;
+}
+
+.book-two-reservation img {
+  filter: saturate(0.75) contrast(1.05);
+}
