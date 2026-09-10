@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reserve The Avis Crown | Book Two by R.A. Crawford</title>
+  <meta name="description" content="Reserve your place for The Avis Crown, Book Two of The Raven’s Heir Trilogy by R.A. Crawford. No payment is taken." />
+  <meta property="og:title" content="Reserve The Avis Crown | R.A. Crawford" />
+  <meta property="og:description" content="Join the reservation list for Book Two of The Raven’s Heir Trilogy. No payment is taken." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://racrawfordauthor.com/preorder.html" />
+  <meta property="og:image" content="https://racrawfordauthor.com/assets/world-brand-art.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="feathers" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">◆</span>
+        <span>R.A. Crawford <small>Epic Fantasy Author</small></span>
+      </a>
+      <button class="menu-button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav">☰</button>
+      <nav class="site-nav" id="site-nav">
+        <a href="index.html">Home</a>
+        <a class="active" href="books.html">Books</a>
+        <a href="world.html">World</a>
+        <a href="updates.html">Updates</a>
+        <a href="shop.html">Shop</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero-subpage preorder-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Book Two Reservations</p>
+        <h1>The Avis Crown</h1>
+        <p class="hero-text">Wounds deepen, alliances fracture, and the throne becomes the greatest danger of all.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#reserve">Reserve Book Two</a>
+          <a class="btn" href="books.html">Explore the Trilogy</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-split preorder-intro">
+      <div class="panel">
+        <p class="eyebrow">The Story Continues</p>
+        <h2>Be First to Return to the Dominion</h2>
+        <p>Reserve your interest in <em>The Avis Crown</em>, Book Two of The Raven’s Heir Trilogy, and receive the ordering announcement when release details are confirmed.</p>
+        <p>This is a reservation only. No payment is taken and there is no obligation to purchase.</p>
+      </div>
+      <div class="cards-grid preorder-benefits">
+        <article class="card"><h3>No Payment Today</h3><p>Your reservation is free and does not create an order.</p></article>
+        <article class="card"><h3>First Release Notice</h3><p>Receive the purchase link when Book Two becomes available.</p></article>
+        <article class="card"><h3>Your Format Recorded</h3><p>Tell us whether you prefer Kindle, paperback or a signed edition.</p></article>
+      </div>
+    </section>
+
+    <section class="section section-cta" id="reserve">
+      <div class="panel preorder-panel">
+        <p class="eyebrow">Reservation Ledger</p>
+        <h2>Reserve The Avis Crown</h2>
+        <p>Complete the details below. Your email app will open with a prepared reservation message—send it to join the list.</p>
+
+        <form class="preorder-form" id="preorder-form">
+          <label for="reader-name">Your name</label>
+          <input id="reader-name" name="reader-name" type="text" autocomplete="name" required placeholder="Reader name" />
+
+          <label for="preferred-format">Preferred edition</label>
+          <select id="preferred-format" name="preferred-format" required>
+            <option value="">Choose an edition</option>
+            <option>Kindle</option>
+            <option>Paperback</option>
+            <option>Signed paperback</option>
+            <option>Not sure yet</option>
+          </select>
+
+          <label class="preorder-consent">
+            <input id="reservation-agreement" type="checkbox" required />
+            <span>I understand this is a free reservation and no payment is being taken.</span>
+          </label>
+
+          <button class="btn primary" type="submit">Prepare My Reservation</button>
+          <p class="small-note" id="preorder-status" role="status" aria-live="polite">Prefer to send it yourself? Email <a href="mailto:hello@racrawfordauthor.com?subject=Reserve%20The%20Avis%20Crown">hello@racrawfordauthor.com</a> with “Reserve The Avis Crown” as the subject.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> R.A. Crawford. All rights reserved. · <a href="https://www.instagram.com/racrawfordauthor/" target="_blank" rel="noopener noreferrer" aria-label="R.A. Crawford on Instagram">@racrawfordauthor on Instagram</a></p>
+  </footer>
+
+  <script src="main.js"></script>
+  <script>
+    const preorderForm = document.getElementById('preorder-form');
+    const preorderStatus = document.getElementById('preorder-status');
+
+    preorderForm.addEventListener('submit', event => {
+      event.preventDefault();
+      const readerName = document.getElementById('reader-name').value.trim();
+      const preferredFormat = document.getElementById('preferred-format').value;
+      const subject = 'Reserve The Avis Crown';
+      const body = [
+        'Hello R.A. Crawford,',
+        '',
+        'Please add me to the reservation list for The Avis Crown.',
+        '',
+        'Name: ' + readerName,
+        'Preferred edition: ' + preferredFormat,
+        '',
+        'I understand this is a free reservation. No payment is being taken and this does not create an obligation to purchase.',
+        '',
+        'Please send me the ordering announcement when Book Two becomes available.'
+      ].join('\n');
+
+      preorderStatus.textContent = 'Your reservation email is ready. Please send it from your email app to complete the reservation.';
+      window.location.href = 'mailto:hello@racrawfordauthor.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    });
+  </script>
+</body>
+</html>
