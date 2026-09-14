@@ -72,6 +72,19 @@
 
         <div class="trial-result-stats" id="result-stats"></div>
 
+        <div class="certificate-controls">
+          <p class="aerie-kicker">Academy Certificate</p>
+          <h3>Claim Your Trial Record</h3>
+          <label for="certificate-name">Name to appear on the certificate</label>
+          <input id="certificate-name" type="text" maxlength="60" autocomplete="name" placeholder="Enter your name" />
+          <div class="trial-actions">
+            <button class="aerie-button" id="download-certificate" type="button">Download Personalised Certificate</button>
+            <button class="aerie-button aerie-button-secondary" id="print-certificate" type="button">Print / Save as PDF</button>
+            <a class="aerie-button aerie-button-secondary" href="certificate.html">Blank Certificate</a>
+          </div>
+          <p class="certificate-note" id="certificate-note" role="status" aria-live="polite"></p>
+        </div>
+
         <div class="trial-actions">
           <button class="aerie-button" id="restart-trial">Take the Trial Again</button>
           <a class="aerie-button aerie-button-secondary" href="../index.html#gazette">
@@ -258,6 +271,7 @@ const houseThemes = {
       };
 
       let currentQuestion = 0;
+      let currentWinningHouse = "";
       let scores = {
         Crow: 0,
         Owl: 0,
@@ -331,6 +345,7 @@ const houseThemes = {
 
   const rankedHouses = Object.entries(scores).sort((a, b) => b[1] - a[1]);
   const winningHouse = rankedHouses[0][0];
+  currentWinningHouse = winningHouse;
   const result = results[winningHouse];
 
   const theme = houseThemes[winningHouse] || {
@@ -441,9 +456,127 @@ https://racrawfordauthor.com/aerie/trial.html`;
 
 }
 
+      function escapeXml(value) {
+        return String(value).replace(/[<>&'"]/g, character => ({
+          "<": "&lt;", ">": "&gt;", "&": "&amp;", "'": "&apos;", '"': "&quot;"
+        })[character]);
+      }
+
+      async function imageToDataUrl(path) {
+        const response = await fetch(path);
+        if (!response.ok) throw new Error("Unable to load certificate artwork.");
+        const blob = await response.blob();
+        return await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+      }
+
+      async function buildCertificateSvg(name, house, dateText) {
+        const safeName = escapeXml(name || "____________________________");
+        const safeHouse = escapeXml(house || "________________");
+        const safeDate = escapeXml(dateText || "________________");
+        const selectedSigil = houseSigils[house] ? await imageToDataUrl(houseSigils[house]) : "";
+        const houseNames = ["Crow", "Owl", "Hawk", "Falcon", "Swan", "Raven"];
+        const crestData = await Promise.all(houseNames.map(item => imageToDataUrl(houseSigils[item])));
+        const crestMarkup = crestData.map((data, index) => {
+          const x = 252 + (index * 124);
+          return `<image href="${data}" x="${x}" y="654" width="74" height="74" preserveAspectRatio="xMidYMid meet"/>
+            <text x="${x + 37}" y="744" class="crest-label" text-anchor="middle">${houseNames[index]}</text>`;
+        }).join("");
+
+        return `<svg xmlns="http://www.w3.org/2000/svg" width="1123" height="794" viewBox="0 0 1123 794">
+          <defs>
+            <radialGradient id="paper" cx="50%" cy="42%" r="75%">
+              <stop offset="0%" stop-color="#fffaf0"/>
+              <stop offset="70%" stop-color="#ead9b9"/>
+              <stop offset="100%" stop-color="#c5a671"/>
+            </radialGradient>
+            <filter id="shadow"><feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#2b1908" flood-opacity=".28"/></filter>
+            <style>
+              .small{font-family:Georgia,serif;font-size:15px;letter-spacing:5px;fill:#5b3b16}
+              .title{font-family:Georgia,serif;font-size:55px;font-weight:700;fill:#20160d}
+              .body{font-family:Georgia,serif;font-size:22px;fill:#43301b}
+              .name{font-family:Georgia,serif;font-size:36px;font-style:italic;fill:#1a120b}
+              .house{font-family:Georgia,serif;font-size:31px;font-weight:700;fill:#5d3511}
+              .crest-label{font-family:Georgia,serif;font-size:11px;letter-spacing:1.5px;fill:#5b3b16}
+              .fine{font-family:Georgia,serif;font-size:14px;fill:#624727}
+            </style>
+          </defs>
+          <rect width="1123" height="794" fill="url(#paper)"/>
+          <rect x="23" y="23" width="1077" height="748" rx="4" fill="none" stroke="#21150b" stroke-width="3"/>
+          <rect x="35" y="35" width="1053" height="724" rx="2" fill="none" stroke="#9a6b28" stroke-width="2"/>
+          <rect x="47" y="47" width="1029" height="700" fill="none" stroke="#3e2813" stroke-width="1"/>
+          <path d="M65 105H350M773 105H1058M65 620H1058" stroke="#9a6b28" stroke-width="1"/>
+          <text x="561.5" y="88" class="small" text-anchor="middle">THE AERIE DOMINION</text>
+          <text x="561.5" y="157" class="title" text-anchor="middle">Trial of the Houses</text>
+          <text x="561.5" y="195" class="small" text-anchor="middle">AETHELMAR ACADEMY · OFFICIAL RECORD</text>
+          ${selectedSigil ? `<image href="${selectedSigil}" x="467" y="212" width="189" height="154" preserveAspectRatio="xMidYMid meet" filter="url(#shadow)"/>` : `<circle cx="561.5" cy="285" r="67" fill="none" stroke="#9a6b28" stroke-width="2"/><text x="561.5" y="294" class="small" text-anchor="middle">ACADEMY SEAL</text>`}
+          <text x="561.5" y="397" class="body" text-anchor="middle">This record certifies that</text>
+          <text x="561.5" y="452" class="name" text-anchor="middle">${safeName}</text>
+          <path d="M270 466H853" stroke="#6a471d" stroke-width="1"/>
+          <text x="561.5" y="504" class="body" text-anchor="middle">has completed the Trial and been recognised by</text>
+          <text x="561.5" y="557" class="house" text-anchor="middle">HOUSE ${safeHouse.toUpperCase()}</text>
+          <text x="280" y="602" class="fine">Date recorded: ${safeDate}</text>
+          <text x="843" y="602" class="fine" text-anchor="end">Hall of Chronicles · Record Verified</text>
+          ${crestMarkup}
+        </svg>`;
+      }
+
+      function downloadSvg(svg, filename) {
+        const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
+
+      async function createPersonalCertificate(mode) {
+        const nameInput = document.getElementById("certificate-name");
+        const note = document.getElementById("certificate-note");
+        const name = nameInput.value.trim();
+        if (!name) {
+          note.textContent = "Enter the name you want recorded on the certificate.";
+          nameInput.focus();
+          return;
+        }
+        if (!currentWinningHouse) {
+          note.textContent = "Complete the Trial before claiming a certificate.";
+          return;
+        }
+        note.textContent = "Preparing your Academy record…";
+        try {
+          const dateText = new Intl.DateTimeFormat("en-GB", {
+            day: "numeric", month: "long", year: "numeric"
+          }).format(new Date());
+          const svg = await buildCertificateSvg(name, currentWinningHouse, dateText);
+          const filename = `trial-of-the-houses-${currentWinningHouse.toLowerCase()}-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}.svg`;
+          if (mode === "download") {
+            downloadSvg(svg, filename);
+            note.textContent = "Your personalised certificate has been downloaded.";
+          } else {
+            const printWindow = window.open("", "_blank");
+            if (!printWindow) throw new Error("Allow pop-ups to print the certificate.");
+            printWindow.document.write(`<!doctype html><html><head><title>Trial of the Houses Certificate</title><style>@page{size:A4 landscape;margin:0}html,body{margin:0;background:#ddd}svg{display:block;width:100vw;height:100vh}@media print{body{background:#fff}}</style></head><body>${svg}<script>window.onload=()=>setTimeout(()=>window.print(),250)<\/script></body></html>`);
+            printWindow.document.close();
+            note.textContent = "Choose “Save as PDF” in the print window for a PDF copy.";
+          }
+        } catch (error) {
+          note.textContent = error.message || "The certificate could not be prepared. Please try again.";
+        }
+      }
+
       // Wire event listeners
       startButton.addEventListener('click', startTrial);
       restartButton.addEventListener('click', startTrial);
+      document.getElementById("download-certificate").addEventListener("click", () => createPersonalCertificate("download"));
+      document.getElementById("print-certificate").addEventListener("click", () => createPersonalCertificate("print"));
 
     });
   </script>
