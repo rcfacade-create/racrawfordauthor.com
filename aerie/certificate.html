@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blank Trial Certificate | The Aerie Dominion</title>
+  <meta name="description" content="Download or print a blank Trial of the Houses certificate from Aethelmar Academy." />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="aerie.css" />
+  <style>
+    .certificate-page{padding:7rem 1rem 3rem;text-align:center}
+    .certificate-toolbar{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin:1.5rem auto 2rem}
+    .certificate-sheet{width:min(1123px,100%);aspect-ratio:1123/794;margin:auto;background:radial-gradient(circle at 50% 42%,#fffaf0 0,#ead9b9 70%,#c5a671 100%);color:#20160d;border:3px solid #21150b;outline:2px solid #9a6b28;outline-offset:-14px;padding:5%;position:relative;display:flex;flex-direction:column;align-items:center;box-shadow:0 16px 44px rgba(0,0,0,.55)}
+    .certificate-sheet:before{content:"";position:absolute;inset:26px;border:1px solid #3e2813;pointer-events:none}
+    .certificate-overline{letter-spacing:.34em;font-size:clamp(.55rem,1.25vw,.95rem);color:#5b3b16}
+    .certificate-sheet h1{font-size:clamp(2rem,5vw,4.4rem);margin:1.2rem 0 .4rem}
+    .certificate-subtitle{letter-spacing:.22em;color:#5b3b16;font-size:clamp(.55rem,1.1vw,.82rem)}
+    .blank-seal{width:clamp(70px,12vw,134px);aspect-ratio:1;border:2px solid #9a6b28;border-radius:50%;display:grid;place-items:center;margin:1.4rem auto;color:#6a471d;letter-spacing:.12em;font-size:clamp(.55rem,1vw,.78rem)}
+    .certificate-copy{font-size:clamp(.85rem,1.8vw,1.35rem);margin:.35rem 0}
+    .blank-line{width:min(580px,70%);height:clamp(28px,5vw,48px);border-bottom:1px solid #6a471d}
+    .house-line{font-size:clamp(1rem,2.4vw,1.9rem);font-weight:700;color:#5d3511;letter-spacing:.08em;margin:.8rem 0}
+    .certificate-footer-line{width:82%;display:flex;justify-content:space-between;border-top:1px solid #9a6b28;padding-top:.8rem;margin-top:.7rem;font-size:clamp(.55rem,1vw,.82rem);color:#624727}
+    .certificate-crests{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;width:72%;margin-top:auto}
+    .certificate-crest img{width:100%;height:clamp(38px,7vw,74px);object-fit:contain}
+    .certificate-crest span{display:block;font-size:clamp(.45rem,.85vw,.68rem);letter-spacing:.08em;color:#5b3b16}
+    @media print{
+      @page{size:A4 landscape;margin:0}
+      body{background:#fff}
+      .aerie-top-nav,.certificate-toolbar,.certificate-page>p,.certificate-page>h1{display:none!important}
+      .certificate-page{padding:0}
+      .certificate-sheet{width:297mm;height:210mm;max-width:none;box-shadow:none;border-radius:0}
+    }
+  </style>
+</head>
+<body class="aerie-page">
+  <header class="aerie-top-nav">
+    <a class="aerie-brand" href="index.html">The Aerie Dominion</a>
+    <nav class="aerie-main-nav" aria-label="Aerie main navigation">
+      <a href="../index.html">Main Site</a><a href="index.html">Gates</a><a href="academy.html">Courtyard</a><a href="trial.html">Trial</a>
+    </nav>
+  </header>
+  <main class="certificate-page">
+    <p class="aerie-kicker">Aethelmar Academy Record Office</p>
+    <h1>Blank Trial Certificate</h1>
+    <p>Download the artwork or print it directly. Choose “Save as PDF” in your print options for an A4 landscape PDF.</p>
+    <div class="certificate-toolbar">
+      <button class="aerie-button" id="download-blank" type="button">Download Blank Certificate</button>
+      <button class="aerie-button aerie-button-secondary" type="button" onclick="window.print()">Print / Save as PDF</button>
+      <a class="aerie-button aerie-button-secondary" href="trial.html">Return to the Trial</a>
+    </div>
+    <section class="certificate-sheet" id="certificate-sheet" aria-label="Blank Trial of the Houses certificate">
+      <div class="certificate-overline">THE AERIE DOMINION</div>
+      <h1>Trial of the Houses</h1>
+      <div class="certificate-subtitle">AETHELMAR ACADEMY · OFFICIAL RECORD</div>
+      <div class="blank-seal">ACADEMY<br />SEAL</div>
+      <p class="certificate-copy">This record certifies that</p>
+      <div class="blank-line"></div>
+      <p class="certificate-copy">has completed the Trial and been recognised by</p>
+      <div class="house-line">HOUSE ____________________</div>
+      <div class="certificate-footer-line"><span>Date recorded: ____________________</span><span>Hall of Chronicles · Record Verified</span></div>
+      <div class="certificate-crests">
+        <div class="certificate-crest"><img src="assets/sigils/crow.png" alt="House Crow sigil"><span>CROW</span></div>
+        <div class="certificate-crest"><img src="assets/sigils/owl.png" alt="House Owl sigil"><span>OWL</span></div>
+        <div class="certificate-crest"><img src="assets/sigils/hawk.png" alt="House Hawk sigil"><span>HAWK</span></div>
+        <div class="certificate-crest"><img src="assets/sigils/falcon.png" alt="House Falcon sigil"><span>FALCON</span></div>
+        <div class="certificate-crest"><img src="assets/sigils/swan.png" alt="House Swan sigil"><span>SWAN</span></div>
+        <div class="certificate-crest"><img src="assets/sigils/raven.png" alt="House Raven sigil"><span>RAVEN</span></div>
+      </div>
+    </section>
+  </main>
+  <script>
+    async function imageToDataUrl(path){
+      const response=await fetch(path);
+      const blob=await response.blob();
+      return await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(blob)});
+    }
+    document.getElementById("download-blank").addEventListener("click",async function(){
+      const button=this;button.textContent="Preparing…";button.disabled=true;
+      try{
+        const houses=["Crow","Owl","Hawk","Falcon","Swan","Raven"];
+        const data=await Promise.all(houses.map(h=>imageToDataUrl(`assets/sigils/${h.toLowerCase()}.png`)));
+        const crests=data.map((src,i)=>{const x=252+i*124;return `<image href="${src}" x="${x}" y="654" width="74" height="74" preserveAspectRatio="xMidYMid meet"/><text x="${x+37}" y="744" class="label" text-anchor="middle">${houses[i]}</text>`}).join("");
+        const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1123" height="794" viewBox="0 0 1123 794"><defs><radialGradient id="p" cx="50%" cy="42%" r="75%"><stop offset="0%" stop-color="#fffaf0"/><stop offset="70%" stop-color="#ead9b9"/><stop offset="100%" stop-color="#c5a671"/></radialGradient><style>.s{font-family:Georgia,serif;font-size:15px;letter-spacing:5px;fill:#5b3b16}.t{font-family:Georgia,serif;font-size:55px;font-weight:700;fill:#20160d}.b{font-family:Georgia,serif;font-size:22px;fill:#43301b}.h{font-family:Georgia,serif;font-size:31px;font-weight:700;fill:#5d3511}.label{font-family:Georgia,serif;font-size:11px;letter-spacing:1.5px;fill:#5b3b16}.f{font-family:Georgia,serif;font-size:14px;fill:#624727}</style></defs><rect width="1123" height="794" fill="url(#p)"/><rect x="23" y="23" width="1077" height="748" fill="none" stroke="#21150b" stroke-width="3"/><rect x="35" y="35" width="1053" height="724" fill="none" stroke="#9a6b28" stroke-width="2"/><rect x="47" y="47" width="1029" height="700" fill="none" stroke="#3e2813"/><text x="561.5" y="88" class="s" text-anchor="middle">THE AERIE DOMINION</text><text x="561.5" y="157" class="t" text-anchor="middle">Trial of the Houses</text><text x="561.5" y="195" class="s" text-anchor="middle">AETHELMAR ACADEMY · OFFICIAL RECORD</text><circle cx="561.5" cy="285" r="67" fill="none" stroke="#9a6b28" stroke-width="2"/><text x="561.5" y="291" class="s" text-anchor="middle">ACADEMY SEAL</text><text x="561.5" y="397" class="b" text-anchor="middle">This record certifies that</text><path d="M270 466H853" stroke="#6a471d"/><text x="561.5" y="504" class="b" text-anchor="middle">has completed the Trial and been recognised by</text><text x="561.5" y="557" class="h" text-anchor="middle">HOUSE ____________________</text><text x="280" y="602" class="f">Date recorded: ____________________</text><text x="843" y="602" class="f" text-anchor="end">Hall of Chronicles · Record Verified</text><path d="M65 620H1058" stroke="#9a6b28"/>${crests}</svg>`;
+        const url=URL.createObjectURL(new Blob([svg],{type:"image/svg+xml;charset=utf-8"}));
+        const link=document.createElement("a");link.href=url;link.download="trial-of-the-houses-blank-certificate.svg";link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+      }finally{button.textContent="Download Blank Certificate";button.disabled=false}
+    });
+  </script>
+</body>
+</html>
