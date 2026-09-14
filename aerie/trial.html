@@ -550,6 +550,11 @@ https://racrawfordauthor.com/aerie/trial.html`;
           note.textContent = "Complete the Trial before claiming a certificate.";
           return;
         }
+        const printWindow = mode === "print" ? window.open("", "_blank") : null;
+        if (mode === "print" && !printWindow) {
+          note.textContent = "Allow pop-ups to print or save the certificate as a PDF.";
+          return;
+        }
         note.textContent = "Preparing your Academy record…";
         try {
           const dateText = new Intl.DateTimeFormat("en-GB", {
@@ -561,8 +566,6 @@ https://racrawfordauthor.com/aerie/trial.html`;
             downloadSvg(svg, filename);
             note.textContent = "Your personalised certificate has been downloaded.";
           } else {
-            const printWindow = window.open("", "_blank");
-            if (!printWindow) throw new Error("Allow pop-ups to print the certificate.");
             printWindow.document.write(`<!doctype html><html><head><title>Trial of the Houses Certificate</title><style>@page{size:A4 landscape;margin:0}html,body{margin:0;background:#ddd}svg{display:block;width:100vw;height:100vh}@media print{body{background:#fff}}</style></head><body>${svg}<script>window.onload=()=>setTimeout(()=>window.print(),250)<\/script></body></html>`);
             printWindow.document.close();
             note.textContent = "Choose “Save as PDF” in the print window for a PDF copy.";
