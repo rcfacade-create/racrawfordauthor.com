@@ -1545,3 +1545,40 @@ body {
 }
 .certificate-controls input:focus { outline:2px solid rgba(200,163,90,.35); border-color:var(--aerie-gold); }
 .certificate-note { min-height:1.4rem; margin:.8rem 0 0; color:var(--aerie-gold)!important; }
+
+/* Mobile Trial callout repair */
+@media (max-width: 640px) {
+  .courtyard-page {
+    width: min(100% - 1.5rem, 1200px);
+    padding-top: 2rem;
+  }
+  .courtyard-hero {
+    margin-bottom: 2.5rem;
+  }
+  .trial-callout {
+    width: 100%;
+    margin: 1.25rem auto 2rem;
+    padding: 1.25rem 1rem;
+    overflow: hidden;
+  }
+  .trial-callout h2 {
+    font-size: clamp(1.55rem, 8vw, 2.15rem);
+    line-height: 1.12;
+    overflow-wrap: anywhere;
+  }
+  .trial-callout .aerie-button {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: .9rem .65rem;
+    letter-spacing: .09em;
+    line-height: 1.35;
+    white-space: normal;
+  }
+  .certificate-controls .aerie-button {
+    width: 100%;
+    letter-spacing: .08em;
+    padding: .9rem .65rem;
+    white-space: normal;
+  }
+}
