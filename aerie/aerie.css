@@ -1524,3 +1524,24 @@ body {
   font-size: 0.9rem;
   letter-spacing: 0.06em;
 }
+/* Trial certificate controls */
+.certificate-controls {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border: 1px solid rgba(200, 163, 90, 0.35);
+  background: rgba(200, 163, 90, 0.06);
+}
+.certificate-controls h3 { margin: .25rem 0 1rem; color: var(--aerie-gold); }
+.certificate-controls label { display:block; margin-bottom:.55rem; color:rgba(245,239,226,.82); }
+.certificate-controls input {
+  width:min(440px,100%);
+  padding:.9rem 1rem;
+  margin-bottom:1.1rem;
+  border:1px solid rgba(200,163,90,.45);
+  background:rgba(0,0,0,.55);
+  color:var(--aerie-white);
+  font:inherit;
+  text-align:center;
+}
+.certificate-controls input:focus { outline:2px solid rgba(200,163,90,.35); border-color:var(--aerie-gold); }
+.certificate-note { min-height:1.4rem; margin:.8rem 0 0; color:var(--aerie-gold)!important; }
