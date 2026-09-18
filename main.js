@@ -9,6 +9,13 @@ if (!document.querySelector('link[href*="site-polish.css"]')) {
   document.head.appendChild(polish);
 }
 
+if (!document.querySelector('link[rel="canonical"]') && location.hostname) {
+  const canonical = document.createElement('link');
+  canonical.rel = 'canonical';
+  canonical.href = `${location.origin}${location.pathname}`;
+  document.head.appendChild(canonical);
+}
+
 const createFeathers = () => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   layers.forEach(layer => {
