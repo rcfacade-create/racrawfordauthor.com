@@ -13,27 +13,19 @@
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="shop.css" />
+  <link rel="stylesheet" href="shop.css?v=20260918b" />
 </head>
-
 <body class="shop-page">
   <div class="feathers" aria-hidden="true"></div>
 
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="index.html">
-        <span class="brand-mark">◆</span>
-        <span>R.A. Crawford<small>Epic Fantasy Author</small></span>
-      </a>
+      <a class="brand" href="index.html"><span class="brand-mark">◆</span><span>R.A. Crawford<small>Epic Fantasy Author</small></span></a>
       <button class="menu-button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav">☰</button>
       <nav class="site-nav" id="site-nav">
-        <a href="index.html">Home</a><a href="books.html">Books</a><a href="world.html">World</a>
-        <a href="updates.html">Updates</a><a class="active" href="shop.html">Shop</a>
-        <a href="about.html">About</a><a href="contact.html">Contact</a>
+        <a href="index.html">Home</a><a href="books.html">Books</a><a href="world.html">World</a><a href="updates.html">Updates</a><a class="active" href="shop.html">Shop</a><a href="about.html">About</a><a href="contact.html">Contact</a>
       </nav>
-      <button class="cart-button" type="button" data-cart-open aria-label="Open basket">
-        Basket <span class="cart-count" data-cart-count>0</span>
-      </button>
+      <button class="cart-button" type="button" data-cart-open aria-label="Open basket">Basket <span class="cart-count" data-cart-count>0</span></button>
     </div>
   </header>
 
@@ -44,10 +36,7 @@
         <p class="eyebrow">Hidden behind the Crow shelves</p>
         <h1>Hemming’s<br />Provision Shop</h1>
         <p class="shop-intro">Books, cards, maps and curious relics gathered from across the Aerie Dominion. Mind what you touch. Hemming notices everything.</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#catalogue">Browse the shelves</a>
-          <a class="btn" href="#keepers-pick">Keeper’s pick</a>
-        </div>
+        <div class="hero-actions"><a class="btn primary" href="#catalogue">Browse the shelves</a><a class="btn" href="#keepers-pick">Keeper’s pick</a></div>
         <p class="preview-note"><span></span> Book One available now — Kindle, paperback and hardback</p>
       </div>
     </section>
@@ -61,7 +50,7 @@
     <section class="section shop-catalogue" id="catalogue">
       <div class="catalogue-heading">
         <div><p class="eyebrow">The current inventory</p><h2>Browse the Shelves</h2></div>
-        <p>Book One checkout is currently connected to Stripe in test mode while the shop is being prepared for live orders. Other wares remain preview items until production is complete.</p>
+        <p>Each Book One edition now has its own listing. Direct checkout remains in Stripe test mode until the live account is connected.</p>
       </div>
 
       <div class="shop-filters" role="group" aria-label="Filter products">
@@ -74,26 +63,28 @@
 
       <div class="product-grid" data-product-grid>
         <article class="product-card" data-category="books" data-product-id="WFAS-KD-001" data-name="The War of Feather & Shadow — Kindle Edition">
-          <div class="product-image book-product"><img src="assets/war-of-feather-and-shadow-shop-cover.jpg" alt="Cover of The War of Feather & Shadow Kindle edition" /><span class="product-badge">Available Now</span></div>
-          <div class="product-copy"><p class="product-type">Book One · Kindle Edition</p><h3>The War of Feather &amp; Shadow</h3><p class="product-description">Begin Kael’s journey through blood, shadow and the broken legacy of House Raven. Available now from Amazon UK.</p><div class="product-bottom"><strong>Kindle</strong><a class="btn primary" href="https://www.amazon.co.uk/dp/B0HHZKCMSV" target="_blank" rel="noopener noreferrer">Buy on Amazon</a></div></div>
+          <div class="product-image book-product edition-kindle"><img src="assets/war-of-feather-and-shadow-shop-cover.jpg" alt="The War of Feather & Shadow Kindle edition" /><span class="product-badge">Kindle</span></div>
+          <div class="product-copy"><p class="product-type">Book One · Digital Edition</p><h3>Kindle Edition</h3><p class="product-description">Read Book One instantly on Kindle through Amazon UK.</p><div class="product-bottom"><strong>Kindle</strong><a class="btn primary" href="https://www.amazon.co.uk/dp/B0HHZKCMSV" target="_blank" rel="noopener noreferrer">Buy on Amazon</a></div></div>
         </article>
 
-        <article class="product-card" data-category="books" data-product-id="WFAS-PRINT-001" data-name="The War of Feather & Shadow — Direct Editions">
-          <div class="product-image book-product"><img src="assets/war-of-feather-and-shadow-shop-cover.jpg" alt="Cover of The War of Feather & Shadow print editions" /><span class="product-badge violet">Stripe Test Checkout</span></div>
-          <div class="product-copy">
-            <p class="product-type">Book One · Direct from R.A. Crawford</p>
-            <h3>The War of Feather &amp; Shadow</h3>
-            <p class="product-description">Choose paperback, hardback or a signed edition. UK delivery is £3.49. These buttons currently open Stripe’s test checkout and cannot take a real payment.</p>
-            <div class="product-bottom" style="display:block">
-              <strong>Paperback £9.99 · Hardback £14.99 · Signed editions available</strong>
-              <div class="hero-actions" style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:.65rem">
-                <a class="btn primary" href="https://buy.stripe.com/test_14A28r8jV11E3K28a98ww00" target="_blank" rel="noopener noreferrer">Paperback · £9.99</a>
-                <a class="btn" href="https://buy.stripe.com/test_8x27sL43F6lY5Saaih8ww01" target="_blank" rel="noopener noreferrer">Signed Paperback · £14.99</a>
-                <a class="btn primary" href="https://buy.stripe.com/test_fZueVd2ZB39M94m0HH8ww02" target="_blank" rel="noopener noreferrer">Hardback · £14.99</a>
-                <a class="btn" href="https://buy.stripe.com/test_eVq28r7fRfWy2FY6218ww03" target="_blank" rel="noopener noreferrer">Signed Hardback · £19.99</a>
-              </div>
-            </div>
-          </div>
+        <article class="product-card" data-category="books" data-product-id="WFAS-PB-001" data-name="The War of Feather & Shadow — Paperback">
+          <div class="product-image book-product edition-paperback"><img src="assets/war-of-feather-and-shadow-shop-cover.jpg" alt="The War of Feather & Shadow paperback" /><span class="product-badge gold">Paperback</span></div>
+          <div class="product-copy"><p class="product-type">Book One · Paperback</p><h3>Paperback Edition</h3><p class="product-description">The standard paperback edition, supplied direct in the UK. Delivery £3.49.</p><div class="product-bottom"><strong>£9.99</strong><a class="btn primary" href="https://buy.stripe.com/test_14A28r8jV11E3K28a98ww00" target="_blank" rel="noopener noreferrer">Buy Paperback</a></div></div>
+        </article>
+
+        <article class="product-card" data-category="books" data-product-id="WFAS-SPB-001" data-name="The War of Feather & Shadow — Signed Paperback">
+          <div class="product-image book-product signed-product edition-signed-paperback"><img src="assets/war-of-feather-and-shadow-shop-cover.jpg" alt="Signed paperback edition of The War of Feather & Shadow" /><span class="product-badge violet">Signed Edition</span><span class="edition-mark">SIGNED</span></div>
+          <div class="product-copy"><p class="product-type">Book One · Signed Paperback</p><h3>Signed Paperback</h3><p class="product-description">Paperback signed by R.A. Crawford. UK delivery £3.49.</p><div class="product-bottom"><strong>£14.99</strong><a class="btn" href="https://buy.stripe.com/test_8x27sL43F6lY5Saaih8ww01" target="_blank" rel="noopener noreferrer">Buy Signed</a></div></div>
+        </article>
+
+        <article class="product-card" data-category="books" data-product-id="WFAS-HB-001" data-name="The War of Feather & Shadow — Hardback">
+          <div class="product-image book-product edition-hardback"><img src="assets/war-of-feather-and-shadow-shop-cover.jpg" alt="The War of Feather & Shadow hardback" /><span class="product-badge gold">Hardback</span><span class="edition-spine" aria-hidden="true"></span></div>
+          <div class="product-copy"><p class="product-type">Book One · Hardback</p><h3>Hardback Edition</h3><p class="product-description">The hardback edition of Book One, supplied direct in the UK. Delivery £3.49.</p><div class="product-bottom"><strong>£14.99</strong><a class="btn primary" href="https://buy.stripe.com/test_fZueVd2ZB39M94m0HH8ww02" target="_blank" rel="noopener noreferrer">Buy Hardback</a></div></div>
+        </article>
+
+        <article class="product-card" data-category="books" data-product-id="WFAS-SHB-001" data-name="The War of Feather & Shadow — Signed Hardback">
+          <div class="product-image book-product signed-product edition-signed-hardback"><img src="assets/war-of-feather-and-shadow-shop-cover.jpg" alt="Signed hardback edition of The War of Feather & Shadow" /><span class="product-badge violet">Signed Hardback</span><span class="edition-mark">SIGNED</span><span class="edition-spine" aria-hidden="true"></span></div>
+          <div class="product-copy"><p class="product-type">Book One · Signed Hardback</p><h3>Signed Hardback</h3><p class="product-description">Hardback signed by R.A. Crawford. UK delivery £3.49.</p><div class="product-bottom"><strong>£19.99</strong><a class="btn" href="https://buy.stripe.com/test_eVq28r7fRfWy2FY6218ww03" target="_blank" rel="noopener noreferrer">Buy Signed</a></div></div>
         </article>
 
         <article class="product-card coming-soon" data-category="books" data-product-id="AVIS-RES-001" data-name="The Avis Crown — Book Two Reservation">
@@ -147,13 +138,13 @@
     <div class="cart-header"><div><p class="eyebrow">Hemming’s ledger</p><h2>Your Basket</h2></div><button type="button" data-cart-close aria-label="Close basket">×</button></div>
     <div class="cart-items" data-cart-items></div>
     <div class="cart-empty" data-cart-empty><p>The ledger is empty.</p><span>Choose something from the shelves before Hemming changes his mind.</span></div>
-    <div class="cart-footer"><div><span>Provisional total</span><strong data-cart-total>£0.00</strong></div><a class="checkout-button" href="index.html#gazette">Register interest in these products</a><p>Basket checkout remains disabled for preview merchandise. Book One test checkout is available directly from its product card.</p></div>
+    <div class="cart-footer"><div><span>Provisional total</span><strong data-cart-total>£0.00</strong></div><a class="checkout-button" href="index.html#gazette">Register interest in these products</a><p>Basket checkout remains disabled for preview merchandise. Book One test checkout is available directly from its product tiles.</p></div>
   </aside>
   <button class="cart-backdrop" type="button" data-cart-close aria-label="Close basket" hidden></button>
   <div class="shop-toast" data-shop-toast role="status" aria-live="polite"></div>
 
   <footer class="site-footer"><p>&copy; <span id="year">2026</span> R.A. Crawford. All rights reserved. · <a href="https://www.instagram.com/racrawfordauthor/" target="_blank" rel="noopener noreferrer" aria-label="R.A. Crawford on Instagram">@racrawfordauthor on Instagram</a></p></footer>
   <script src="main.js"></script>
-  <script src="shop.js?v=20260901"></script>
+  <script src="shop.js?v=20260918b"></script>
 </body>
 </html>
