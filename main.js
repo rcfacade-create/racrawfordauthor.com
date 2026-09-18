@@ -63,6 +63,7 @@ if (footer) {
       <nav class="footer-links" aria-label="Footer navigation">
         <a href="books.html">Books</a>
         <a href="shop.html">Shop</a>
+        <a href="policies.html">Delivery &amp; Returns</a>
         <a href="press.html">Press &amp; Media</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
