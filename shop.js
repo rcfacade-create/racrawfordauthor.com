@@ -13,7 +13,7 @@
           <p class="product-type">Book One · Paperback</p>
           <h3>The War of Feather &amp; Shadow</h3>
           <p class="product-description">The standard paperback edition, supplied directly by R.A. Crawford. UK delivery is £3.49.</p>
-          <div class="product-bottom"><strong>£9.99</strong><a class="btn primary" href="https://buy.stripe.com/test_14A28r8jV11E3K28a98ww00" target="_blank" rel="noopener noreferrer">Buy Paperback</a></div>
+          <div class="product-bottom"><strong>£9.99</strong><a class="btn primary" href="https://buy.stripe.com/bJe9ATfHt2A7gERgnj2Nq04" target="_blank" rel="noopener noreferrer">Buy Paperback</a></div>
         </div>
       </article>
 
@@ -28,7 +28,7 @@
           <p class="product-type">Book One · Signed Paperback</p>
           <h3>The War of Feather &amp; Shadow</h3>
           <p class="product-description">A paperback copy signed by R.A. Crawford and supplied directly from the author. UK delivery is £3.49.</p>
-          <div class="product-bottom"><strong>£14.99</strong><a class="btn primary" href="https://buy.stripe.com/test_8x27sL43F6lY5Saaih8ww01" target="_blank" rel="noopener noreferrer">Buy Signed</a></div>
+          <div class="product-bottom"><strong>£14.99</strong><a class="btn primary" href="https://buy.stripe.com/8x2fZh9j57UrfAN3Ax2Nq05" target="_blank" rel="noopener noreferrer">Buy Signed</a></div>
         </div>
       </article>
 
@@ -42,7 +42,7 @@
           <p class="product-type">Book One · Hardback</p>
           <h3>The War of Feather &amp; Shadow</h3>
           <p class="product-description">The hardback edition for readers and collectors, supplied directly by R.A. Crawford. UK delivery is £3.49.</p>
-          <div class="product-bottom"><strong>£14.99</strong><a class="btn primary" href="https://buy.stripe.com/test_fZueVd2ZB39M94m0HH8ww02" target="_blank" rel="noopener noreferrer">Buy Hardback</a></div>
+          <div class="product-bottom"><strong>£14.99</strong><a class="btn primary" href="https://buy.stripe.com/6oU4gz52P3Ebagt0ol2Nq06" target="_blank" rel="noopener noreferrer">Buy Hardback</a></div>
         </div>
       </article>
 
@@ -57,7 +57,7 @@
           <p class="product-type">Book One · Signed Hardback</p>
           <h3>The War of Feather &amp; Shadow</h3>
           <p class="product-description">The hardback edition signed by R.A. Crawford — the premium direct edition for collectors. UK delivery is £3.49.</p>
-          <div class="product-bottom"><strong>£19.99</strong><a class="btn primary" href="https://buy.stripe.com/test_eVq28r7fRfWy2FY6218ww03" target="_blank" rel="noopener noreferrer">Buy Signed</a></div>
+          <div class="product-bottom"><strong>£19.99</strong><a class="btn primary" href="https://buy.stripe.com/8x25kD1QDeiP88l5IF2Nq07" target="_blank" rel="noopener noreferrer">Buy Signed</a></div>
         </div>
       </article>`;
 
