@@ -571,3 +571,31 @@ img {
 .book-two-reservation img {
   filter: saturate(0.75) contrast(1.05);
 }
+
+/* About page author portrait */
+.author-section {
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 460px);
+  gap: 56px;
+}
+.author-portrait-panel {
+  width: 100%;
+  max-width: 460px;
+  justify-self: center;
+  padding: 14px;
+}
+.author-portrait {
+  width: 100%;
+  height: auto !important;
+  max-height: 620px;
+  object-fit: contain;
+  object-position: center;
+  aspect-ratio: auto;
+}
+@media (max-width: 980px) {
+  .author-section {
+    grid-template-columns: 1fr;
+  }
+  .author-portrait-panel {
+    max-width: 430px;
+  }
+}
