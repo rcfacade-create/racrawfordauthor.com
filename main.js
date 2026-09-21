@@ -20,7 +20,7 @@ const createFeathers = () => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   layers.forEach(layer => {
     layer.innerHTML = '';
-    const count = window.innerWidth < 700 ? 14 : 26;
+    const count = window.innerWidth < 700 ? 10 : 26;
     for (let i = 0; i < count; i += 1) {
       const feather = document.createElement('span');
       feather.textContent = '🪶';
@@ -53,6 +53,55 @@ menuButtons.forEach(button => {
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape') closeMenu(button, nav);
   });
+});
+
+const conversionName = href => {
+  if (!href) return null;
+  if (href.includes('aerie/trial')) return 'trial_click';
+  if (href.includes('shop.html')) return 'book_shop_click';
+  if (href.includes('preorder.html')) return 'book_two_reservation_click';
+  if (href.includes('#gazette')) return 'gazette_click';
+  if (href.includes('amazon.co.uk')) return 'amazon_click';
+  if (href.includes('blackfeather')) return 'blackfeather_click';
+  return null;
+};
+
+const recordConversion = (eventName, href, label) => {
+  if (!eventName) return;
+  const payload = {
+    event: eventName,
+    href,
+    label: label || '',
+    page: location.pathname,
+    timestamp: new Date().toISOString()
+  };
+
+  try {
+    const key = 'ra_conversion_clicks';
+    const existing = JSON.parse(localStorage.getItem(key) || '[]');
+    existing.push(payload);
+    localStorage.setItem(key, JSON.stringify(existing.slice(-100)));
+  } catch (_) {}
+
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', eventName, {
+      link_url: href,
+      link_text: label || '',
+      page_path: location.pathname
+    });
+  }
+
+  if (typeof window.plausible === 'function') {
+    window.plausible(eventName, { props: { href, label: label || '', page: location.pathname } });
+  }
+};
+
+document.addEventListener('click', event => {
+  const link = event.target.closest('a[href]');
+  if (!link) return;
+  const href = link.href || link.getAttribute('href') || '';
+  const eventName = conversionName(href);
+  if (eventName) recordConversion(eventName, href, link.textContent.trim());
 });
 
 const footer = document.querySelector('.site-footer');
