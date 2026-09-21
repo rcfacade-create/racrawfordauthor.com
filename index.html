@@ -41,6 +41,9 @@
     .trial-home p{max-width:720px;margin-left:auto;margin-right:auto}
     .trial-home .trial-hook{color:var(--gold-soft);font-size:clamp(1.08rem,2.3vw,1.35rem);line-height:1.65}
     .trial-home .trial-mini{margin-top:18px;color:var(--muted);font-size:.82rem;text-transform:uppercase;letter-spacing:.12em}
+    .discovery-card{display:block;color:inherit;text-decoration:none;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+    .discovery-card:hover,.discovery-card:focus-visible{transform:translateY(-4px);border-color:rgba(200,163,90,.5);box-shadow:0 20px 55px rgba(0,0,0,.28)}
+    .discovery-card .text-link{display:inline-block;margin-top:10px}
   </style>
 </head>
 <body>
@@ -50,7 +53,7 @@
       <a class="brand" href="index.html"><span class="brand-mark">◆</span><span>R.A. Crawford<small>Epic Fantasy Author</small></span></a>
       <button class="menu-button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav">☰</button>
       <nav class="site-nav" id="site-nav">
-        <a class="active" href="index.html">Home</a><a href="books.html">Books</a><a href="world.html">World</a><a href="updates.html">Updates</a><a href="shop.html">Shop</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+        <a class="active" href="index.html">Home</a><a href="books.html">Books</a><a href="world.html">World</a><a href="aerie/trial.html">Trial</a><a href="updates.html">Updates</a><a href="shop.html">Shop</a><a href="about.html">About</a><a href="contact.html">Contact</a>
       </nav>
     </div>
   </header>
@@ -110,9 +113,9 @@
     <section class="section section-feature">
       <div class="section-title"><p class="eyebrow">Enter the Realm</p><h2>Maps, Houses, Secrets and Shadow</h2></div>
       <div class="cards-grid">
-        <article class="card"><h3>The Houses</h3><p>Enter a world of competing Houses, inherited duty and ancient loyalties waiting to break.</p></article>
-        <article class="card"><h3>The Aerie Dominion</h3><p>Explore Aethelmar Academy, the Hall of Chronicles and the places where the trilogy’s history still leaves scars.</p></article>
-        <article class="card"><h3>Blackfeather</h3><p>Step beyond the novels and discover the cards, legends and hidden history woven through the Dominion.</p></article>
+        <a class="card discovery-card" href="aerie/trial.html"><h3>The Houses</h3><p>Enter a world of competing Houses, inherited duty and ancient loyalties waiting to break.</p><span class="text-link">Discover Your House</span></a>
+        <a class="card discovery-card" href="aerie/index.html"><h3>The Aerie Dominion</h3><p>Explore Aethelmar Academy, the Hall of Chronicles and the places where the trilogy’s history still leaves scars.</p><span class="text-link">Enter the Dominion</span></a>
+        <a class="card discovery-card" href="blackfeather/"><h3>Blackfeather</h3><p>Step beyond the novels and discover the cards, legends and hidden history woven through the Dominion.</p><span class="text-link">Play Blackfeather</span></a>
       </div>
     </section>
 
