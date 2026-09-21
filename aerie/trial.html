@@ -14,6 +14,11 @@
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="../assets/favicon.svg" />
   <link rel="stylesheet" href="aerie.css" />
+  <style>
+    .trial-next-step{margin-top:32px;padding:30px 24px;text-align:center;border:1px solid rgba(200,163,90,.38);background:radial-gradient(circle at top,rgba(200,163,90,.10),transparent 58%),rgba(255,255,255,.025)}
+    .trial-next-step h3{margin:6px 0 12px;font-size:clamp(1.45rem,4vw,2.1rem)}
+    .trial-next-step p{max-width:650px;margin:0 auto 20px;line-height:1.65}
+  </style>
 </head>
 
 <body class="aerie-page">
@@ -85,11 +90,19 @@
           <p class="certificate-note" id="certificate-note" role="status" aria-live="polite"></p>
         </div>
 
+        <div class="trial-next-step">
+          <p class="aerie-kicker">Your House Has Chosen</p>
+          <h3>Now Enter the Story</h3>
+          <p>The Houses, rivalries and secrets behind your Trial are waiting inside <em>The War of Feather &amp; Shadow</em>, Book One of The Raven’s Heir Trilogy.</p>
+          <div class="trial-actions">
+            <a class="aerie-button" href="../shop.html">Read Book One</a>
+            <a class="aerie-button aerie-button-secondary" href="index.html">Explore the Dominion</a>
+            <a class="aerie-button aerie-button-secondary" href="../index.html#gazette">Join The Gilded Gazette</a>
+          </div>
+        </div>
+
         <div class="trial-actions">
           <button class="aerie-button" id="restart-trial">Take the Trial Again</button>
-          <a class="aerie-button aerie-button-secondary" href="../index.html#gazette">
-            Join The Gilded Gazette
-          </a>
         </div>
       </div>
     </section>
@@ -484,8 +497,8 @@ https://racrawfordauthor.com/aerie/trial.html`;
 }
 
       function escapeXml(value) {
-        return String(value).replace(/[<>&'"]/g, character => ({
-          "<": "&lt;", ">": "&gt;", "&": "&amp;", "'": "&apos;", '"': "&quot;"
+        return String(value).replace(/[<>&'\"]/g, character => ({
+          "<": "&lt;", ">": "&gt;", "&": "&amp;", "'": "&apos;", '\"': "&quot;"
         })[character]);
       }
 
@@ -621,4 +634,3 @@ https://racrawfordauthor.com/aerie/trial.html`;
   </script>
 </body>
 </html>
-  
