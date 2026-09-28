@@ -57,6 +57,8 @@ menuButtons.forEach(button => {
 
 const conversionName = href => {
   if (!href) return null;
+  if (href.includes('chapter-one.html')) return 'chapter_one_click';
+  if (href.includes('buy.stripe.com/')) return 'book_checkout_click';
   if (href.includes('aerie/trial')) return 'trial_click';
   if (href.includes('shop.html')) return 'book_shop_click';
   if (href.includes('preorder.html')) return 'book_two_reservation_click';
@@ -111,6 +113,7 @@ if (footer) {
       <p class="footer-tagline">The Raven’s Heir Trilogy · R.A. Crawford</p>
       <nav class="footer-links" aria-label="Footer navigation">
         <a href="books.html">Books</a>
+        <a href="the-war-of-feather-and-shadow.html">The War of Feather and Shadow</a>
         <a href="shop.html">Shop</a>
         <a href="policies.html">Delivery &amp; Returns</a>
         <a href="press.html">Press &amp; Media</a>

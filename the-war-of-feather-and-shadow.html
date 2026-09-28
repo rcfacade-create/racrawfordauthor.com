@@ -18,38 +18,113 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css?v=20260925d" />
   <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@graph":[
-      {
-        "@type":"Book",
-        "@id":"https://racrawfordauthor.com/the-war-of-feather-and-shadow.html#book",
-        "name":"The War of Feather & Shadow",
-        "alternateName":"The War of Feather and Shadow",
-        "isbn":"9781066954513",
-        "datePublished":"2026-09-18",
-        "numberOfPages":"468",
-        "inLanguage":"en-GB",
-        "genre":["Dark Fantasy","Epic Fantasy","Fantasy Academy"],
-        "author":{"@type":"Person","name":"R.A. Crawford","url":"https://racrawfordauthor.com/about.html"},
-        "publisher":{"@type":"Organization","name":"R.A. Crawford"},
-        "isPartOf":{"@type":"BookSeries","name":"The Raven’s Heir Trilogy"},
-        "image":"https://racrawfordauthor.com/assets/book-one-paperback.jpg",
-        "url":"https://racrawfordauthor.com/the-war-of-feather-and-shadow.html",
-        "workExample":[
-          {"@type":"Book","bookFormat":"https://schema.org/Paperback","isbn":"9781066954513"}
-        ]
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://racrawfordauthor.com/#author",
+      "name": "R.A. Crawford",
+      "url": "https://racrawfordauthor.com/about.html",
+      "sameAs": [
+        "https://www.instagram.com/racrawfordauthor/"
+      ]
+    },
+    {
+      "@type": "Book",
+      "@id": "https://racrawfordauthor.com/the-war-of-feather-and-shadow.html#book",
+      "name": "The War of Feather and Shadow",
+      "alternateName": "The War of Feather & Shadow",
+      "author": {
+        "@id": "https://racrawfordauthor.com/#author"
       },
-      {
-        "@type":"BreadcrumbList",
-        "itemListElement":[
-          {"@type":"ListItem","position":1,"name":"Home","item":"https://racrawfordauthor.com/"},
-          {"@type":"ListItem","position":2,"name":"Books","item":"https://racrawfordauthor.com/books.html"},
-          {"@type":"ListItem","position":3,"name":"The War of Feather & Shadow","item":"https://racrawfordauthor.com/the-war-of-feather-and-shadow.html"}
-        ]
-      }
-    ]
-  }
+      "inLanguage": "en-GB",
+      "genre": [
+        "Dark Fantasy",
+        "Epic Fantasy",
+        "Academy Fantasy"
+      ],
+      "isPartOf": {
+        "@type": "BookSeries",
+        "@id": "https://racrawfordauthor.com/books.html#series",
+        "name": "The Raven’s Heir Trilogy"
+      },
+      "image": "https://racrawfordauthor.com/assets/book-one-paperback.jpg",
+      "url": "https://racrawfordauthor.com/the-war-of-feather-and-shadow.html",
+      "sameAs": [
+        "https://www.goodreads.com/book/show/258457296-the-war-of-feather-and-shadow"
+      ],
+      "workExample": [
+        {
+          "@type": "Book",
+          "@id": "https://racrawfordauthor.com/the-war-of-feather-and-shadow.html#paperback",
+          "name": "The War of Feather and Shadow — Paperback",
+          "bookFormat": "https://schema.org/Paperback",
+          "exampleOfWork": {
+            "@id": "https://racrawfordauthor.com/the-war-of-feather-and-shadow.html#book"
+          },
+          "author": {
+            "@id": "https://racrawfordauthor.com/#author"
+          },
+          "inLanguage": "en-GB",
+          "isbn": "9781066954513",
+          "offers": {
+            "@type": "Offer",
+            "name": "Paperback",
+            "price": "9.99",
+            "priceCurrency": "GBP",
+            "availability": "https://schema.org/InStock",
+            "url": "https://buy.stripe.com/bJe9ATfHt2A7gERgnj2Nq04"
+          }
+        },
+        {
+          "@type": "Book",
+          "@id": "https://racrawfordauthor.com/the-war-of-feather-and-shadow.html#hardback",
+          "name": "The War of Feather and Shadow — Hardback",
+          "bookFormat": "https://schema.org/Hardcover",
+          "exampleOfWork": {
+            "@id": "https://racrawfordauthor.com/the-war-of-feather-and-shadow.html#book"
+          },
+          "author": {
+            "@id": "https://racrawfordauthor.com/#author"
+          },
+          "inLanguage": "en-GB",
+          "offers": {
+            "@type": "Offer",
+            "name": "Hardback",
+            "price": "14.99",
+            "priceCurrency": "GBP",
+            "availability": "https://schema.org/InStock",
+            "url": "https://buy.stripe.com/6oU4gz52P3Ebagt0ol2Nq06"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://racrawfordauthor.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Books",
+          "item": "https://racrawfordauthor.com/books.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "The War of Feather & Shadow",
+          "item": "https://racrawfordauthor.com/the-war-of-feather-and-shadow.html"
+        }
+      ]
+    }
+  ]
+}
   </script>
   <style>
     .seo-book{max-width:1100px;margin:0 auto;padding:64px 24px}
@@ -68,6 +143,7 @@
     .seo-faq h3{margin-top:0;color:var(--gold-soft)}
     @media(max-width:760px){.seo-book-grid{grid-template-columns:1fr}.seo-book-cover{max-width:300px;margin:0 auto}.book-facts{grid-template-columns:1fr}}
   </style>
+  <meta name="robots" content="index,follow,max-image-preview:large" />
 </head>
 <body>
   <div class="feathers" aria-hidden="true"></div>
@@ -100,6 +176,13 @@
         </div>
       </div>
 
+      <section class="seo-section" id="editions">
+        <h2>Choose your edition</h2>
+        <p>Paperback £9.99 · Hardback £14.99 · Signed paperback £14.99 · Signed hardback £19.99.</p>
+        <p>Direct orders are available for UK delivery. Delivery is £3.49. Kindle is available through Amazon UK.</p>
+        <div class="seo-actions"><a class="btn primary" href="https://buy.stripe.com/bJe9ATfHt2A7gERgnj2Nq04" target="_blank" rel="noopener noreferrer">Buy Paperback — £9.99</a><a class="btn" href="https://buy.stripe.com/6oU4gz52P3Ebagt0ol2Nq06" target="_blank" rel="noopener noreferrer">Buy Hardback — £14.99</a><a class="btn" href="shop.html">Signed Editions</a></div>
+      </section>
+
       <section class="seo-section">
         <h2>A dark fantasy novel of Houses, bloodlines and forbidden history</h2>
         <p>At Aethelmar Academy, students from the Dominion’s Houses are trained to become warriors, scholars, diplomats and leaders. Kael arrives from a very different world: the streets, the Gutter District and a life built on survival. His acceptance into the academy should offer escape. Instead, it places him at the centre of secrets powerful people have spent generations burying.</p>
@@ -131,6 +214,6 @@
   </main>
 
   <footer class="site-footer"><p>© <span id="year"></span> R.A. Crawford. All rights reserved. · <a href="the-war-of-feather-and-shadow.html">The War of Feather &amp; Shadow</a></p></footer>
-  <script src="main.js"></script>
+  <script src="main.js?v=20260928seo"></script>
 </body>
 </html>

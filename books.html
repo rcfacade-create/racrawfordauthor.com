@@ -16,17 +16,45 @@
   <meta name="twitter:image" content="https://racrawfordauthor.com/assets/book-one-paperback.jpg" />
   <link rel="canonical" href="https://racrawfordauthor.com/books.html" />
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Book",
-    "name": "The War of Feather & Shadow",
-    "author": {"@type": "Person", "name": "R.A. Crawford"},
-    "bookFormat": ["https://schema.org/EBook","https://schema.org/Paperback","https://schema.org/Hardcover"],
-    "inLanguage": "en-GB",
-    "image": "https://racrawfordauthor.com/assets/book-one-paperback.jpg",
-    "url": "https://racrawfordauthor.com/books.html",
-    "offers": {"@type":"Offer","url":"https://racrawfordauthor.com/shop.html","availability":"https://schema.org/InStock","priceCurrency":"GBP"}
-  }
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://racrawfordauthor.com/#author",
+      "name": "R.A. Crawford",
+      "url": "https://racrawfordauthor.com/about.html",
+      "sameAs": [
+        "https://www.instagram.com/racrawfordauthor/"
+      ]
+    },
+    {
+      "@type": "Book",
+      "@id": "https://racrawfordauthor.com/the-war-of-feather-and-shadow.html#book",
+      "name": "The War of Feather and Shadow",
+      "alternateName": "The War of Feather & Shadow",
+      "author": {
+        "@id": "https://racrawfordauthor.com/#author"
+      },
+      "inLanguage": "en-GB",
+      "genre": [
+        "Dark Fantasy",
+        "Epic Fantasy",
+        "Academy Fantasy"
+      ],
+      "isPartOf": {
+        "@type": "BookSeries",
+        "@id": "https://racrawfordauthor.com/books.html#series",
+        "name": "The Raven’s Heir Trilogy"
+      },
+      "image": "https://racrawfordauthor.com/assets/book-one-paperback.jpg",
+      "url": "https://racrawfordauthor.com/the-war-of-feather-and-shadow.html",
+      "sameAs": [
+        "https://www.goodreads.com/book/show/258457296-the-war-of-feather-and-shadow"
+      ]
+    }
+  ]
+}
   </script>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="assets/favicon.svg" />
@@ -86,6 +114,7 @@
         <p>At Aethelmar Academy, five noble Houses train their elite. But when ancient secrets surface and the Raven bloodline awakens, loyalty is tested and destinies collide.</p>
         <p>Kael is drawn into a struggle of inheritance, power and fractured allegiance where every House carries its own secrets—and the return of Raven threatens to change the Dominion forever.</p>
         <p><strong>Read the complete first chapter free, then continue in Kindle, paperback, signed paperback, hardback or signed hardback.</strong></p>
+        <p><a class="text-link" href="the-war-of-feather-and-shadow.html">Discover The War of Feather and Shadow: story, editions and reader questions</a></p>
         <div class="edition-actions">
           <a class="btn primary" href="chapter-one.html">Read Chapter One Free</a>
           <a class="btn" href="shop.html">Buy Book One</a>
@@ -131,6 +160,6 @@
   </main>
 
   <footer class="site-footer"><p>© <span id="year"></span> R.A. Crawford. All rights reserved.</p></footer>
-  <script src="main.js"></script>
+  <script src="main.js?v=20260928seo"></script>
 </body>
 </html>

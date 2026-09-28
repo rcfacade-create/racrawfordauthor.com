@@ -16,27 +16,45 @@
   <meta name="twitter:image" content="https://racrawfordauthor.com/assets/book-one-paperback.jpg" />
   <link rel="canonical" href="https://racrawfordauthor.com/" />
   <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@graph":[
-      {
-        "@type":"Person",
-        "@id":"https://racrawfordauthor.com/#author",
-        "name":"R.A. Crawford",
-        "url":"https://racrawfordauthor.com/"
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://racrawfordauthor.com/#author",
+      "name": "R.A. Crawford",
+      "url": "https://racrawfordauthor.com/about.html",
+      "sameAs": [
+        "https://www.instagram.com/racrawfordauthor/"
+      ]
+    },
+    {
+      "@type": "Book",
+      "@id": "https://racrawfordauthor.com/the-war-of-feather-and-shadow.html#book",
+      "name": "The War of Feather and Shadow",
+      "alternateName": "The War of Feather & Shadow",
+      "author": {
+        "@id": "https://racrawfordauthor.com/#author"
       },
-      {
-        "@type":"Book",
-        "@id":"https://racrawfordauthor.com/books.html#book-one",
-        "name":"The War of Feather & Shadow",
-        "author":{"@id":"https://racrawfordauthor.com/#author"},
-        "isPartOf":{"@type":"BookSeries","name":"The Raven’s Heir Trilogy"},
-        "inLanguage":"en-GB",
-        "image":"https://racrawfordauthor.com/assets/book-one-paperback.jpg",
-        "url":"https://racrawfordauthor.com/books.html#book-one"
-      }
-    ]
-  }
+      "inLanguage": "en-GB",
+      "genre": [
+        "Dark Fantasy",
+        "Epic Fantasy",
+        "Academy Fantasy"
+      ],
+      "isPartOf": {
+        "@type": "BookSeries",
+        "@id": "https://racrawfordauthor.com/books.html#series",
+        "name": "The Raven’s Heir Trilogy"
+      },
+      "image": "https://racrawfordauthor.com/assets/book-one-paperback.jpg",
+      "url": "https://racrawfordauthor.com/the-war-of-feather-and-shadow.html",
+      "sameAs": [
+        "https://www.goodreads.com/book/show/258457296-the-war-of-feather-and-shadow"
+      ]
+    }
+  ]
+}
   </script>
   <script>
     (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
@@ -93,6 +111,7 @@
         </div>
         <div class="hero-secondary-links">
           <a href="https://www.amazon.co.uk/dp/B0HHZKCMSV" target="_blank" rel="noopener noreferrer">Amazon &amp; Kindle</a>
+          <a href="the-war-of-feather-and-shadow.html">About Book One</a>
           <a href="shop.html">Signed Copies</a>
           <a href="aerie/trial.html">Take the House Trial</a>
           <a href="world.html">Explore Avis</a>
@@ -182,6 +201,6 @@
   </main>
 
   <footer class="site-footer"><p>© <span id="year"></span> R.A. Crawford. All rights reserved.</p></footer>
-  <script src="main.js"></script>
+  <script src="main.js?v=20260928seo"></script>
 </body>
 </html>
