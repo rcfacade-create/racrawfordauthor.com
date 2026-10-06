@@ -134,6 +134,7 @@
     ]
   }
   </script>
+<style>.direct-book-visual{margin:0 0 28px;padding:22px;border:1px solid rgba(200,163,90,.35);background:rgba(255,255,255,.02);display:grid;grid-template-columns:minmax(220px,360px) 1fr;gap:28px;align-items:center}@media(max-width:720px){.direct-book-visual{grid-template-columns:1fr!important}}</style>
 </head>
 <body class="shop-page">
   <div class="feathers" aria-hidden="true"></div>
@@ -145,7 +146,7 @@
       <nav class="site-nav" id="site-nav">
         <a href="index.html">Home</a><a href="books.html">Books</a><a href="world.html">World</a><a href="updates.html">Updates</a><a class="active" href="shop.html">Shop</a><a href="about.html">About</a><a href="contact.html">Contact</a>
       </nav>
-      <button class="cart-button" type="button" data-cart-open aria-label="Open basket">Basket <span class="cart-count" data-cart-count>0</span></button>
+      
     </div>
   </header>
 
@@ -167,9 +168,9 @@
       <p><strong>Gilded Dispatch</strong><span>UK delivery · £3.49 flat rate</span></p>
     </section>
 
-    <section class="section shop-catalogue" id="catalogue">
+    <section class="section shop-catalogue" id="catalogue"><div id="direct-editions" aria-hidden="true"></div>
       <div class="catalogue-heading">
-        <div><p class="eyebrow">The current inventory</p><h2>Browse the Shelves</h2></div>
+        <div><p class="eyebrow">The current inventory</p><h2>Browse the Shelves</h2><p><strong>Direct Book One editions start at £8.99 and every direct copy includes a FREE House bookmark of your choice plus the FREE digital House Starter Pack.</strong></p></div>
         <p>Buy Book One direct and receive a FREE House bookmark of your choice plus the FREE digital House Starter Pack. Choose Crow, Owl, Raven, Swan, Falcon or Hawk at secure Stripe checkout. UK delivery is £3.49.</p>
       </div>
 
@@ -182,6 +183,10 @@
         <button class="filter-button" type="button" data-filter="relics">Relics</button>
       </div>
 
+      <div class="direct-book-visual" >
+        <img src="assets/six-house-bookmarks.webp?v=20261005-2" alt="Choose one free Raven's Heir House bookmark with every direct Book One order" style="width:100%;height:auto" />
+        <div><p class="eyebrow">Direct Author Bonus</p><h2>Choose Your FREE House Bookmark</h2><p>Crow, Owl, Raven, Swan, Falcon or Hawk — choose your House at Stripe checkout. Every direct Book One order also unlocks the FREE digital House Starter Pack immediately after payment.</p><p class="availability-note">Books from £8.99 · UK delivery £3.49</p></div>
+      </div>
       <div class="product-grid" data-product-grid>
         <article class="product-card featured-product" data-category="digital" data-product-id="AV-FREE-001" data-name="Your House Starter Pack">
           <div class="product-image sigil-product"><img src="aerie/assets/sigils/crow.png" alt="House Crow sigil" /><img src="aerie/assets/sigils/falcon.png" alt="House Falcon sigil" /><img src="aerie/assets/sigils/swan.png" alt="House Swan sigil" /><span class="product-badge violet">Free</span></div>
@@ -209,8 +214,8 @@
           <div class="product-copy"><p class="product-type">Book One · Paperback</p><h3>Paperback Edition</h3><p class="product-description">Direct Author Edition paperback. Includes a FREE House bookmark of your choice and FREE digital House Starter Pack. UK delivery £3.49.</p><div class="product-bottom"><strong>£8.99</strong><a class="btn primary" href="https://buy.stripe.com/dRmeVdbrd2A79cpfjf2Nq0j" target="_blank" rel="noopener noreferrer">Buy Paperback</a></div></div>
         </article>
 
-        <article class="product-card" data-category="books" data-product-id="WFAS-SPB-001" data-name="The War of Feather & Shadow — Signed Paperback">
-          <div class="product-image book-product signed-product edition-signed-paperback"><img src="assets/book-one-paperback.jpg" alt="Signed paperback edition of The War of Feather & Shadow" /><span class="product-badge violet">Signed Edition</span><span class="edition-mark">SIGNED</span></div>
+        <article class="product-card featured-product" data-category="books" data-product-id="WFAS-SPB-001" data-name="The War of Feather & Shadow — Signed Paperback">
+          <div class="product-image book-product signed-product edition-signed-paperback"><img src="assets/book-one-paperback.jpg" alt="Signed paperback edition of The War of Feather & Shadow" /><span class="product-badge violet">Best Value · Signed</span><span class="edition-mark">SIGNED</span></div>
           <div class="product-copy"><p class="product-type">Book One · Signed Paperback</p><h3>Signed Paperback</h3><p class="product-description">Signed by R.A. Crawford. Includes a FREE House bookmark of your choice and FREE digital House Starter Pack. UK delivery £3.49.</p><div class="product-bottom"><strong>£12.99</strong><a class="btn" href="https://buy.stripe.com/eVqcN5gLx7Ur88l7QN2Nq0k" target="_blank" rel="noopener noreferrer">Buy Signed</a></div></div>
         </article>
 
@@ -295,18 +300,9 @@
     </section>
   </main>
 
-  <aside class="cart-drawer" data-cart-drawer aria-hidden="true" aria-label="Shopping basket">
-    <div class="cart-header"><div><p class="eyebrow">Hemming’s ledger</p><h2>Your Basket</h2></div><button type="button" data-cart-close aria-label="Close basket">×</button></div>
-    <div class="cart-items" data-cart-items></div>
-    <div class="cart-empty" data-cart-empty><p>The ledger is empty.</p><span>Choose something from the shelves before Hemming changes his mind.</span></div>
-    <div class="cart-footer"><div><span>Provisional total</span><strong data-cart-total>£0.00</strong></div><a class="checkout-button" href="index.html#gazette">Register interest in these products</a><p>Basket checkout remains disabled for preview merchandise. Book One live checkout is available directly from its product tiles.</p></div>
-  </aside>
-  <button class="cart-backdrop" type="button" data-cart-close aria-label="Close basket" hidden></button>
-  <div class="shop-toast" data-shop-toast role="status" aria-live="polite"></div>
-
+  
   <footer class="site-footer"><p>&copy; <span id="year">2026</span> R.A. Crawford. All rights reserved. · <a href="policies.html">Shop Policies</a> · <a href="https://www.instagram.com/racrawfordauthor/" target="_blank" rel="noopener noreferrer" aria-label="R.A. Crawford on Instagram">@racrawfordauthor on Instagram</a></p></footer>
   <script src="main.js?v=20260928seo"></script>
-  <script src="shop.js?v=20260918d"></script>
 </body>
 </html>
 <!-- bookmark deployment refresh 2026-10-05 -->
