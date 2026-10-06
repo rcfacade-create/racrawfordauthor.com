@@ -25,15 +25,15 @@
 
 <body class="aerie-page">
   <header class="aerie-top-nav">
-    <a class="aerie-brand" href="index.html">The Aerie Dominion</a>
-
-    <nav class="aerie-main-nav" aria-label="Aerie main navigation">
-      <a href="../index.html">Main Site</a>
-      <a href="index.html">Gates</a>
-      <a href="academy.html">Courtyard</a>
-      <a href="archives.html">Archives</a>
-    </nav>
-
+    <div class="aerie-top-nav-inner">
+      <a class="aerie-top-brand" href="index.html">The Aerie Dominion</a>
+      <nav class="aerie-top-links" aria-label="Aerie main navigation">
+        <a href="../index.html">Main Site</a>
+        <a href="index.html">Gates</a>
+        <a href="academy.html">Courtyard</a>
+        <a href="archives.html">Archives</a>
+      </nav>
+    </div>
     <nav class="aerie-location-nav" aria-label="Aethelmar location navigation">
       <a href="great-hall.html">Great Hall</a>
       <a href="crow-tower.html">Crow</a>
@@ -90,6 +90,7 @@
             <a class="aerie-button aerie-button-secondary" href="certificate.html?v=20261006-2">Blank Certificate</a>
           </div>
           <p class="certificate-note" id="certificate-note" role="status" aria-live="polite"></p>
+          <div id="certificate-preview" style="margin:1.5rem auto 0;max-width:760px"></div>
         </div>
 
         <div class="trial-rewards" id="trial-rewards">
@@ -419,6 +420,19 @@ const houseThemes = {
        <img class="result-sigil" src="${sigilSrc}" alt="House ${winningHouse} sigil">
      </div>`
   : `<div class="result-house-mark">${winningHouse.charAt(0)}</div>`;
+async function renderCertificatePreview(){
+  const mount=document.getElementById("certificate-preview");
+  if(!mount||!currentWinningHouse) return;
+  try{
+    const previewName=(document.getElementById("certificate-name")?.value||"Your Name").trim()||"Your Name";
+    const dateText=new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"long",year:"numeric"}).format(new Date());
+    mount.innerHTML=await buildCertificateSvg(previewName,currentWinningHouse,dateText);
+    const svg=mount.querySelector("svg");
+    if(svg){svg.style.width="100%";svg.style.height="auto";svg.style.display="block";}
+  }catch(e){}
+}
+setTimeout(renderCertificatePreview,0);
+document.getElementById("certificate-name")?.addEventListener("input",()=>{clearTimeout(window.__certPrevTimer);window.__certPrevTimer=setTimeout(renderCertificatePreview,200)});
 const shareLine = `${result.share || `I was placed in House ${winningHouse} by the Trial of the Houses.`} — ${result.title}`;
 
 const fullShareText = `${shareLine}
