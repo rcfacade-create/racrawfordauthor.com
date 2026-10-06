@@ -58,4 +58,6 @@
 
   document.addEventListener("projectAvis:trialStart",()=>fire("house_trial_start",{source_page:path}));
   document.addEventListener("projectAvis:trialComplete",e=>fire("house_trial_complete",{house:e.detail?.house||"unknown",source_page:path}));
+  document.addEventListener("projectAvis:rewardDownload",e=>fire("house_reward_download",{reward:e.detail?.reward||"unknown",house:e.detail?.house||"unknown",source_page:path}));
+  document.addEventListener("projectAvis:rewardClick",e=>fire("house_reward_click",{reward:e.detail?.reward||"unknown",house:e.detail?.house||"unknown",source_page:path}));
 })();

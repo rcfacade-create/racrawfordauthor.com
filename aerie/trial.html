@@ -15,7 +15,7 @@
   <link rel="apple-touch-icon" href="../assets/favicon.svg" />
   <link rel="stylesheet" href="aerie.css" />
   <style>
-    .trial-next-step{margin-top:32px;padding:30px 24px;text-align:center;border:1px solid rgba(200,163,90,.38);background:radial-gradient(circle at top,rgba(200,163,90,.10),transparent 58%),rgba(255,255,255,.025)}
+    .trial-rewards{margin-top:28px;padding:28px 22px;border:1px solid rgba(200,163,90,.38);background:rgba(200,163,90,.055);text-align:center}.trial-rewards h3{margin:6px 0 12px;font-size:clamp(1.35rem,4vw,1.9rem)}.trial-rewards p{max-width:680px;margin:0 auto 18px;line-height:1.65}\n    .trial-next-step{margin-top:32px;padding:30px 24px;text-align:center;border:1px solid rgba(200,163,90,.38);background:radial-gradient(circle at top,rgba(200,163,90,.10),transparent 58%),rgba(255,255,255,.025)}
     .trial-next-step h3{margin:6px 0 12px;font-size:clamp(1.45rem,4vw,2.1rem)}
     .trial-next-step p{max-width:650px;margin:0 auto 20px;line-height:1.65}
   </style>
@@ -90,6 +90,18 @@
             <a class="aerie-button aerie-button-secondary" href="certificate.html">Blank Certificate</a>
           </div>
           <p class="certificate-note" id="certificate-note" role="status" aria-live="polite"></p>
+        </div>
+
+        <div class="trial-rewards" id="trial-rewards">
+          <p class="aerie-kicker">Your House Record</p>
+          <h3>Keep Your House With You</h3>
+          <p>Your result unlocks a personalised certificate, a House phone wallpaper, your free House Starter Pack, and the opening chapter of <em>The War of Feather &amp; Shadow</em>.</p>
+          <div class="trial-actions">
+            <button class="aerie-button" id="download-wallpaper" type="button">Download House Wallpaper</button>
+            <a class="aerie-button aerie-button-secondary reward-link" data-reward="starter_pack" href="../downloads/free-house-starter.html">Free House Starter Pack</a>
+            <a class="aerie-button aerie-button-secondary reward-link" data-reward="chapter_one" href="../chapter-one.html">Read Chapter One Free</a>
+          </div>
+          <p class="certificate-note" id="wallpaper-note" role="status" aria-live="polite"></p>
         </div>
 
         <div class="trial-next-step">
@@ -627,6 +639,45 @@ https://racrawfordauthor.com/aerie/trial.html`;
           note.textContent = error.message || "The certificate could not be prepared. Please try again.";
         }
       }
+
+      async function downloadHouseWallpaper() {
+        const note=document.getElementById("wallpaper-note");
+        if(!currentWinningHouse){ note.textContent="Complete the Trial first."; return; }
+        const record=houseRecords[currentWinningHouse];
+        note.textContent="Preparing your House wallpaper…";
+        try{
+          const img=new Image(); img.crossOrigin="anonymous";
+          img.src=houseSigils[currentWinningHouse];
+          await img.decode();
+          const canvas=document.createElement("canvas");
+          canvas.width=1170; canvas.height=2532;
+          const ctx=canvas.getContext("2d");
+          const g=ctx.createRadialGradient(585,850,80,585,1266,1350);
+          g.addColorStop(0,"#27222b"); g.addColorStop(.62,"#111014"); g.addColorStop(1,"#050506");
+          ctx.fillStyle=g; ctx.fillRect(0,0,canvas.width,canvas.height);
+          ctx.strokeStyle="#9a6b28"; ctx.lineWidth=3; ctx.strokeRect(55,55,1060,2422);
+          ctx.strokeStyle="rgba(200,163,90,.35)"; ctx.lineWidth=1; ctx.strokeRect(76,76,1018,2380);
+          const max=620,scale=Math.min(max/img.width,max/img.height);
+          const w=img.width*scale,h=img.height*scale;
+          ctx.drawImage(img,(1170-w)/2,410,w,h);
+          ctx.textAlign="center"; ctx.fillStyle="#c8a35a";
+          ctx.font="28px Georgia"; ctx.fillText("THE AERIE DOMINION",585,230);
+          ctx.fillStyle="#f4ecdd"; ctx.font="bold 72px Georgia"; ctx.fillText("HOUSE "+currentWinningHouse.toUpperCase(),585,1190);
+          ctx.fillStyle="#c8a35a"; ctx.font="italic 34px Georgia"; ctx.fillText(record.motto,585,1260);
+          ctx.fillStyle="#e7dac2"; ctx.font="30px Georgia";
+          const words=record.lore.split(" "); let line="",lines=[],y=1415;
+          words.forEach(word=>{const test=line+word+" "; if(ctx.measureText(test).width>850){lines.push(line.trim());line=word+" ";}else line=test;}); if(line)lines.push(line.trim());
+          lines.forEach(l=>{ctx.fillText(l,585,y);y+=48;});
+          ctx.fillStyle="#8f806b"; ctx.font="24px Georgia"; ctx.fillText("THE RAVEN'S HEIR · R.A. CRAWFORD",585,2265);
+          ctx.fillText("racrawfordauthor.com",585,2320);
+          const a=document.createElement("a"); a.download="house-"+currentWinningHouse.toLowerCase()+"-phone-wallpaper.png"; a.href=canvas.toDataURL("image/png"); a.click();
+          note.textContent="Your House wallpaper has been downloaded.";
+          document.dispatchEvent(new CustomEvent("projectAvis:rewardDownload",{detail:{reward:"wallpaper",house:currentWinningHouse}}));
+        }catch(e){ note.textContent="The wallpaper could not be prepared. Please try again."; }
+      }
+
+      document.getElementById("download-wallpaper").addEventListener("click",downloadHouseWallpaper);
+      document.querySelectorAll(".reward-link").forEach(link=>link.addEventListener("click",()=>document.dispatchEvent(new CustomEvent("projectAvis:rewardClick",{detail:{reward:link.dataset.reward,house:currentWinningHouse}}))));
 
       // Wire event listeners
       startButton.addEventListener('click', startTrial);
