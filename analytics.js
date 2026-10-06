@@ -60,4 +60,5 @@
   document.addEventListener("projectAvis:trialComplete",e=>fire("house_trial_complete",{house:e.detail?.house||"unknown",source_page:path}));
   document.addEventListener("projectAvis:rewardDownload",e=>fire("house_reward_download",{reward:e.detail?.reward||"unknown",house:e.detail?.house||"unknown",source_page:path}));
   document.addEventListener("projectAvis:rewardClick",e=>fire("house_reward_click",{reward:e.detail?.reward||"unknown",house:e.detail?.house||"unknown",source_page:path}));
+  document.addEventListener("projectAvis:resultShare",e=>fire("house_result_share",{house:e.detail?.house||"unknown",method:e.detail?.method||"unknown",source_page:path}));
 })();
