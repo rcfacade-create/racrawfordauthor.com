@@ -39,15 +39,6 @@
     const a=e.target.closest("a");
     if(!a) return;
     const href=a.getAttribute("href")||"";
-    if(href.includes("chapter-one.html")){
-      fire("chapter_one_click",{link_text:(a.textContent||"").trim(),source_page:path});
-    }
-    if(href.includes("shop.html")){
-      fire("shop_click",{link_text:(a.textContent||"").trim(),source_page:path});
-    }
-    if(href.includes("aerie/trial.html")){
-      fire("house_trial_click",{link_text:(a.textContent||"").trim(),source_page:path});
-    }
     const m=href.match(/buy\.stripe\.com\/([^?#]+)/);
     if(m && products[m[1]]){
       const p=products[m[1]];
