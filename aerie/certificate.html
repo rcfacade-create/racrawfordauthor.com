@@ -6,33 +6,21 @@
   <title>Blank Trial Certificate | The Aerie Dominion</title>
   <meta name="description" content="Download or print a blank Trial of the Houses certificate from Aethelmar Academy." />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="aerie.css" />
+  <link rel="stylesheet" href="aerie.css?v=20261006-2" />
   <style>
     .certificate-page{padding:7rem 1rem 3rem;text-align:center}
     .certificate-toolbar{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;align-items:center;margin:1.5rem auto 2rem}
     .certificate-toolbar label{color:#e7dac2}
     .certificate-toolbar select{padding:.78rem 1rem;border:1px solid rgba(200,163,90,.5);background:#111014;color:#f8f2e8;font:inherit}
-    .certificate-sheet{width:min(1123px,100%);aspect-ratio:1123/794;margin:auto;overflow:hidden;background:radial-gradient(circle at 50% 42%,#fffaf0 0,#ead9b9 70%,#c5a671 100%);color:#20160d;border:3px solid #21150b;outline:2px solid #9a6b28;outline-offset:-14px;padding:5%;position:relative;display:flex;flex-direction:column;align-items:center;box-shadow:0 16px 44px rgba(0,0,0,.55)}
-    .certificate-sheet:before{content:"";position:absolute;inset:26px;border:1px solid #3e2813;pointer-events:none}
-    .certificate-overline{letter-spacing:.34em;font-size:clamp(.55rem,1.25vw,.95rem);color:#5b3b16}
-    .certificate-sheet h1{font-size:clamp(1.8rem,4.5vw,3.9rem);line-height:1;margin:1rem 0 .35rem}
-    .certificate-subtitle{letter-spacing:.22em;color:#5b3b16;font-size:clamp(.55rem,1.1vw,.82rem)}
-    .blank-seal{width:clamp(62px,10vw,112px);height:clamp(62px,10vw,112px);object-fit:contain;margin:1rem auto .7rem;filter:drop-shadow(0 5px 7px rgba(43,25,8,.28))}
-    .certificate-motto{font-size:clamp(.7rem,1.4vw,1.05rem);font-style:italic;letter-spacing:.18em;color:#6a471d;margin:.2rem 0}
-    .certificate-lore{font-size:clamp(.56rem,1vw,.82rem);line-height:1.3;color:#43301b;margin:.2rem auto .4rem;max-width:720px}
-    .certificate-copy{font-size:clamp(.85rem,1.8vw,1.35rem);margin:.35rem 0}
-    .blank-line{width:min(580px,70%);height:clamp(28px,5vw,48px);border-bottom:1px solid #6a471d}
-    .house-line{font-size:clamp(1rem,2.4vw,1.9rem);font-weight:700;color:#5d3511;letter-spacing:.08em;margin:.8rem 0}
-    .certificate-footer-line{width:82%;display:flex;justify-content:space-between;border-top:1px solid #9a6b28;padding-top:.8rem;margin-top:.7rem;font-size:clamp(.55rem,1vw,.82rem);color:#624727}
-    .certificate-crests{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;width:72%;margin-top:auto}
-    .certificate-crest img{width:100%;height:clamp(38px,7vw,74px);object-fit:contain}
-    .certificate-crest span{display:block;font-size:clamp(.45rem,.85vw,.68rem);letter-spacing:.08em;color:#5b3b16}
+    .certificate-stage{width:min(1180px,100%);margin:auto;background:#0b0a0b;padding:14px;box-shadow:0 18px 54px rgba(0,0,0,.55)}
+    .certificate-stage svg{display:block;width:100%;height:auto;background:#ead6ad}
+    .certificate-note{max-width:900px;margin:1rem auto;color:#cbbca5}
     @media print{
       @page{size:A4 landscape;margin:0}
       body{background:#fff}
       .aerie-top-nav,.certificate-toolbar,.certificate-page>p,.certificate-page>h1{display:none!important}
-      .certificate-page{padding:0}
-      .certificate-sheet{width:297mm;height:210mm;max-width:none;box-shadow:none;border-radius:0}
+      .certificate-page{padding:0}.certificate-stage{padding:0;box-shadow:none;width:100%}
+      .certificate-stage svg{width:297mm;height:210mm}
     }
   </style>
   <link rel="canonical" href="https://racrawfordauthor.com/aerie/certificate.html" />
@@ -47,93 +35,73 @@
   <main class="certificate-page">
     <p class="aerie-kicker">Aethelmar Academy Record Office</p>
     <h1>Blank Trial Certificate</h1>
-    <p>Download the artwork or print it directly. Choose “Save as PDF” in your print options for an A4 landscape PDF.</p>
+    <p class="certificate-note">This is the engraved Project Avis certificate style. Choose a House, then download the scalable artwork or print it at A4 landscape.</p>
     <div class="certificate-toolbar">
       <label for="blank-house">House:</label>
-      <select id="blank-house">
-        <option>Crow</option><option>Owl</option><option>Hawk</option><option>Falcon</option><option>Swan</option><option>Raven</option>
-      </select>
+      <select id="blank-house"><option>Crow</option><option>Owl</option><option>Hawk</option><option>Falcon</option><option>Swan</option><option>Raven</option></select>
       <button class="aerie-button" id="download-blank" type="button">Download Blank Certificate</button>
-      <button class="aerie-button aerie-button-secondary" type="button" onclick="window.print()">Print / Save as PDF</button>
-      <a class="aerie-button aerie-button-secondary" href="trial.html">Return to the Trial</a>
+      <button class="aerie-button aerie-button-secondary" id="print-blank" type="button">Print / Save as PDF</button>
+      <a class="aerie-button aerie-button-secondary" href="trial.html?v=20261006-2">Return to the Trial</a>
     </div>
-    <section class="certificate-sheet" id="certificate-sheet" aria-label="Blank Trial of the Houses certificate">
-      <div class="certificate-overline">THE AERIE DOMINION</div>
-      <h1>Trial of the Houses</h1>
-      <div class="certificate-subtitle">AETHELMAR ACADEMY · OFFICIAL RECORD</div>
-      <img class="blank-seal" id="blank-sigil" src="assets/sigils/crow.png" alt="House Crow sigil" />
-      <p class="certificate-copy">This record certifies that</p>
-      <div class="blank-line"></div>
-      <p class="certificate-copy">has completed the Trial and been recognised by</p>
-      <div class="house-line" id="blank-house-line">HOUSE CROW</div>
-      <p class="certificate-motto" id="blank-motto">UMBRAE OMNIA VIDENT</p>
-      <p class="certificate-lore" id="blank-lore">Crow walks in silence, guarding secrets and seeing what others bury.</p>
-      <div class="certificate-footer-line"><span>Date recorded: ____________________</span><span>Hall of Chronicles · Record Verified</span></div>
-      <div class="certificate-crests">
-        <div class="certificate-crest"><img src="assets/sigils/crow.png" alt="House Crow sigil"><span>CROW</span></div>
-        <div class="certificate-crest"><img src="assets/sigils/owl.png" alt="House Owl sigil"><span>OWL</span></div>
-        <div class="certificate-crest"><img src="assets/sigils/hawk.png" alt="House Hawk sigil"><span>HAWK</span></div>
-        <div class="certificate-crest"><img src="assets/sigils/falcon.png" alt="House Falcon sigil"><span>FALCON</span></div>
-        <div class="certificate-crest"><img src="assets/sigils/swan.png" alt="House Swan sigil"><span>SWAN</span></div>
-        <div class="certificate-crest"><img src="assets/sigils/raven.png" alt="House Raven sigil"><span>RAVEN</span></div>
-      </div>
-    </section>
+    <section class="certificate-stage" id="certificate-stage" aria-label="Blank Trial of the Houses certificate"></section>
   </main>
-  <script>
-    const houseRecords={
-      Crow:{motto:"UMBRAE OMNIA VIDENT",lore:"Crow walks in silence, guarding secrets and seeing what others bury."},
-      Owl:{motto:"SAPIENTIA ANTE OMNIA",lore:"Owl preserves memory and reads the truths hidden in pattern and omission."},
-      Hawk:{motto:"FERRUM ET HONOR",lore:"Hawk tempers strength with discipline, command and the courage to stand first."},
-      Falcon:{motto:"PER CAELUM VINCIMUS",lore:"Falcon is the silent path of precision, pursuit and the decisive strike."},
-      Swan:{motto:"LUX PER VERITATEM",lore:"Swan shapes power through grace, diplomacy and the word that ends a war."},
-      Raven:{motto:"VERITAS IN TENEBRIS",lore:"Raven bears a royal legacy hidden in shadow, waiting to be remembered."}
-    };
-    const houseSelect=document.getElementById("blank-house");
-    function updateHousePreview(){
-      const house=houseSelect.value,record=houseRecords[house];
-      const sigil=document.getElementById("blank-sigil");
-      sigil.src=`assets/sigils/${house.toLowerCase()}.png`;
-      sigil.alt=`House ${house} sigil`;
-      document.getElementById("blank-house-line").textContent=`HOUSE ${house.toUpperCase()}`;
-      document.getElementById("blank-motto").textContent=record.motto;
-      document.getElementById("blank-lore").textContent=record.lore;
-    }
-    houseSelect.addEventListener("change",updateHousePreview);
-    async function imageToDataUrl(path){
-      const response=await fetch(path);
-      const blob=await response.blob();
-      return await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(blob)});
-    }
-    document.getElementById("download-blank").addEventListener("click",async function(){
-      const button=this;button.textContent="Preparing…";button.disabled=true;
-      try{
-        const houses=["Crow","Owl","Hawk","Falcon","Swan","Raven"];
-        const selectedHouse=houseSelect.value;
-        const record=houseRecords[selectedHouse];
-        const data=await Promise.all(houses.map(h=>imageToDataUrl(`assets/sigils/${h.toLowerCase()}.png`)));
-        const selectedSigil=data[houses.indexOf(selectedHouse)];
-        const crests=data.map((src,i)=>{
-          const x=205+i*143,active=houses[i]===selectedHouse;
-          return `<g><rect x="${x}" y="657" width="58" height="58" rx="2" fill="#efe2c8" stroke="${active?'#5d3511':'#9a6b28'}" stroke-width="${active?2:1}"/><image href="${src}" x="${x+4}" y="661" width="50" height="50" preserveAspectRatio="xMidYMid meet"/><text x="${x+29}" y="738" class="label" text-anchor="middle">${houses[i]}</text></g>`
-        }).join("");
-        const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1123" height="794" viewBox="0 0 1123 794">
-          <defs>
-            <radialGradient id="p" cx="50%" cy="45%" r="72%"><stop offset="0%" stop-color="#fffaf1"/><stop offset="72%" stop-color="#efe1c7"/><stop offset="100%" stop-color="#d4ba8c"/></radialGradient>
-            <filter id="g" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="11"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 .035"/></feComponentTransfer></filter>
-            <style>.s{font-family:Georgia,serif;font-size:14px;letter-spacing:5px;fill:#5b3b16}.t{font-family:Georgia,serif;font-size:48px;font-weight:700;fill:#20160d}.b{font-family:Georgia,serif;font-size:21px;fill:#43301b}.h{font-family:Georgia,serif;font-size:31px;font-weight:700;fill:#5d3511}.m{font-family:Georgia,serif;font-size:16px;font-style:italic;letter-spacing:3px;fill:#6a471d}.l{font-family:Georgia,serif;font-size:12px;fill:#43301b}.label{font-family:Georgia,serif;font-size:11px;letter-spacing:1.2px;fill:#5b3b16}.f{font-family:Georgia,serif;font-size:13px;fill:#624727}</style>
-          </defs>
-          <rect width="1123" height="794" fill="url(#p)"/><rect width="1123" height="794" fill="#8a642f" filter="url(#g)" opacity=".22"/>
-          <rect x="18" y="18" width="1087" height="758" fill="none" stroke="#2d1d0f" stroke-width="2"/><rect x="27" y="27" width="1069" height="740" fill="none" stroke="#9a6b28" stroke-width="1.6"/><rect x="37" y="37" width="1049" height="720" fill="none" stroke="#4a3218" stroke-width=".8"/>
-          <path d="M62 103H344M779 103H1061" stroke="#9a6b28"/><text x="561.5" y="82" class="s" text-anchor="middle">THE AERIE DOMINION</text><text x="561.5" y="146" class="t" text-anchor="middle">Trial of the Houses</text><text x="561.5" y="180" class="s" text-anchor="middle">AETHELMAR ACADEMY · OFFICIAL RECORD</text>
-          <rect x="496" y="205" width="131" height="131" rx="3" fill="#efe2c8" stroke="#8b5b20" stroke-width="1.5"/><image href="${selectedSigil}" x="502" y="211" width="119" height="119" preserveAspectRatio="xMidYMid meet"/>
-          <text x="561.5" y="382" class="b" text-anchor="middle">This record certifies that</text><path d="M243 447H880" stroke="#6a471d"/><text x="561.5" y="482" class="b" text-anchor="middle">has completed the Trial and been recognised by</text><text x="561.5" y="525" class="h" text-anchor="middle">HOUSE ${selectedHouse.toUpperCase()}</text><text x="561.5" y="554" class="m" text-anchor="middle">${record.motto}</text><text x="561.5" y="583" class="l" text-anchor="middle">${record.lore}</text>
-          <path d="M75 619H335M788 619H1048" stroke="#9a6b28" stroke-width=".9"/><text x="78" y="642" class="f">Date recorded: ____________________</text><text x="1045" y="642" class="f" text-anchor="end">Hall of Chronicles · Record Verified</text>
-          ${crests}
-        </svg>`;
-        const url=URL.createObjectURL(new Blob([svg],{type:"image/svg+xml;charset=utf-8"}));
-        const link=document.createElement("a");link.href=url;link.download=`trial-of-the-houses-${selectedHouse.toLowerCase()}-blank-certificate.svg`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
-      }finally{button.textContent="Download Blank Certificate";button.disabled=false}
-    });
-  </script>
-</body>
-</html>
+<script>
+const houseRecords={
+  Crow:{motto:"UMBRAE OMNIA VIDENT",lore:"Crows see what others miss, and carry truth through shadow.",accent:"#14233b"},
+  Owl:{motto:"SAPIENTIA ANTE OMNIA",lore:"Owls seek knowledge beyond the seen, and guard the hidden truths.",accent:"#315d7a"},
+  Hawk:{motto:"FERRUM ET HONOR",lore:"Hawks rise with vision, and carry the future in freedom.",accent:"#8a5b1c"},
+  Falcon:{motto:"PER CAELUM VINCIMUS",lore:"Falcons move with purpose, and fly far without fear.",accent:"#2c6794"},
+  Swan:{motto:"LUX PER VERITATEM",lore:"Swans lead with grace, and prove that true strength is serenity.",accent:"#4f86a7"},
+  Raven:{motto:"VERITAS IN TENEBRIS",lore:"Ravens bear memory, keep what is broken, and return to be remembered.",accent:"#17233a"}
+};
+const houses=["Crow","Owl","Hawk","Falcon","Swan","Raven"];
+const sigils={Crow:"assets/sigils/crow.png",Owl:"assets/sigils/owl.png",Hawk:"assets/sigils/hawk.png",Falcon:"assets/sigils/falcon.png",Swan:"assets/sigils/swan.png",Raven:"assets/sigils/raven.png"};
+async function imageToDataUrl(path){
+  const r=await fetch(path,{cache:"no-store"}); if(!r.ok) throw new Error("Unable to load House artwork.");
+  const b=await r.blob(); return await new Promise((res,rej)=>{const x=new FileReader();x.onload=()=>res(x.result);x.onerror=rej;x.readAsDataURL(b)});
+}
+function esc(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&apos;"}[c]))}
+async function buildCertificate(house){
+  const rec=houseRecords[house], accent=rec.accent;
+  const data=await Promise.all(houses.map(h=>imageToDataUrl(sigils[h])));
+  const chosen=data[houses.indexOf(house)];
+  const footer=data.map((src,i)=>{const x=116+i*178, active=houses[i]===house;return `
+    <g opacity="${active?1:.84}">
+      <circle cx="${x}" cy="704" r="${active?43:37}" fill="#f1dfbf" stroke="${active?accent:"#725129"}" stroke-width="${active?3:1.4}"/>
+      <circle cx="${x}" cy="704" r="${active?36:31}" fill="${active?accent:"#d8c39f"}" opacity="${active?.95:.42}"/>
+      <image href="${src}" x="${x-(active?31:27)}" y="${704-(active?31:27)}" width="${active?62:54}" height="${active?62:54}" preserveAspectRatio="xMidYMid meet"/>
+      <text x="${x}" y="766" class="seal-label" text-anchor="middle">${houses[i].toUpperCase()}</text>
+    </g>`}).join("");
+  const city=house==="Swan"
+    ? '<path d="M44 417 C80 381 101 351 129 351 C159 351 171 379 198 379 C225 379 239 350 269 350 C298 350 313 377 345 414 M58 416 V299 M92 416 V271 M127 416 V318 M165 416 V253 M202 416 V313 M241 416 V286 M281 416 V321 M318 416 V277" />'
+    : '<path d="M43 420 L43 262 L67 262 L67 211 L88 211 L88 251 L116 251 L116 177 L139 177 L139 242 L165 242 L165 205 L185 205 L185 257 L212 257 L212 191 L236 191 L236 248 L266 248 L266 219 L286 219 L286 279 L318 279 L318 420 M43 420 Q86 386 126 420 Q165 383 205 420 Q244 388 285 420 Q304 404 325 420"/>';
+  const landscape=house==="Swan"
+    ? '<path d="M30 440 C113 410 196 410 279 441 C362 471 447 465 525 434 M697 438 C782 409 862 415 942 445 C1008 469 1063 458 1104 438"/><path d="M26 455 Q62 430 98 456 Q132 425 166 456 Q204 420 241 456 Q278 429 315 456 M804 456 Q842 424 879 456 Q915 429 950 456 Q987 422 1024 456 Q1058 431 1092 456"/>'
+    : '<path d="M743 423 L817 313 L854 353 L923 245 L994 351 L1046 293 L1105 424 M817 313 l19 38 l18 6 l18 20 M923 245 l28 61 l15 10 l27 36 M1046 293 l19 40 l18 13"/>';
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="3508" height="2480" viewBox="0 0 1123 794">
+  <defs>
+    <radialGradient id="paper" cx="50%" cy="43%" r="75%"><stop offset="0%" stop-color="#fff7e6"/><stop offset="66%" stop-color="#efd9b5"/><stop offset="100%" stop-color="#caa56e"/></radialGradient>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".6" numOctaves="3" seed="29"/><feComponentTransfer><feFuncA type="table" tableValues="0 .055"/></feComponentTransfer></filter>
+    <style>.over{font:12px Georgia;letter-spacing:4px;fill:#4e351a}.title{font:bold 46px Georgia;fill:#17110b}.sub{font:11px Georgia;letter-spacing:3px;fill:#51391e}.body{font:17px Georgia;fill:#312217}.house{font:bold 31px Georgia;fill:${accent}}.motto{font:italic 14px Georgia;letter-spacing:2px;fill:#60441f}.lore{font:italic 11px Georgia;fill:#49351f}.fine{font:10px Georgia;fill:#49351f}.seal-label{font:bold 9px Georgia;letter-spacing:1.2px;fill:#352516}</style>
+  </defs>
+  <rect width="1123" height="794" fill="url(#paper)"/><rect width="1123" height="794" filter="url(#grain)" opacity=".26"/>
+  <rect x="9" y="9" width="1105" height="776" fill="none" stroke="#1d150f" stroke-width="2.3"/><rect x="17" y="17" width="1089" height="760" fill="none" stroke="#b78338" stroke-width="2"/><rect x="25" y="25" width="1073" height="744" fill="none" stroke="#2c2016"/>
+  <path d="M22 87 C76 57 99 33 149 25 C120 51 104 72 95 99 C126 73 165 61 204 62 C166 83 137 107 116 139 C154 119 187 117 218 126" fill="none" stroke="#182338" stroke-width="13" stroke-linecap="round" opacity=".93"/>
+  <path d="M1101 87 C1047 57 1024 33 974 25 C1003 51 1019 72 1028 99 C997 73 958 61 919 62 C957 83 986 107 1007 139 C969 119 936 117 905 126" fill="none" stroke="#182338" stroke-width="13" stroke-linecap="round" opacity=".93"/>
+  <g opacity=".72" stroke="#34281d" fill="none" stroke-width="1.4">${city}${landscape}</g>
+  <path d="M335 74H470 M653 74H788" stroke="#775328"/>
+  <text x="561.5" y="70" class="over" text-anchor="middle">THE AERIE DOMINION</text><text x="561.5" y="120" class="title" text-anchor="middle">Trial of the Houses</text><text x="561.5" y="145" class="sub" text-anchor="middle">AETHELMAR ACADEMY · OFFICIAL RECORD</text>
+  <g transform="translate(561.5 245)"><circle r="73" fill="#ecd5ac" stroke="#6d4c25" stroke-width="2"/><circle r="63" fill="${accent}" stroke="#bf9149" stroke-width="3"/><image href="${chosen}" x="-54" y="-54" width="108" height="108" preserveAspectRatio="xMidYMid meet"/></g>
+  <text x="561.5" y="342" class="body" text-anchor="middle">This record certifies that</text><path d="M325 393H798" stroke="#6b4a22"/><text x="561.5" y="424" class="body" text-anchor="middle">has completed the Trial and been recognised by</text><text x="561.5" y="463" class="house" text-anchor="middle">HOUSE ${esc(house).toUpperCase()}</text><text x="561.5" y="488" class="motto" text-anchor="middle">${esc(rec.motto)}</text><text x="561.5" y="514" class="lore" text-anchor="middle">${esc(rec.lore)}</text>
+  <text x="88" y="543" class="fine">Date recorded:</text><text x="88" y="558" class="fine">____________________</text><text x="1035" y="543" text-anchor="end" class="fine">Hall of Chronicles</text><text x="1035" y="558" text-anchor="end" class="fine">Record Verified</text>
+  <path d="M71 610 C214 579 337 589 455 612 M668 612 C790 588 913 580 1053 610" fill="none" stroke="#6b4a22"/>${footer}
+  </svg>`;
+}
+const select=document.getElementById("blank-house"),stage=document.getElementById("certificate-stage");
+async function refresh(){stage.innerHTML=await buildCertificate(select.value)}
+select.addEventListener("change",refresh);
+document.getElementById("download-blank").addEventListener("click",async()=>{const svg=await buildCertificate(select.value);const u=URL.createObjectURL(new Blob([svg],{type:"image/svg+xml;charset=utf-8"}));const a=document.createElement("a");a.href=u;a.download="trial-of-the-houses-"+select.value.toLowerCase()+"-blank-certificate.svg";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)});
+document.getElementById("print-blank").addEventListener("click",()=>window.print());
+refresh();
+</script>
+</body></html>
