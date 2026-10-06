@@ -1,4 +1,53 @@
 (() => {
+  if(!document.querySelector('script[src*="analytics.js"]')){
+    const analytics=document.createElement("script");
+    analytics.src="../analytics.js?v=20261006";
+    analytics.defer=true;
+    document.head.appendChild(analytics);
+  }
+
+  const purchaseCatalog={
+    "crow-7f3a2d91.html":{id:"AV-DH-CROW-001",name:"House Crow Digital Pack",price:2.99,shipping:0},
+    "owl-61be4c28.html":{id:"AV-DH-OWL-001",name:"House Owl Digital Pack",price:2.99,shipping:0},
+    "raven-4d9f73a1.html":{id:"AV-DH-RAVEN-001",name:"House Raven Digital Pack",price:2.99,shipping:0},
+    "swan-2c8e51f7.html":{id:"AV-DH-SWAN-001",name:"House Swan Digital Pack",price:2.99,shipping:0},
+    "falcon-8a5d14c3.html":{id:"AV-DH-FALCON-001",name:"House Falcon Digital Pack",price:2.99,shipping:0},
+    "hawk-35f0a8e6.html":{id:"AV-DH-HAWK-001",name:"House Hawk Digital Pack",price:2.99,shipping:0},
+    "houses-complete-b24e970d.html":{id:"AV-DH-ALL-001",name:"Complete Houses Collection",price:9.99,shipping:0},
+    "dominion-map-a19c6e42.html":{id:"AV-DM-001",name:"Aerie Dominion Map Pack",price:3.99,shipping:0},
+    "academy-student-73e5b10c.html":{id:"AV-DA-001",name:"Aethelmar Academy Student Pack",price:4.99,shipping:0}
+  };
+
+  function trackProjectAvisPurchase(){
+    const params=new URLSearchParams(location.search);
+    const session=params.get("session_id");
+    if(!session || typeof window.gtag!=="function") return;
+    const page=location.pathname.split("/").pop();
+    let p=purchaseCatalog[page];
+    if(page==="free-house-starter.html"){
+      const kind=params.get("purchase");
+      const physical={
+        paperback:{id:"WFAS-PB-DIRECT-002",name:"Book One Paperback",price:8.99,shipping:3.49},
+        signed_paperback:{id:"WFAS-SPB-DIRECT-002",name:"Book One Signed Paperback",price:12.99,shipping:3.49},
+        hardback:{id:"WFAS-HB-DIRECT-002",name:"Book One Hardback",price:13.99,shipping:3.49},
+        signed_hardback:{id:"WFAS-SHB-DIRECT-002",name:"Book One Signed Hardback",price:17.99,shipping:3.49}
+      };
+      p=physical[kind];
+    }
+    if(!p) return;
+    const storageKey="ga_purchase_"+session;
+    try{ if(sessionStorage.getItem(storageKey)) return; sessionStorage.setItem(storageKey,"1"); }catch(e){}
+    window.gtag("event","purchase",{
+      transaction_id:session,
+      currency:"GBP",
+      value:Number((p.price+p.shipping).toFixed(2)),
+      shipping:p.shipping,
+      items:[{item_id:p.id,item_name:p.name,price:p.price,quantity:1}]
+    });
+  }
+
+  window.addEventListener("load",()=>setTimeout(trackProjectAvisPurchase,700));
+
   const houses={
     Crow:{motto:"UMBRAE OMNIA VIDENT",lore:"Crow walks in silence, guarding secrets and seeing what others bury."},
     Owl:{motto:"SAPIENTIA ANTE OMNIA",lore:"Owl preserves memory and reads the truths hidden in pattern and omission."},

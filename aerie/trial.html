@@ -20,6 +20,7 @@
     .trial-next-step p{max-width:650px;margin:0 auto 20px;line-height:1.65}
   </style>
   <link rel="canonical" href="https://racrawfordauthor.com/aerie/trial.html" />
+  <script src="../analytics.js?v=20261006"></script>
 </head>
 
 <body class="aerie-page">
@@ -336,6 +337,7 @@ const houseThemes = {
       const resultStats = document.getElementById("result-stats");
 
       function startTrial() {
+        document.dispatchEvent(new CustomEvent('projectAvis:trialStart'));
         currentQuestion = 0;
         scores = {
           Crow: 0,
@@ -387,6 +389,7 @@ const houseThemes = {
   const rankedHouses = Object.entries(scores).sort((a, b) => b[1] - a[1]);
   const winningHouse = rankedHouses[0][0];
   currentWinningHouse = winningHouse;
+  document.dispatchEvent(new CustomEvent('projectAvis:trialComplete', { detail: { house: winningHouse } }));
   const result = results[winningHouse];
 
   const theme = houseThemes[winningHouse] || {
