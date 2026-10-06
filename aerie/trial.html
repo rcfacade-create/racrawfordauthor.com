@@ -547,13 +547,13 @@ https://racrawfordauthor.com/aerie/trial.html`;
         const crestMarkup = crestData.map((data, index) => {
           const x = 217 + (index * 138);
           const cx = x + 26;
-          return \`<circle cx="\${cx}" cy="692" r="35" fill="none" stroke="#9a6b28" stroke-width="1" opacity=".72"/>
-            <path d="M\${x - 4} 692H\${x + 56}" stroke="#6a471d" stroke-width=".7" opacity=".55"/>
-            <image href="\${data}" x="\${x}" y="666" width="52" height="52" preserveAspectRatio="xMidYMid meet"/>
-            <text x="\${cx}" y="744" class="crest-label" text-anchor="middle">\${houseNames[index]}</text>\`;
+          return `<circle cx="${cx}" cy="692" r="35" fill="none" stroke="#9a6b28" stroke-width="1" opacity=".72"/>
+            <path d="M${x - 4} 692H${x + 56}" stroke="#6a471d" stroke-width=".7" opacity=".55"/>
+            <image href="${data}" x="${x}" y="666" width="52" height="52" preserveAspectRatio="xMidYMid meet"/>
+            <text x="${cx}" y="744" class="crest-label" text-anchor="middle">${houseNames[index]}</text>`;
         }).join("");
 
-        return \`<svg xmlns="http://www.w3.org/2000/svg" width="1123" height="794" viewBox="0 0 1123 794">
+        return `<svg xmlns="http://www.w3.org/2000/svg" width="1123" height="794" viewBox="0 0 1123 794">
           <defs>
             <radialGradient id="paper" cx="50%" cy="42%" r="75%">
               <stop offset="0%" stop-color="#fffaf0"/>
@@ -570,10 +570,10 @@ https://racrawfordauthor.com/aerie/trial.html`;
               .small{font-family:Georgia,serif;font-size:15px;letter-spacing:5px;fill:#5b3b16}
               .title{font-family:Georgia,serif;font-size:49px;font-weight:700;fill:#20160d}
               .body{font-family:Georgia,serif;font-size:22px;fill:#43301b}
-              .name{font-family:Georgia,serif;font-size:\${nameFontSize}px;font-style:italic;fill:#1a120b}
+              .name{font-family:Georgia,serif;font-size:${nameFontSize}px;font-style:italic;fill:#1a120b}
               .house{font-family:Georgia,serif;font-size:31px;font-weight:700;fill:#5d3511}
               .motto{font-family:Georgia,serif;font-size:17px;font-style:italic;letter-spacing:3px;fill:#6a471d}
-              .lore{font-family:Georgia,serif;font-size:\${loreFontSize}px;fill:#43301b}
+              .lore{font-family:Georgia,serif;font-size:${loreFontSize}px;fill:#43301b}
               .crest-label{font-family:Georgia,serif;font-size:11px;letter-spacing:1.5px;fill:#5b3b16}
               .fine{font-family:Georgia,serif;font-size:14px;fill:#624727}
             </style>
@@ -596,24 +596,24 @@ https://racrawfordauthor.com/aerie/trial.html`;
           <text x="561.5" y="153" class="title" text-anchor="middle">Trial of the Houses</text>
           <text x="561.5" y="188" class="small" text-anchor="middle">AETHELMAR ACADEMY · OFFICIAL RECORD</text>
 
-          \${selectedSigil ? \`<circle cx="561.5" cy="270" r="74" fill="rgba(154,107,40,.06)" stroke="#9a6b28" stroke-width="1.5"/>
+          ${selectedSigil ? `<circle cx="561.5" cy="270" r="74" fill="rgba(154,107,40,.06)" stroke="#9a6b28" stroke-width="1.5"/>
           <circle cx="561.5" cy="270" r="65" fill="none" stroke="#3e2813" stroke-width=".8"/>
-          <image href="\${selectedSigil}" x="495" y="216" width="133" height="108" preserveAspectRatio="xMidYMid meet" filter="url(#shadow)"/>\` : \`<circle cx="561.5" cy="270" r="67" fill="none" stroke="#9a6b28" stroke-width="2"/><text x="561.5" y="279" class="small" text-anchor="middle">ACADEMY SEAL</text>\`}
+          <image href="${selectedSigil}" x="495" y="216" width="133" height="108" preserveAspectRatio="xMidYMid meet" filter="url(#shadow)"/>` : `<circle cx="561.5" cy="270" r="67" fill="none" stroke="#9a6b28" stroke-width="2"/><text x="561.5" y="279" class="small" text-anchor="middle">ACADEMY SEAL</text>`}
 
           <text x="561.5" y="366" class="body" text-anchor="middle">This record certifies that</text>
-          <text x="561.5" y="416" class="name" text-anchor="middle">\${safeName}</text>
+          <text x="561.5" y="416" class="name" text-anchor="middle">${safeName}</text>
           <path d="M245 432H878" stroke="#6a471d" stroke-width="1"/>
           <text x="561.5" y="468" class="body" text-anchor="middle">has completed the Trial and been recognised by</text>
-          <text x="561.5" y="514" class="house" text-anchor="middle">HOUSE \${safeHouse.toUpperCase()}</text>
-          <text x="561.5" y="544" class="motto" text-anchor="middle">\${safeMotto}</text>
-          <text x="561.5" y="574" class="lore" text-anchor="middle">\${safeLore}</text>
+          <text x="561.5" y="514" class="house" text-anchor="middle">HOUSE ${safeHouse.toUpperCase()}</text>
+          <text x="561.5" y="544" class="motto" text-anchor="middle">${safeMotto}</text>
+          <text x="561.5" y="574" class="lore" text-anchor="middle">${safeLore}</text>
 
           <path d="M115 607H345M778 607H1008" stroke="#9a6b28" stroke-width=".9"/>
-          <text x="105" y="628" class="fine">Date recorded: \${safeDate}</text>
+          <text x="105" y="628" class="fine">Date recorded: ${safeDate}</text>
           <text x="1018" y="628" class="fine" text-anchor="end">Hall of Chronicles · Record Verified</text>
 
-          \${crestMarkup}
-        </svg>\`;
+          ${crestMarkup}
+        </svg>`;
       }
 
       function downloadSvg(svg, filename) {
