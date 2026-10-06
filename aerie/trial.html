@@ -97,10 +97,12 @@
           <h3>Keep Your House With You</h3>
           <p>Your result unlocks a personalised certificate, a House phone wallpaper, your free House Starter Pack, and the opening chapter of <em>The War of Feather &amp; Shadow</em>.</p>
           <div class="trial-actions">
-            <button class="aerie-button" id="download-wallpaper" type="button">Download House Wallpaper</button>
+            <button class="aerie-button" id="share-house-card" type="button">Share My House Result</button>
+            <button class="aerie-button aerie-button-secondary" id="download-wallpaper" type="button">Download House Wallpaper</button>
             <a class="aerie-button aerie-button-secondary reward-link" data-reward="starter_pack" href="../downloads/free-house-starter.html">Free House Starter Pack</a>
             <a class="aerie-button aerie-button-secondary reward-link" data-reward="chapter_one" href="../chapter-one.html">Read Chapter One Free</a>
           </div>
+          <p class="certificate-note" id="share-note" role="status" aria-live="polite"></p>
           <p class="certificate-note" id="wallpaper-note" role="status" aria-live="polite"></p>
         </div>
 
@@ -640,6 +642,62 @@ https://racrawfordauthor.com/aerie/trial.html`;
         }
       }
 
+      async function buildHouseShareCard() {
+        if(!currentWinningHouse) throw new Error("Complete the Trial first.");
+        const record=houseRecords[currentWinningHouse];
+        const result=results[currentWinningHouse];
+        const img=new Image(); img.crossOrigin="anonymous"; img.src=houseSigils[currentWinningHouse]; await img.decode();
+        const canvas=document.createElement("canvas"); canvas.width=1080; canvas.height=1920;
+        const ctx=canvas.getContext("2d");
+        const bg=ctx.createRadialGradient(540,720,80,540,960,1100);
+        bg.addColorStop(0,"#2a252d"); bg.addColorStop(.58,"#111014"); bg.addColorStop(1,"#050506");
+        ctx.fillStyle=bg; ctx.fillRect(0,0,1080,1920);
+        ctx.strokeStyle="#9a6b28"; ctx.lineWidth=4; ctx.strokeRect(48,48,984,1824);
+        ctx.strokeStyle="rgba(200,163,90,.38)"; ctx.lineWidth=1; ctx.strokeRect(70,70,940,1780);
+        ctx.textAlign="center";
+        ctx.fillStyle="#c8a35a"; ctx.font="28px Georgia"; ctx.fillText("TRIAL OF THE HOUSES",540,175);
+        ctx.fillStyle="#f4ecdd"; ctx.font="bold 68px Georgia"; ctx.fillText("I WAS CHOSEN BY",540,300);
+        ctx.fillStyle="#f4ecdd"; ctx.font="bold 92px Georgia"; ctx.fillText("HOUSE "+currentWinningHouse.toUpperCase(),540,405);
+        const max=520, scale=Math.min(max/img.width,max/img.height);
+        const w=img.width*scale,h=img.height*scale; ctx.drawImage(img,(1080-w)/2,500,w,h);
+        ctx.fillStyle="#c8a35a"; ctx.font="italic 34px Georgia"; ctx.fillText(record.motto,540,1120);
+        ctx.fillStyle="#e7dac2"; ctx.font="31px Georgia";
+        const wrap=(text,maxWidth)=>{const words=text.split(" ");let line="",lines=[];words.forEach(word=>{const test=line+word+" ";if(ctx.measureText(test).width>maxWidth&&line){lines.push(line.trim());line=word+" ";}else line=test;});if(line)lines.push(line.trim());return lines;};
+        let y=1215; wrap(record.lore,820).forEach(line=>{ctx.fillText(line,540,y);y+=48;});
+        ctx.fillStyle="#bba98a"; ctx.font="27px Georgia"; y+=45;
+        wrap(result.title,820).forEach(line=>{ctx.fillText(line,540,y);y+=42;});
+        ctx.fillStyle="#8f806b"; ctx.font="24px Georgia"; ctx.fillText("WHICH HOUSE WOULD CLAIM YOU?",540,1630);
+        ctx.fillStyle="#c8a35a"; ctx.font="26px Georgia"; ctx.fillText("racrawfordauthor.com/aerie/trial.html",540,1690);
+        ctx.fillStyle="#8f806b"; ctx.font="22px Georgia"; ctx.fillText("THE RAVEN'S HEIR · R.A. CRAWFORD",540,1780);
+        return canvas;
+      }
+
+      async function shareHouseCard() {
+        const note=document.getElementById("share-note");
+        note.textContent="Preparing your House result…";
+        try{
+          const canvas=await buildHouseShareCard();
+          const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error("Unable to prepare image.")),"image/png"));
+          const filename="house-"+currentWinningHouse.toLowerCase()+"-trial-result.png";
+          const file=new File([blob],filename,{type:"image/png"});
+          const shareText="I was chosen by House "+currentWinningHouse+" in the Trial of the Houses. Which House would claim you?";
+          if(navigator.share && (!navigator.canShare || navigator.canShare({files:[file]}))){
+            await navigator.share({title:"My Trial of the Houses Result",text:shareText,files:[file]});
+            note.textContent="Your House result is ready to share.";
+            document.dispatchEvent(new CustomEvent("projectAvis:resultShare",{detail:{house:currentWinningHouse,method:"native_share"}}));
+          }else{
+            const url=URL.createObjectURL(blob);
+            const a=document.createElement("a"); a.href=url; a.download=filename; a.click(); setTimeout(()=>URL.revokeObjectURL(url),1000);
+            if(navigator.clipboard && navigator.clipboard.writeText) await navigator.clipboard.writeText(shareText+" https://racrawfordauthor.com/aerie/trial.html");
+            note.textContent="Your share card has been downloaded. The share caption was copied where supported.";
+            document.dispatchEvent(new CustomEvent("projectAvis:resultShare",{detail:{house:currentWinningHouse,method:"download"}}));
+          }
+        }catch(e){
+          if(e && e.name==="AbortError"){ note.textContent="Sharing cancelled."; return; }
+          note.textContent=e.message||"The share card could not be prepared. Please try again.";
+        }
+      }
+
       async function downloadHouseWallpaper() {
         const note=document.getElementById("wallpaper-note");
         if(!currentWinningHouse){ note.textContent="Complete the Trial first."; return; }
@@ -676,6 +734,7 @@ https://racrawfordauthor.com/aerie/trial.html`;
         }catch(e){ note.textContent="The wallpaper could not be prepared. Please try again."; }
       }
 
+      document.getElementById("share-house-card").addEventListener("click",shareHouseCard);
       document.getElementById("download-wallpaper").addEventListener("click",downloadHouseWallpaper);
       document.querySelectorAll(".reward-link").forEach(link=>link.addEventListener("click",()=>document.dispatchEvent(new CustomEvent("projectAvis:rewardClick",{detail:{reward:link.dataset.reward,house:currentWinningHouse}}))));
 
