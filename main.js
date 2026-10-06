@@ -1,3 +1,12 @@
+// Project Avis funnel analytics
+(function loadProjectAvisAnalytics(){
+  if(document.querySelector('script[src*="analytics.js"]')) return;
+  const s=document.createElement('script');
+  s.src='analytics.js?v=20261006';
+  s.defer=true;
+  document.head.appendChild(s);
+})();
+
 // Google Analytics 4
 (function installGoogleAnalytics() {
   const measurementId = 'G-BEB2CGY758';
