@@ -544,73 +544,98 @@ https://racrawfordauthor.com/aerie/trial.html`;
         const selectedSigil = houseSigils[house] ? await imageToDataUrl(houseSigils[house]) : "";
         const houseNames = ["Crow", "Owl", "Hawk", "Falcon", "Swan", "Raven"];
         const crestData = await Promise.all(houseNames.map(item => imageToDataUrl(houseSigils[item])));
+        const crestDefs = crestData.map((_, index) => {
+          const x = 214 + (index * 139);
+          const cx = x + 27;
+          return '<clipPath id="miniClip' + index + '"><circle cx="' + cx + '" cy="690" r="27"/></clipPath>';
+        }).join("");
         const crestMarkup = crestData.map((data, index) => {
-          const x = 217 + (index * 138);
-          const cx = x + 26;
-          return `<circle cx="${cx}" cy="692" r="35" fill="none" stroke="#9a6b28" stroke-width="1" opacity=".72"/>
-            <path d="M${x - 4} 692H${x + 56}" stroke="#6a471d" stroke-width=".7" opacity=".55"/>
-            <image href="${data}" x="${x}" y="666" width="52" height="52" preserveAspectRatio="xMidYMid meet"/>
-            <text x="${cx}" y="744" class="crest-label" text-anchor="middle">${houseNames[index]}</text>`;
+          const x = 214 + (index * 139);
+          const cx = x + 27;
+          const active = houseNames[index] === house;
+          return '<g>' +
+            '<circle cx="' + cx + '" cy="690" r="' + (active ? 38 : 35) + '" fill="#f1e0bd" stroke="' + (active ? '#6a3f13' : '#9a6b28') + '" stroke-width="' + (active ? 2.2 : 1.1) + '"/>' +
+            '<circle cx="' + cx + '" cy="690" r="31" fill="none" stroke="#3e2813" stroke-width=".7" opacity=".78"/>' +
+            '<image href="' + data + '" x="' + x + '" y="663" width="54" height="54" preserveAspectRatio="xMidYMid slice" clip-path="url(#miniClip' + index + ')"/>' +
+            '<text x="' + cx + '" y="744" class="crest-label" text-anchor="middle">' + houseNames[index] + '</text>' +
+            '</g>';
         }).join("");
 
         return `<svg xmlns="http://www.w3.org/2000/svg" width="1123" height="794" viewBox="0 0 1123 794">
           <defs>
-            <radialGradient id="paper" cx="50%" cy="42%" r="75%">
-              <stop offset="0%" stop-color="#fffaf0"/>
-              <stop offset="70%" stop-color="#ead9b9"/>
-              <stop offset="100%" stop-color="#c5a671"/>
+            <radialGradient id="paper" cx="50%" cy="40%" r="76%">
+              <stop offset="0%" stop-color="#fff9ec"/>
+              <stop offset="68%" stop-color="#ead6b1"/>
+              <stop offset="100%" stop-color="#c5a36d"/>
             </radialGradient>
-            <filter id="shadow"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#2b1908" flood-opacity=".25"/></filter>
-            <filter id="paper-grain" x="-10%" y="-10%" width="120%" height="120%">
-              <feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="3" seed="7" result="noise"/>
-              <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
-              <feComponentTransfer in="mono" result="faded"><feFuncA type="table" tableValues="0 .10"/></feComponentTransfer>
-            </filter>
+            <linearGradient id="inkFade" x1="0" x2="1"><stop stop-color="#2c1b0d" stop-opacity=".26"/><stop offset=".5" stop-color="#2c1b0d" stop-opacity=".05"/><stop offset="1" stop-color="#2c1b0d" stop-opacity=".26"/></linearGradient>
+            <filter id="shadow"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#2b1908" flood-opacity=".28"/></filter>
+            <filter id="grain" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" seed="5"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 .11"/></feComponentTransfer></filter>
+            <clipPath id="heroClip"><circle cx="561.5" cy="274" r="61"/></clipPath>
+            ${crestDefs}
             <style>
               .small{font-family:Georgia,serif;font-size:15px;letter-spacing:5px;fill:#5b3b16}
               .title{font-family:Georgia,serif;font-size:49px;font-weight:700;fill:#20160d}
-              .body{font-family:Georgia,serif;font-size:22px;fill:#43301b}
+              .body{font-family:Georgia,serif;font-size:21px;fill:#43301b}
               .name{font-family:Georgia,serif;font-size:${nameFontSize}px;font-style:italic;fill:#1a120b}
               .house{font-family:Georgia,serif;font-size:31px;font-weight:700;fill:#5d3511}
               .motto{font-family:Georgia,serif;font-size:17px;font-style:italic;letter-spacing:3px;fill:#6a471d}
               .lore{font-family:Georgia,serif;font-size:${loreFontSize}px;fill:#43301b}
               .crest-label{font-family:Georgia,serif;font-size:11px;letter-spacing:1.5px;fill:#5b3b16}
-              .fine{font-family:Georgia,serif;font-size:14px;fill:#624727}
+              .fine{font-family:Georgia,serif;font-size:13px;fill:#624727}
             </style>
           </defs>
           <rect width="1123" height="794" fill="url(#paper)"/>
-          <rect width="1123" height="794" fill="#6b4a22" filter="url(#paper-grain)" opacity=".38"/>
+          <rect width="1123" height="794" fill="#765224" filter="url(#grain)" opacity=".42"/>
 
-          <rect x="18" y="18" width="1087" height="758" rx="4" fill="none" stroke="#21150b" stroke-width="3"/>
-          <rect x="29" y="29" width="1065" height="736" rx="2" fill="none" stroke="#9a6b28" stroke-width="2"/>
-          <rect x="41" y="41" width="1041" height="712" fill="none" stroke="#3e2813" stroke-width="1"/>
+          <rect x="16" y="16" width="1091" height="762" rx="5" fill="none" stroke="#21150b" stroke-width="3"/>
+          <rect x="27" y="27" width="1069" height="740" rx="3" fill="none" stroke="#9a6b28" stroke-width="2"/>
+          <rect x="40" y="40" width="1043" height="714" fill="none" stroke="#3e2813" stroke-width="1"/>
 
-          <path d="M52 52c58 3 94 26 121 69-35-17-66-20-105-8 35 14 60 37 76 68-35-26-62-37-92-39M1071 52c-58 3-94 26-121 69 35-17 66-20 105-8-35 14-60 37-76 68 35-26 62-37 92-39" fill="none" stroke="#2c1b0d" stroke-width="2.2" opacity=".9"/>
-          <path d="M52 742c58-3 94-26 121-69-35 17-66 20-105 8 35-14 60-37 76-68-35 26-62 37-92 39M1071 742c-58-3-94-26-121-69 35 17 66 20 105 8-35-14-60-37-76-68 35 26 62 37 92 39" fill="none" stroke="#2c1b0d" stroke-width="2.2" opacity=".9"/>
-          <path d="M58 105H342M781 105H1065M58 632H1065" stroke="#9a6b28" stroke-width="1"/>
+          <!-- feathered corner ornament -->
+          <g fill="none" stroke="#2b190e" stroke-linecap="round">
+            <path d="M44 44C102 48 141 70 171 113C132 94 101 94 63 108C99 120 126 145 145 178C108 151 79 139 45 145" stroke-width="2.4"/>
+            <path d="M47 51C72 83 78 110 72 140M64 63C92 91 102 114 104 144M84 77C112 96 128 116 137 142" stroke-width="1"/>
+            <path d="M1079 44C1021 48 982 70 952 113C991 94 1022 94 1060 108C1024 120 997 145 978 178C1015 151 1044 139 1078 145" stroke-width="2.4"/>
+            <path d="M1076 51C1051 83 1045 110 1051 140M1059 63C1031 91 1021 114 1019 144M1039 77C1011 96 995 116 986 142" stroke-width="1"/>
+            <path d="M44 750C102 746 141 724 171 681C132 700 101 700 63 686C99 674 126 649 145 616C108 643 79 655 45 649" stroke-width="2.4"/>
+            <path d="M1079 750C1021 746 982 724 952 681C991 700 1022 700 1060 686C1024 674 997 649 978 616C1015 643 1044 655 1078 649" stroke-width="2.4"/>
+          </g>
 
-          <path d="M86 321c61-35 117-48 178-42M1037 321c-61-35-117-48-178-42M94 344c52-20 99-28 145-23M1029 344c-52-20-99-28-145-23" fill="none" stroke="#6b4a22" stroke-width="1" opacity=".30"/>
-          <path d="M112 300l10-7 9 7 11-6 11 7M1011 300l-10-7-9 7-11-6-11 7" fill="none" stroke="#6b4a22" stroke-width="1" opacity=".45"/>
+          <!-- etched Aethelmar landscape -->
+          <g fill="none" stroke="#3c2917" stroke-width="1" opacity=".24">
+            <path d="M64 330L98 295L128 316L164 268L196 305L228 255L256 296L291 277L324 320"/>
+            <path d="M799 319L830 281L862 301L897 244L931 291L969 257L1007 303L1055 268"/>
+            <path d="M70 351C131 331 193 335 254 351C286 360 319 360 348 353"/>
+            <path d="M775 351C838 332 901 335 966 353C997 361 1026 360 1054 352"/>
+            <path d="M82 307V257H110V307M91 257V235H101V257M123 307V242H151V307M133 242V216H141V242M165 307V269H188V307"/>
+            <path d="M910 332C930 307 954 296 982 297C1013 298 1036 308 1051 332M916 332V309M1046 332V309M942 305V332M1020 305V332"/>
+            <path d="M934 311Q982 268 1030 311"/>
+            <path d="M86 365H328M795 365H1042"/>
+          </g>
 
-          <text x="561.5" y="88" class="small" text-anchor="middle">THE AERIE DOMINION</text>
-          <text x="561.5" y="153" class="title" text-anchor="middle">Trial of the Houses</text>
-          <text x="561.5" y="188" class="small" text-anchor="middle">AETHELMAR ACADEMY · OFFICIAL RECORD</text>
+          <text x="561.5" y="82" class="small" text-anchor="middle">THE AERIE DOMINION</text>
+          <path d="M176 93H359M764 93H947" stroke="#9a6b28" stroke-width=".9"/>
+          <text x="561.5" y="145" class="title" text-anchor="middle">Trial of the Houses</text>
+          <text x="561.5" y="180" class="small" text-anchor="middle">AETHELMAR ACADEMY · OFFICIAL RECORD</text>
 
-          ${selectedSigil ? `<circle cx="561.5" cy="270" r="74" fill="rgba(154,107,40,.06)" stroke="#9a6b28" stroke-width="1.5"/>
-          <circle cx="561.5" cy="270" r="65" fill="none" stroke="#3e2813" stroke-width=".8"/>
-          <image href="${selectedSigil}" x="495" y="216" width="133" height="108" preserveAspectRatio="xMidYMid meet" filter="url(#shadow)"/>` : `<circle cx="561.5" cy="270" r="67" fill="none" stroke="#9a6b28" stroke-width="2"/><text x="561.5" y="279" class="small" text-anchor="middle">ACADEMY SEAL</text>`}
+          <circle cx="561.5" cy="274" r="77" fill="#ead6b1" stroke="#6a471d" stroke-width="2.1"/>
+          <circle cx="561.5" cy="274" r="68" fill="none" stroke="#21150b" stroke-width=".9"/>
+          <circle cx="561.5" cy="274" r="64" fill="none" stroke="#9a6b28" stroke-width=".8"/>
+          ${selectedSigil ? `<image href="${selectedSigil}" x="500.5" y="213" width="122" height="122" preserveAspectRatio="xMidYMid slice" clip-path="url(#heroClip)" filter="url(#shadow)"/>` : ""}
+          <path d="M561.5 191l8 14h-16zM561.5 357l8-14h-16zM478 274l14-8v16zM645 274l-14-8v16z" fill="#9a6b28"/>
 
-          <text x="561.5" y="366" class="body" text-anchor="middle">This record certifies that</text>
-          <text x="561.5" y="416" class="name" text-anchor="middle">${safeName}</text>
-          <path d="M245 432H878" stroke="#6a471d" stroke-width="1"/>
-          <text x="561.5" y="468" class="body" text-anchor="middle">has completed the Trial and been recognised by</text>
-          <text x="561.5" y="514" class="house" text-anchor="middle">HOUSE ${safeHouse.toUpperCase()}</text>
-          <text x="561.5" y="544" class="motto" text-anchor="middle">${safeMotto}</text>
-          <text x="561.5" y="574" class="lore" text-anchor="middle">${safeLore}</text>
+          <text x="561.5" y="386" class="body" text-anchor="middle">This record certifies that</text>
+          <text x="561.5" y="430" class="name" text-anchor="middle">${safeName}</text>
+          <path d="M236 447H887" stroke="#6a471d" stroke-width="1"/>
+          <text x="561.5" y="480" class="body" text-anchor="middle">has completed the Trial and been recognised by</text>
+          <text x="561.5" y="522" class="house" text-anchor="middle">HOUSE ${safeHouse.toUpperCase()}</text>
+          <text x="561.5" y="552" class="motto" text-anchor="middle">${safeMotto}</text>
+          <text x="561.5" y="582" class="lore" text-anchor="middle">${safeLore}</text>
 
-          <path d="M115 607H345M778 607H1008" stroke="#9a6b28" stroke-width=".9"/>
-          <text x="105" y="628" class="fine">Date recorded: ${safeDate}</text>
-          <text x="1018" y="628" class="fine" text-anchor="end">Hall of Chronicles · Record Verified</text>
+          <path d="M80 613H342M781 613H1043" stroke="#9a6b28" stroke-width="1"/>
+          <text x="82" y="633" class="fine">Date recorded: ${safeDate}</text>
+          <text x="1041" y="633" class="fine" text-anchor="end">Hall of Chronicles · Record Verified</text>
 
           ${crestMarkup}
         </svg>`;
