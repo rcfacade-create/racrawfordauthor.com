@@ -540,73 +540,97 @@ https://racrawfordauthor.com/aerie/trial.html`;
         const record = houseRecords[house] || { motto: "ONE HOUSE · ONE MARK · ONE PATH", lore: "The Hall of Chronicles records every path." };
         const safeMotto = escapeXml(record.motto);
         const safeLore = escapeXml(record.lore);
-        const loreFontSize = record.lore.length > 82 ? 12 : 13;
-        const selectedSigil = houseSigils[house] ? await imageToDataUrl(houseSigils[house]) : "";
-        const houseNames = ["Crow", "Owl", "Hawk", "Falcon", "Swan", "Raven"];
+        const houseNames = ["Crow","Owl","Hawk","Falcon","Swan","Raven"];
         const crestData = await Promise.all(houseNames.map(item => imageToDataUrl(houseSigils[item])));
-        const crestMarkup = crestData.map((data, index) => {
-          const x = 205 + (index * 143);
-          const active = houseNames[index] === house;
-          return `<g>
-            <rect x="${x}" y="657" width="58" height="58" rx="2" fill="#efe2c8" stroke="${active ? '#5d3511' : '#9a6b28'}" stroke-width="${active ? '2' : '1'}"/>
-            <image href="${data}" x="${x + 4}" y="661" width="50" height="50" preserveAspectRatio="xMidYMid meet"/>
-            <text x="${x + 29}" y="738" class="crest-label" text-anchor="middle">${houseNames[index]}</text>
+        const selectedSigil = crestData[houseNames.indexOf(house)] || "";
+        const accent = ({Crow:"#1b2b46",Owl:"#315d7a",Hawk:"#8a5c1e",Falcon:"#295f8f",Swan:"#4d86a8",Raven:"#18243c"})[house] || "#295f8f";
+        const crestMarkup = crestData.map((data,index)=>{
+          const x=112+(index*178);
+          const active=houseNames[index]===house;
+          return `<g opacity="${active?1:.82}">
+            <circle cx="${x}" cy="705" r="${active?42:37}" fill="#f5ead4" stroke="${active?accent:"#6b4a22"}" stroke-width="${active?3:1.4}"/>
+            <circle cx="${x}" cy="705" r="${active?35:31}" fill="${active?accent:"#ead8b8"}" opacity="${active?.9:.5}"/>
+            <image href="${data}" x="${x-(active?31:28)}" y="${705-(active?31:28)}" width="${active?62:56}" height="${active?62:56}" preserveAspectRatio="xMidYMid meet"/>
+            <text x="${x}" y="766" class="crest-label" text-anchor="middle">${houseNames[index].toUpperCase()}</text>
           </g>`;
         }).join("");
 
-        return `<svg xmlns="http://www.w3.org/2000/svg" width="1123" height="794" viewBox="0 0 1123 794">
+        const feather=(x,y,s,flip=1)=>`<g transform="translate(${x} ${y}) scale(${s*flip} ${s})">
+          <path d="M0 0 C24 -52 62 -72 105 -82 C72 -47 42 -18 11 23 C54 2 83 -5 116 -3 C74 18 45 38 13 64 C56 54 83 58 106 70 C64 82 35 94 4 121 C15 79 15 38 0 0Z" fill="#142238" stroke="#6d4b21" stroke-width="2"/>
+          <path d="M6 8 C35 -10 62 -29 96 -51 M11 28 C46 17 73 7 103 6 M11 51 C43 45 69 47 95 55 M9 74 C39 73 62 80 84 92" fill="none" stroke="#c09345" stroke-width="1.4"/>
+        </g>`;
+
+        const castle=`<g opacity=".86" stroke="#2d251d" fill="none" stroke-width="1.45">
+          <path d="M52 420 L52 248 L72 248 L72 197 L90 197 L90 238 L116 238 L116 168 L136 168 L136 232 L160 232 L160 206 L179 206 L179 250 L204 250 L204 190 L224 190 L224 241 L250 241 L250 214 L268 214 L268 276 L296 276 L296 236 L316 236 L316 334"/>
+          <path d="M52 420 Q90 392 122 420 Q155 386 188 420 Q220 390 252 420 Q282 396 316 420"/>
+          <path d="M40 430 C92 408 133 412 182 430 C226 412 275 415 330 435"/>
+          <path d="M64 275 h14 m16 -26 h14 m34 0 h14 m30 24 h14 m24 -18 h14 m27 33 h14"/>
+          <path d="M84 420 v-58 h33 v58 M144 420 v-78 h38 v78 M211 420 v-61 h34 v61 M263 420 v-50 h31 v50"/>
+        </g>`;
+        const mountains=`<g opacity=".82" fill="none" stroke="#3a3128" stroke-width="1.35">
+          <path d="M760 422 L833 303 L866 349 L930 239 L995 347 L1042 289 L1102 421"/>
+          <path d="M833 303 l20 42 l13 4 l18 24 M930 239 l25 61 l17 11 l23 36 M1042 289 l18 41 l18 14"/>
+          <path d="M748 432 C823 411 897 420 962 433 C1016 442 1062 430 1107 424"/>
+          <path d="M792 446 q21 -34 40 0 q18 -29 36 0 q20 -37 40 0 q18 -29 35 0 q20 -34 39 0 q17 -28 34 0 q20 -31 38 0"/>
+        </g>`;
+
+        return `<svg xmlns="http://www.w3.org/2000/svg" width="3508" height="2480" viewBox="0 0 1123 794">
           <defs>
-            <radialGradient id="paper" cx="50%" cy="45%" r="72%">
-              <stop offset="0%" stop-color="#fffaf1"/>
-              <stop offset="72%" stop-color="#efe1c7"/>
-              <stop offset="100%" stop-color="#d4ba8c"/>
+            <radialGradient id="paper" cx="50%" cy="44%" r="74%">
+              <stop offset="0%" stop-color="#fff8e8"/><stop offset="64%" stop-color="#f0ddba"/><stop offset="100%" stop-color="#cda873"/>
             </radialGradient>
             <filter id="grain" x="-10%" y="-10%" width="120%" height="120%">
-              <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="11"/>
-              <feColorMatrix type="saturate" values="0"/>
-              <feComponentTransfer><feFuncA type="table" tableValues="0 .035"/></feComponentTransfer>
+              <feTurbulence type="fractalNoise" baseFrequency=".55" numOctaves="3" seed="17"/>
+              <feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 .055"/></feComponentTransfer>
             </filter>
             <style>
-              .small{font-family:Georgia,serif;font-size:14px;letter-spacing:5px;fill:#5b3b16}
-              .title{font-family:Georgia,serif;font-size:48px;font-weight:700;fill:#20160d}
-              .body{font-family:Georgia,serif;font-size:21px;fill:#43301b}
-              .name{font-family:Georgia,serif;font-size:${nameFontSize}px;font-style:italic;fill:#1a120b}
-              .house{font-family:Georgia,serif;font-size:31px;font-weight:700;fill:#5d3511}
-              .motto{font-family:Georgia,serif;font-size:16px;font-style:italic;letter-spacing:3px;fill:#6a471d}
-              .lore{font-family:Georgia,serif;font-size:${loreFontSize}px;fill:#43301b}
-              .crest-label{font-family:Georgia,serif;font-size:11px;letter-spacing:1.2px;fill:#5b3b16}
-              .fine{font-family:Georgia,serif;font-size:13px;fill:#624727}
+              .over{font-family:Georgia,serif;font-size:12px;letter-spacing:4px;fill:#4d351a}
+              .title{font-family:Georgia,serif;font-size:45px;font-weight:700;fill:#17120d}
+              .sub{font-family:Georgia,serif;font-size:11px;letter-spacing:3px;fill:#4b351c}
+              .body{font-family:Georgia,serif;font-size:17px;fill:#342619}
+              .name{font-family:Georgia,serif;font-size:${nameFontSize}px;font-style:italic;font-weight:700;fill:#17120d}
+              .house{font-family:Georgia,serif;font-size:31px;font-weight:700;fill:${accent}}
+              .motto{font-family:Georgia,serif;font-size:14px;font-style:italic;letter-spacing:2px;fill:#5f421f}
+              .lore{font-family:Georgia,serif;font-size:11px;font-style:italic;fill:#4a3724}
+              .fine{font-family:Georgia,serif;font-size:10px;fill:#49351f}
+              .crest-label{font-family:Georgia,serif;font-size:9px;letter-spacing:1.25px;font-weight:700;fill:#372718}
             </style>
           </defs>
-
           <rect width="1123" height="794" fill="url(#paper)"/>
-          <rect width="1123" height="794" fill="#8a642f" filter="url(#grain)" opacity=".22"/>
+          <rect width="1123" height="794" fill="#79572f" filter="url(#grain)" opacity=".20"/>
+          <rect x="10" y="10" width="1103" height="774" fill="none" stroke="#21170f" stroke-width="2.2"/>
+          <rect x="17" y="17" width="1089" height="760" fill="none" stroke="#b28039" stroke-width="2"/>
+          <rect x="25" y="25" width="1073" height="744" fill="none" stroke="#2d2117" stroke-width=".9"/>
+          ${feather(38,55,.56,1)}${feather(1085,55,.56,-1)}${feather(39,740,.47,1)}${feather(1084,740,.47,-1)}
+          <g opacity=".72">${castle}${mountains}</g>
+          <path d="M332 74 H468 M655 74 H791" stroke="#765126" stroke-width="1"/>
+          <text x="561.5" y="70" class="over" text-anchor="middle">THE AERIE DOMINION</text>
+          <text x="561.5" y="118" class="title" text-anchor="middle">Trial of the Houses</text>
+          <text x="561.5" y="144" class="sub" text-anchor="middle">AETHELMAR ACADEMY · OFFICIAL RECORD</text>
 
-          <rect x="18" y="18" width="1087" height="758" fill="none" stroke="#2d1d0f" stroke-width="2"/>
-          <rect x="27" y="27" width="1069" height="740" fill="none" stroke="#9a6b28" stroke-width="1.6"/>
-          <rect x="37" y="37" width="1049" height="720" fill="none" stroke="#4a3218" stroke-width=".8"/>
+          <g transform="translate(561 244)">
+            <circle r="71" fill="#e9d2a9" stroke="#6b4a22" stroke-width="2.2"/>
+            <circle r="62" fill="${accent}" opacity=".93" stroke="#c29449" stroke-width="3"/>
+            <circle r="55" fill="#f0e1c7" opacity=".16"/>
+            <image href="${selectedSigil}" x="-53" y="-53" width="106" height="106" preserveAspectRatio="xMidYMid meet"/>
+          </g>
 
-          <path d="M62 103H344M779 103H1061" stroke="#9a6b28" stroke-width="1"/>
-          <text x="561.5" y="82" class="small" text-anchor="middle">THE AERIE DOMINION</text>
-          <text x="561.5" y="146" class="title" text-anchor="middle">Trial of the Houses</text>
-          <text x="561.5" y="180" class="small" text-anchor="middle">AETHELMAR ACADEMY · OFFICIAL RECORD</text>
+          <text x="561.5" y="340" class="body" text-anchor="middle">This record certifies that</text>
+          <text x="561.5" y="383" class="name" text-anchor="middle">${safeName}</text>
+          <path d="M323 396 H800" stroke="#6d4b21" stroke-width="1.2"/>
+          <text x="561.5" y="426" class="body" text-anchor="middle">has completed the Trial and been recognised by</text>
+          <text x="561.5" y="463" class="house" text-anchor="middle">HOUSE ${safeHouse.toUpperCase()}</text>
+          <text x="561.5" y="488" class="motto" text-anchor="middle">${safeMotto}</text>
+          <text x="561.5" y="513" class="lore" text-anchor="middle">${safeLore}</text>
 
-          <rect x="496" y="205" width="131" height="131" rx="3" fill="#efe2c8" stroke="#8b5b20" stroke-width="1.5"/>
-          ${selectedSigil ? `<image href="${selectedSigil}" x="502" y="211" width="119" height="119" preserveAspectRatio="xMidYMid meet"/>` : ""}
+          <g class="fine">
+            <text x="92" y="540">Date recorded:</text><text x="92" y="556">${safeDate}</text>
+            <path d="M84 566 H213" stroke="#6d4b21"/>
+            <text x="1032" y="540" text-anchor="end">Hall of Chronicles</text><text x="1032" y="556" text-anchor="end">Record Verified</text>
+            <path d="M910 566 H1040" stroke="#6d4b21"/>
+          </g>
 
-          <text x="561.5" y="382" class="body" text-anchor="middle">This record certifies that</text>
-          <text x="561.5" y="428" class="name" text-anchor="middle">${safeName}</text>
-          <path d="M243 447H880" stroke="#6a471d" stroke-width="1"/>
-
-          <text x="561.5" y="482" class="body" text-anchor="middle">has completed the Trial and been recognised by</text>
-          <text x="561.5" y="525" class="house" text-anchor="middle">HOUSE ${safeHouse.toUpperCase()}</text>
-          <text x="561.5" y="554" class="motto" text-anchor="middle">${safeMotto}</text>
-          <text x="561.5" y="583" class="lore" text-anchor="middle">${safeLore}</text>
-
-          <path d="M75 619H335M788 619H1048" stroke="#9a6b28" stroke-width=".9"/>
-          <text x="78" y="642" class="fine">Date recorded: ${safeDate}</text>
-          <text x="1045" y="642" class="fine" text-anchor="end">Hall of Chronicles · Record Verified</text>
-
+          <path d="M70 610 C210 578 335 588 455 612 M668 612 C790 588 915 580 1053 610" fill="none" stroke="#6d4b21" stroke-width="1"/>
           ${crestMarkup}
         </svg>`;
       }
