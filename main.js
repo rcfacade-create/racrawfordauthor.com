@@ -2,25 +2,9 @@
 (function loadProjectAvisAnalytics(){
   if(document.querySelector('script[src*="analytics.js"]')) return;
   const s=document.createElement('script');
-  s.src='analytics.js?v=20261006';
+  s.src='/analytics.js?v=20261008';
   s.defer=true;
   document.head.appendChild(s);
-})();
-
-// Google Analytics 4
-(function installGoogleAnalytics() {
-  const measurementId = 'G-BEB2CGY758';
-  if (document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${measurementId}"]`)) return;
-
-  const script = document.createElement('script');
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
-  document.head.appendChild(script);
-
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = window.gtag || function gtag(){ window.dataLayer.push(arguments); };
-  window.gtag('js', new Date());
-  window.gtag('config', measurementId);
 })();
 
 const layers = document.querySelectorAll('.feathers');

@@ -45,63 +45,28 @@
     </div>
     <section class="certificate-stage" id="certificate-stage" aria-label="Blank Trial of the Houses certificate"></section>
   </main>
+<script src="../house-journey.js?v=20261008"></script>
+<script src="../house-rewards.js?v=20261008"></script>
+<script src="../analytics.js?v=20261008"></script>
 <script>
-const houseRecords={
-  Crow:{motto:"UMBRAE OMNIA VIDENT",lore:"Crows see what others miss, and carry truth through shadow.",accent:"#14233b"},
-  Owl:{motto:"SAPIENTIA ANTE OMNIA",lore:"Owls seek knowledge beyond the seen, and guard the hidden truths.",accent:"#315d7a"},
-  Hawk:{motto:"FERRUM ET HONOR",lore:"Hawks rise with vision, and carry the future in freedom.",accent:"#8a5b1c"},
-  Falcon:{motto:"PER CAELUM VINCIMUS",lore:"Falcons move with purpose, and fly far without fear.",accent:"#2c6794"},
-  Swan:{motto:"LUX PER VERITATEM",lore:"Swans lead with grace, and prove that true strength is serenity.",accent:"#4f86a7"},
-  Raven:{motto:"VERITAS IN TENEBRIS",lore:"Ravens bear memory, keep what is broken, and return to be remembered.",accent:"#17233a"}
-};
-const houses=["Crow","Owl","Hawk","Falcon","Swan","Raven"];
-const sigils={Crow:"assets/sigils/crow.png",Owl:"assets/sigils/owl.png",Hawk:"assets/sigils/hawk.png",Falcon:"assets/sigils/falcon.png",Swan:"assets/sigils/swan.png",Raven:"assets/sigils/raven.png"};
-async function imageToDataUrl(path){
-  const r=await fetch(path,{cache:"no-store"}); if(!r.ok) throw new Error("Unable to load House artwork.");
-  const b=await r.blob(); return await new Promise((res,rej)=>{const x=new FileReader();x.onload=()=>res(x.result);x.onerror=rej;x.readAsDataURL(b)});
+const select = document.getElementById("blank-house"), stage = document.getElementById("certificate-stage");
+const chosen = window.ProjectAvisJourney.getHouse();
+if (chosen) select.value = chosen;
+async function refresh() {
+  try { stage.innerHTML = await window.ProjectAvisRewards.buildCertificateSvg("", select.value, ""); }
+  catch (_) { stage.textContent = "Unable to load certificate artwork. Please try again."; }
 }
-function esc(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&apos;"}[c]))}
-async function buildCertificate(house){
-  const rec=houseRecords[house], accent=rec.accent;
-  const data=await Promise.all(houses.map(h=>imageToDataUrl(sigils[h])));
-  const chosen=data[houses.indexOf(house)];
-  const footer=data.map((src,i)=>{const x=116+i*178, active=houses[i]===house;return `
-    <g opacity="${active?1:.84}">
-      <circle cx="${x}" cy="704" r="${active?43:37}" fill="#f1dfbf" stroke="${active?accent:"#725129"}" stroke-width="${active?3:1.4}"/>
-      <circle cx="${x}" cy="704" r="${active?36:31}" fill="${active?accent:"#d8c39f"}" opacity="${active?.95:.42}"/>
-      <image href="${src}" x="${x-(active?31:27)}" y="${704-(active?31:27)}" width="${active?62:54}" height="${active?62:54}" preserveAspectRatio="xMidYMid meet"/>
-      <text x="${x}" y="766" class="seal-label" text-anchor="middle">${houses[i].toUpperCase()}</text>
-    </g>`}).join("");
-  const city=house==="Swan"
-    ? '<path d="M44 417 C80 381 101 351 129 351 C159 351 171 379 198 379 C225 379 239 350 269 350 C298 350 313 377 345 414 M58 416 V299 M92 416 V271 M127 416 V318 M165 416 V253 M202 416 V313 M241 416 V286 M281 416 V321 M318 416 V277" />'
-    : '<path d="M43 420 L43 262 L67 262 L67 211 L88 211 L88 251 L116 251 L116 177 L139 177 L139 242 L165 242 L165 205 L185 205 L185 257 L212 257 L212 191 L236 191 L236 248 L266 248 L266 219 L286 219 L286 279 L318 279 L318 420 M43 420 Q86 386 126 420 Q165 383 205 420 Q244 388 285 420 Q304 404 325 420"/>';
-  const landscape=house==="Swan"
-    ? '<path d="M30 440 C113 410 196 410 279 441 C362 471 447 465 525 434 M697 438 C782 409 862 415 942 445 C1008 469 1063 458 1104 438"/><path d="M26 455 Q62 430 98 456 Q132 425 166 456 Q204 420 241 456 Q278 429 315 456 M804 456 Q842 424 879 456 Q915 429 950 456 Q987 422 1024 456 Q1058 431 1092 456"/>'
-    : '<path d="M743 423 L817 313 L854 353 L923 245 L994 351 L1046 293 L1105 424 M817 313 l19 38 l18 6 l18 20 M923 245 l28 61 l15 10 l27 36 M1046 293 l19 40 l18 13"/>';
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="3508" height="2480" viewBox="0 0 1123 794">
-  <defs>
-    <radialGradient id="paper" cx="50%" cy="43%" r="75%"><stop offset="0%" stop-color="#fff7e6"/><stop offset="66%" stop-color="#efd9b5"/><stop offset="100%" stop-color="#caa56e"/></radialGradient>
-    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".6" numOctaves="3" seed="29"/><feComponentTransfer><feFuncA type="table" tableValues="0 .055"/></feComponentTransfer></filter>
-    <style>.over{font:12px Georgia;letter-spacing:4px;fill:#4e351a}.title{font:bold 46px Georgia;fill:#17110b}.sub{font:11px Georgia;letter-spacing:3px;fill:#51391e}.body{font:17px Georgia;fill:#312217}.house{font:bold 31px Georgia;fill:${accent}}.motto{font:italic 14px Georgia;letter-spacing:2px;fill:#60441f}.lore{font:italic 11px Georgia;fill:#49351f}.fine{font:10px Georgia;fill:#49351f}.seal-label{font:bold 9px Georgia;letter-spacing:1.2px;fill:#352516}</style>
-  </defs>
-  <rect width="1123" height="794" fill="url(#paper)"/><rect width="1123" height="794" filter="url(#grain)" opacity=".26"/>
-  <rect x="9" y="9" width="1105" height="776" fill="none" stroke="#1d150f" stroke-width="2.3"/><rect x="17" y="17" width="1089" height="760" fill="none" stroke="#b78338" stroke-width="2"/><rect x="25" y="25" width="1073" height="744" fill="none" stroke="#2c2016"/>
-  <path d="M22 87 C76 57 99 33 149 25 C120 51 104 72 95 99 C126 73 165 61 204 62 C166 83 137 107 116 139 C154 119 187 117 218 126" fill="none" stroke="#182338" stroke-width="13" stroke-linecap="round" opacity=".93"/>
-  <path d="M1101 87 C1047 57 1024 33 974 25 C1003 51 1019 72 1028 99 C997 73 958 61 919 62 C957 83 986 107 1007 139 C969 119 936 117 905 126" fill="none" stroke="#182338" stroke-width="13" stroke-linecap="round" opacity=".93"/>
-  <g opacity=".72" stroke="#34281d" fill="none" stroke-width="1.4">${city}${landscape}</g>
-  <path d="M335 74H470 M653 74H788" stroke="#775328"/>
-  <text x="561.5" y="70" class="over" text-anchor="middle">THE AERIE DOMINION</text><text x="561.5" y="120" class="title" text-anchor="middle">Trial of the Houses</text><text x="561.5" y="145" class="sub" text-anchor="middle">AETHELMAR ACADEMY · OFFICIAL RECORD</text>
-  <g transform="translate(561.5 245)"><circle r="73" fill="#ecd5ac" stroke="#6d4c25" stroke-width="2"/><circle r="63" fill="${accent}" stroke="#bf9149" stroke-width="3"/><image href="${chosen}" x="-54" y="-54" width="108" height="108" preserveAspectRatio="xMidYMid meet"/></g>
-  <text x="561.5" y="342" class="body" text-anchor="middle">This record certifies that</text><path d="M325 393H798" stroke="#6b4a22"/><text x="561.5" y="424" class="body" text-anchor="middle">has completed the Trial and been recognised by</text><text x="561.5" y="463" class="house" text-anchor="middle">HOUSE ${esc(house).toUpperCase()}</text><text x="561.5" y="488" class="motto" text-anchor="middle">${esc(rec.motto)}</text><text x="561.5" y="514" class="lore" text-anchor="middle">${esc(rec.lore)}</text>
-  <text x="88" y="543" class="fine">Date recorded:</text><text x="88" y="558" class="fine">____________________</text><text x="1035" y="543" text-anchor="end" class="fine">Hall of Chronicles</text><text x="1035" y="558" text-anchor="end" class="fine">Record Verified</text>
-  <path d="M71 610 C214 579 337 589 455 612 M668 612 C790 588 913 580 1053 610" fill="none" stroke="#6b4a22"/>${footer}
-  </svg>`;
-}
-const select=document.getElementById("blank-house"),stage=document.getElementById("certificate-stage");
-async function refresh(){stage.innerHTML=await buildCertificate(select.value)}
-select.addEventListener("change",refresh);
-document.getElementById("download-blank").addEventListener("click",async()=>{const svg=await buildCertificate(select.value);const u=URL.createObjectURL(new Blob([svg],{type:"image/svg+xml;charset=utf-8"}));const a=document.createElement("a");a.href=u;a.download="trial-of-the-houses-"+select.value.toLowerCase()+"-blank-certificate.svg";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)});
-document.getElementById("print-blank").addEventListener("click",()=>window.print());
+select.addEventListener("change", refresh);
+document.getElementById("download-blank").addEventListener("click", async () => {
+  try {
+    const svg = await window.ProjectAvisRewards.buildCertificateSvg("", select.value, "");
+    window.ProjectAvisRewards.downloadSvg(svg, "trial-of-the-houses-" + select.value.toLowerCase() + "-blank-certificate.svg");
+    document.dispatchEvent(new CustomEvent("projectAvis:rewardDownload", {detail:{reward:"blank_certificate",house:select.value}}));
+  } catch (_) { stage.textContent = "Unable to download certificate. Please try again."; }
+});
+document.getElementById("print-blank").addEventListener("click", () => { window.print();
+  document.dispatchEvent(new CustomEvent("projectAvis:rewardPrint", {detail:{reward:"blank_certificate",house:select.value}}));
+});
 refresh();
 </script>
 </body></html>

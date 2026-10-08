@@ -9,15 +9,30 @@
     s.src="https://www.googletagmanager.com/gtag/js?id="+GA_ID;
     document.head.appendChild(s);
     gtag("js", new Date());
-    gtag("config", GA_ID);
+    const pageUrl = new URL(location.href);
+    pageUrl.searchParams.delete("session_id");
+    gtag("config", GA_ID, {page_location:pageUrl.href});
   }
 
-  const fire=(name,params={})=>{ try{ gtag("event",name,params); }catch(e){} };
+  const fire=(name,params={})=>{ try{ gtag("event",name,{
+    house:window.ProjectAvisJourney?.getHouse()||"unknown",
+    journey_source:window.ProjectAvisJourney?.getSource()||"direct",
+    referral_house:window.ProjectAvisJourney?.getReferralHouse()||"none",
+    ...params
+  }); }catch(e){} };
   const path=location.pathname;
 
   if (/chapter-one\.html$/.test(path)) fire("chapter_one_view",{content_name:"The War of Feather & Shadow - Chapter One"});
   if (/shop\.html$/.test(path)) fire("shop_view",{content_name:"Hemming's Provision Shop"});
   if (/aerie\/trial\.html$/.test(path)) fire("house_trial_view",{content_name:"Trial of the Houses"});
+
+  const returnParams = new URLSearchParams(location.search);
+  if (returnParams.has("session_id") && /\/downloads\//.test(path)) {
+    // A return URL is not proof of payment. Only a verified server webhook may record purchase.
+    fire("checkout_return", {payment_status:"unverified",source_page:path});
+  }
+  if (/free-house-starter\.html$/.test(path)) fire("house_starter_pack_view", {source_page:path});
+  if (returnParams.get("source") === "house_share") fire("house_share_referral", {source_page:path});
 
   const products={
     "dRmeVdbrd2A79cpfjf2Nq0j":{id:"WFAS-PB-DIRECT-002",name:"Book One Paperback",price:8.99},
@@ -31,6 +46,7 @@
     "00wbJ1brda2z0FT6MJ2Nq0d":{id:"AV-DH-FALCON-001",name:"House Falcon Digital Pack",price:2.99},
     "9B63cvdzla2z1JX1sp2Nq0e":{id:"AV-DH-HAWK-001",name:"House Hawk Digital Pack",price:2.99},
     "6oU28r7aX4IfgERb2Z2Nq0f":{id:"AV-DH-ALL-001",name:"Complete Houses Collection",price:9.99},
+    "00w28reDp3Eb9cpdb72Nq0i":{id:"AV-BM-ALL-001",name:"Six House Bookmark Set",price:8.50},
     "aFa5kDfHt0rZ60dc732Nq0g":{id:"AV-DM-001",name:"Aerie Dominion Map Pack",price:3.99},
     "28EdR97aXfmTewJdb72Nq0h":{id:"AV-DA-001",name:"Aethelmar Academy Student Pack",price:4.99}
   };
@@ -52,7 +68,7 @@
 
   document.addEventListener("submit",e=>{
     if(e.target.closest(".ml-embedded,.gilded-gazette-embed")){
-      fire("generate_lead",{lead_source:"Gilded Gazette",source_page:path});
+      fire("gazette_signup_submit",{lead_source:"Gilded Gazette",source_page:path});
     }
   },true);
 
@@ -61,4 +77,7 @@
   document.addEventListener("projectAvis:rewardDownload",e=>fire("house_reward_download",{reward:e.detail?.reward||"unknown",house:e.detail?.house||"unknown",source_page:path}));
   document.addEventListener("projectAvis:rewardClick",e=>fire("house_reward_click",{reward:e.detail?.reward||"unknown",house:e.detail?.house||"unknown",source_page:path}));
   document.addEventListener("projectAvis:resultShare",e=>fire("house_result_share",{house:e.detail?.house||"unknown",method:e.detail?.method||"unknown",source_page:path}));
+  document.addEventListener("projectAvis:resultCopy",e=>fire("house_result_caption_copy",{house:e.detail?.house||"unknown",source_page:path}));
+  document.addEventListener("projectAvis:rewardPrint",e=>fire("house_reward_print_open",{reward:e.detail?.reward||"unknown",house:e.detail?.house||"unknown",source_page:path}));
+  document.addEventListener("projectAvis:rewardError",e=>fire("house_reward_error",{reward:e.detail?.reward||"unknown",house:e.detail?.house||"unknown",source_page:path}));
 })();

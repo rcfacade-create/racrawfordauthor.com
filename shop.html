@@ -134,7 +134,8 @@
     ]
   }
   </script>
-<style>.direct-book-visual{margin:0 0 28px;padding:22px;border:1px solid rgba(200,163,90,.35);background:rgba(255,255,255,.02);display:grid;grid-template-columns:minmax(220px,360px) 1fr;gap:28px;align-items:center}@media(max-width:720px){.direct-book-visual{grid-template-columns:1fr!important}}</style>
+<style>.product-card[hidden]{display:none!important}.direct-book-visual{margin:0 0 28px;padding:22px;border:1px solid rgba(200,163,90,.35);background:rgba(255,255,255,.02);display:grid;grid-template-columns:minmax(220px,360px) 1fr;gap:28px;align-items:center}@media(max-width:720px){.direct-book-visual{grid-template-columns:1fr!important}}</style>
+  <script src="house-journey.js?v=20261008"></script>
 </head>
 <body class="shop-page">
   <div class="feathers" aria-hidden="true"></div>
@@ -168,7 +169,7 @@
       <p><strong>Gilded Dispatch</strong><span>UK delivery · £3.49 flat rate</span></p>
     </section>
 
-    <section class="section shop-catalogue" id="catalogue"><div id="direct-editions" aria-hidden="true"></div>
+    <section class="section shop-catalogue" id="catalogue"><div id="direct-editions"></div><p id="shop-house-note" role="status"></p>
       <div class="catalogue-heading">
         <div><p class="eyebrow">The current inventory</p><h2>Browse the Shelves</h2><p><strong>Direct Book One editions start at £8.99 and every direct copy includes a FREE House bookmark of your choice plus the FREE digital House Starter Pack.</strong></p></div>
         <p>Buy Book One direct and receive a FREE House bookmark of your choice plus the FREE digital House Starter Pack. Choose Crow, Owl, Raven, Swan, Falcon or Hawk at secure Stripe checkout. UK delivery is £3.49.</p>
@@ -246,12 +247,12 @@
 
         <article class="product-card" data-category="prints" data-product-id="AV-MP-001" data-name="Aerie Dominion Map — A2" data-price="18.00">
           <div class="product-image map-product"><img src="assets/map.jpg" alt="Map of the Aerie Dominion" /><span class="product-badge">A2 Print</span></div>
-          <div class="product-copy"><p class="product-type">Cartographer’s archive</p><h3>Aerie Dominion Map</h3><p class="product-description">A detailed A2 wall map of the Dominion, its ancient cities, hidden roads and forbidden reaches.</p><div class="product-bottom"><strong>£18.00</strong><button type="button" data-add-to-cart>Add to basket</button></div></div>
+          <div class="product-copy"><p class="product-type">Cartographer’s archive</p><h3>Aerie Dominion Map</h3><p class="product-description">A detailed A2 wall map of the Dominion, its ancient cities, hidden roads and forbidden reaches.</p><div class="product-bottom"><strong>£18.00</strong><button type="button" disabled>Coming soon</button></div></div>
         </article>
 
         <article class="product-card" data-category="prints" data-product-id="AV-AR-004" data-name="Hall of Chronicles Archive Print" data-price="16.00">
           <div class="product-image archive-product"><img src="assets/archives/ra-004-hall-of-chronicles.jpg" alt="Hall of Chronicles archive artwork" /><span class="product-badge">Archive IV</span></div>
-          <div class="product-copy"><p class="product-type">Royal Archive print</p><h3>Hall of Chronicles</h3><p class="product-description">An archival art print of the Academy’s guarded repository, prepared in the Royal Archive style.</p><div class="product-bottom"><strong>£16.00</strong><button type="button" data-add-to-cart>Add to basket</button></div></div>
+          <div class="product-copy"><p class="product-type">Royal Archive print</p><h3>Hall of Chronicles</h3><p class="product-description">An archival art print of the Academy’s guarded repository, prepared in the Royal Archive style.</p><div class="product-bottom"><strong>£16.00</strong><button type="button" disabled>Coming soon</button></div></div>
         </article>
 
         <article class="product-card" data-category="relics" data-product-id="AV-BM-001" data-name="The Raven’s Heir — Six House Bookmark Set" data-price="8.50">
@@ -302,7 +303,11 @@
 
   
   <footer class="site-footer"><p>&copy; <span id="year">2026</span> R.A. Crawford. All rights reserved. · <a href="policies.html">Shop Policies</a> · <a href="https://www.instagram.com/racrawfordauthor/" target="_blank" rel="noopener noreferrer" aria-label="R.A. Crawford on Instagram">@racrawfordauthor on Instagram</a></p></footer>
-  <script src="main.js?v=20260928seo"></script>
-</body>
+  <script src="main.js?v=20261008"></script>
+  <script src="shop.js?v=20261008"></script>
+<script>
+const shopHouse=window.ProjectAvisJourney.getHouse();
+if(shopHouse) document.getElementById("shop-house-note").textContent="Your Trial House is " + shopHouse + ". Choose " + shopHouse + " in the free bookmark menu at checkout, or choose another House.";
+</script></body>
 </html>
 <!-- bookmark deployment refresh 2026-10-05 -->
