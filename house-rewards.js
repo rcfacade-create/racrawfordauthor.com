@@ -71,8 +71,8 @@ async function buildCertificateSvg(name, house, dateText) {
   if (!certificateHouses[house]) throw new Error('Choose one of the six Houses.');
   const houses = Object.keys(certificateHouses), record = certificateHouses[house];
   const [plate, ...crests] = await Promise.all([
-    imageToDataUrl('/aerie/assets/certificates/engraved-background.png'),
-    ...houses.map(h => imageToDataUrl('/aerie/assets/certificates/book-one/' + h.toLowerCase() + '.png'))
+    imageToDataUrl('/aerie/assets/certificates/engraved-background.jpg'),
+    ...houses.map(h => imageToDataUrl('/aerie/assets/certificates/book-one/' + h.toLowerCase() + '.webp'))
   ]);
   // Original, unaltered Book One image bytes. The viewport excludes the image's
   // existing heading and translation; its engraved crest and motto remain intact.
@@ -109,18 +109,59 @@ async function buildCertificateSvg(name, house, dateText) {
   </svg>`;
 }
 
-      function downloadSvg(svg, filename) {
-        const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = filename;
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
-      }
-
+const encoder = new TextEncoder();
+function certificatePdf(jpegBytes, width, height) {
+  const parts = [], offsets = [0]; let length = 0;
+  const append = value => {const bytes = typeof value === 'string' ? encoder.encode(value) : value; parts.push(bytes); length += bytes.length;};
+  const object = (id, content) => {offsets[id] = length; append(`${id} 0 obj\n${content}\nendobj\n`);};
+  append('%PDF-1.4\n');
+  object(1, '<< /Type /Catalog /Pages 2 0 R >>');
+  object(2, '<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
+  object(3, '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 841.89 595.28] /Resources << /XObject << /Certificate 4 0 R >> >> /Contents 5 0 R >>');
+  offsets[4] = length;
+  append(`4 0 obj\n<< /Type /XObject /Subtype /Image /Width ${width} /Height ${height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${jpegBytes.length} >>\nstream\n`);
+  append(jpegBytes); append('\nendstream\nendobj\n');
+  const commands = 'q\n841.89 0 0 595.28 0 0 cm\n/Certificate Do\nQ\n';
+  object(5, `<< /Length ${encoder.encode(commands).length} >>\nstream\n${commands}endstream`);
+  const xref = length;
+  append('xref\n0 6\n0000000000 65535 f \n');
+  for(let i=1;i<=5;i++) append(String(offsets[i]).padStart(10,'0') + ' 00000 n \n');
+  append(`trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF\n`);
+  return new Blob(parts, {type:'application/pdf'});
+}
+function offerDownload(blob, filename, note) {
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a'); link.href = url; link.download = filename;
+  link.textContent = 'Save PDF'; link.className = 'aerie-button aerie-button-secondary';
+  if(note) {
+    const oldUrl = note.dataset.downloadUrl;
+    if(oldUrl) setTimeout(()=>URL.revokeObjectURL(oldUrl),60000);
+    note.dataset.downloadUrl = url;
+    note.replaceChildren(document.createTextNode('Your PDF is ready. If it did not download automatically, tap Save PDF. '),link);
+    // Keep this link valid for a second tap with a fresh user gesture on phones.
+  } else {document.body.appendChild(link);}
+  link.click();
+  if(!note) {link.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);}
+}
+async function downloadCertificatePdf(svg, filename, note) {
+  const renderUrl = URL.createObjectURL(new Blob([svg],{type:'image/svg+xml;charset=utf-8'}));
+  try {
+    const image = new Image(); image.src = renderUrl; await image.decode();
+    const canvas = document.createElement('canvas'); canvas.width = 2400; canvas.height = 1697;
+    const ctx = canvas.getContext('2d');
+    if(!ctx) throw new Error('Unable to prepare the PDF. Please use Print / Save as PDF.');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.drawImage(image,0,0,canvas.width,canvas.height);
+    const jpeg = await new Promise((resolve,reject)=>canvas.toBlob(blob=>blob ? resolve(blob) : reject(new Error('Unable to prepare the PDF. Please use Print / Save as PDF.')),'image/jpeg',.94));
+    const pdf = certificatePdf(new Uint8Array(await jpeg.arrayBuffer()),canvas.width,canvas.height);
+    offerDownload(pdf,filename.replace(/\.svg$/i,'.pdf'),note);
+    return {bytes:pdf.size};
+  } finally {URL.revokeObjectURL(renderUrl);}
+}
+function downloadSvg(svg, filename) {
+  const blob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' });
+  offerDownload(blob,filename);
+}
 
 async function buildWallpaperCanvas(house) {
   if (!houseRecords[house]) throw new Error("Choose one of the six Houses.");
@@ -151,5 +192,5 @@ async function buildWallpaperCanvas(house) {
           ctx.fillText("racrawfordauthor.com",585,2320);
   return canvas;
 }
-window.ProjectAvisRewards = { records: houseRecords, sigils: houseSigils, certificateHouses, buildCertificateSvg, downloadSvg, buildWallpaperCanvas };
+window.ProjectAvisRewards = { records: houseRecords, sigils: houseSigils, certificateHouses, buildCertificateSvg, certificatePdf, downloadSvg, downloadCertificatePdf, buildWallpaperCanvas };
 })();

@@ -16,3 +16,7 @@ Canonical source: `The War of Feather and Shadow - Book I - Version 2.docx`, ope
 All certificate entry points load the new version: personalised Trial preview/download/print, blank certificates and Starter Pack certificate buttons. The certificate palette is scoped to certificates; unrelated wallpaper and share art are not silently redesigned.
 
 Validation: all six SVG outputs rendered and visually checked for border and crest/text separation. Tests verify the exact source crest bytes are embedded, all six footer Houses, matching motto/colour, escaped personal names and 3508 × 2480 output geometry. SVG text remains vector; the decorative background itself is a 1536 × 1024 raster plate, so the export dimensions are not a claim of native 300-dpi background detail.
+
+## Phone download reliability follow-up
+
+The original self-contained SVG was approximately 10.6 MB and revoked its download URL after one second. Downloads now produce an A4 landscape PDF, with a persistent explicit Save PDF link on the Trial and blank page (also the Starter Pack). The automatic handoff is an attempt, not a claim that the file reached the user's device. Original PNGs remain archived; served crests are lossless WebP copies with decoded RGBA equality verified. The background is encoded as quality-94 JPEG without changing dimensions or composition. Text stays vector in the page preview; the downloadable PDF flattens the certificate at 2400 × 1697 and embeds a JPEG. Print / Save as PDF remains available for browser-native vector text.

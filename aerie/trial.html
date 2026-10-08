@@ -22,7 +22,7 @@
   </style>
   <link rel="canonical" href="https://racrawfordauthor.com/aerie/trial.html" />
   <script src="../house-journey.js?v=20261008"></script>
-  <script src="../house-rewards.js?v=20261008-canon2"></script>
+  <script src="../house-rewards.js?v=20261008-pdf1"></script>
   <script src="../analytics.js?v=20261008"></script>
 </head>
 
@@ -88,7 +88,7 @@
           <label for="certificate-name">Name to appear on the certificate</label>
           <input maxlength="80" id="certificate-name" type="text" autocomplete="name" placeholder="Enter your name" />
           <div class="trial-actions">
-            <button class="aerie-button" id="download-certificate" type="button">Download Personalised Certificate</button>
+            <button class="aerie-button" id="download-certificate" type="button">Download Personalised Certificate (PDF)</button>
             <button class="aerie-button aerie-button-secondary" id="print-certificate" type="button">Print / Save as PDF</button>
             <a class="aerie-button aerie-button-secondary" href="certificate.html?v=20261008-canon1">Blank Certificate</a>
           </div>
@@ -482,7 +482,7 @@ document.getElementById("certificate-name").oninput=()=>{clearTimeout(window.__c
 
 }
 
-      const { buildCertificateSvg, downloadSvg } = window.ProjectAvisRewards;
+      const { buildCertificateSvg, downloadCertificatePdf } = window.ProjectAvisRewards;
 
       async function createPersonalCertificate(mode) {
         const nameInput = document.getElementById("certificate-name");
@@ -508,10 +508,9 @@ document.getElementById("certificate-name").oninput=()=>{clearTimeout(window.__c
             day: "numeric", month: "long", year: "numeric"
           }).format(new Date());
           const svg = await buildCertificateSvg(name, currentWinningHouse, dateText);
-          const filename = `trial-of-the-houses-${currentWinningHouse.toLowerCase()}-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}.svg`;
+          const filename = `trial-of-the-houses-${currentWinningHouse.toLowerCase()}-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}.pdf`;
           if (mode === "download") {
-            downloadSvg(svg, filename);
-            note.textContent = "Your personalised certificate has been downloaded.";
+            await downloadCertificatePdf(svg, filename, note);
             document.dispatchEvent(new CustomEvent("projectAvis:rewardDownload", {detail:{reward:"certificate",house:currentWinningHouse}}));
           } else {
             printWindow.document.write(`<!doctype html><html><head><title>Trial of the Houses Certificate</title><style>@page{size:A4 landscape;margin:0}html,body{margin:0;background:#ddd}svg{display:block;width:100vw;height:100vh}@media print{body{background:#fff}}</style></head><body>${svg}<script>window.onload=()=>setTimeout(()=>window.print(),250)<\/script></body></html>`);

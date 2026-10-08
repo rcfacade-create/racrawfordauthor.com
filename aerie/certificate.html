@@ -35,18 +35,19 @@
   <main class="certificate-page">
     <p class="aerie-kicker">Aethelmar Academy Record Office</p>
     <h1>Blank Trial Certificate</h1>
-    <p class="certificate-note">This engraved certificate uses the original Book One House crests and colours. Choose a House, then download the scalable artwork or print it at A4 landscape.</p>
+    <p class="certificate-note">This engraved certificate uses the original Book One House crests and colours. Choose a House, then download the PDF or print it at A4 landscape.</p>
     <div class="certificate-toolbar">
       <label for="blank-house">House:</label>
       <select id="blank-house"><option>Crow</option><option>Owl</option><option>Hawk</option><option>Falcon</option><option>Swan</option><option>Raven</option></select>
-      <button class="aerie-button" id="download-blank" type="button">Download Blank Certificate</button>
+      <button class="aerie-button" id="download-blank" type="button">Download Blank Certificate (PDF)</button>
       <button class="aerie-button aerie-button-secondary" id="print-blank" type="button">Print / Save as PDF</button>
       <a class="aerie-button aerie-button-secondary" href="trial.html?v=20261006-2">Return to the Trial</a>
     </div>
+    <p id="blank-download-note" role="status" aria-live="polite"></p>
     <section class="certificate-stage" id="certificate-stage" aria-label="Blank Trial of the Houses certificate"></section>
   </main>
 <script src="../house-journey.js?v=20261008"></script>
-<script src="../house-rewards.js?v=20261008-canon2"></script>
+<script src="../house-rewards.js?v=20261008-pdf1"></script>
 <script src="../analytics.js?v=20261008"></script>
 <script>
 const select = document.getElementById("blank-house"), stage = document.getElementById("certificate-stage");
@@ -58,11 +59,13 @@ async function refresh() {
 }
 select.addEventListener("change", refresh);
 document.getElementById("download-blank").addEventListener("click", async () => {
+  const note = document.getElementById("blank-download-note");
+  note.textContent = "Preparing your PDF…";
   try {
     const svg = await window.ProjectAvisRewards.buildCertificateSvg("", select.value, "");
-    window.ProjectAvisRewards.downloadSvg(svg, "trial-of-the-houses-" + select.value.toLowerCase() + "-blank-certificate.svg");
+    await window.ProjectAvisRewards.downloadCertificatePdf(svg, "trial-of-the-houses-" + select.value.toLowerCase() + "-blank-certificate.pdf", note);
     document.dispatchEvent(new CustomEvent("projectAvis:rewardDownload", {detail:{reward:"blank_certificate",house:select.value}}));
-  } catch (_) { stage.textContent = "Unable to download certificate. Please try again."; }
+  } catch (_) { note.textContent = "Unable to prepare the PDF. Please try again, or use Print / Save as PDF."; }
 });
 document.getElementById("print-blank").addEventListener("click", () => { window.print();
   document.dispatchEvent(new CustomEvent("projectAvis:rewardPrint", {detail:{reward:"blank_certificate",house:select.value}}));

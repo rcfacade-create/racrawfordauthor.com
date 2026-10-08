@@ -35,7 +35,7 @@
     const name = document.getElementById("starter-name")?.value.trim() || "";
     const date = name ? new Intl.DateTimeFormat("en-GB", {day:"numeric",month:"long",year:"numeric"}).format(new Date()) : "";
     const svg = await window.ProjectAvisRewards.buildCertificateSvg(name, house, date);
-    window.ProjectAvisRewards.downloadSvg(svg, "trial-of-the-houses-" + house.toLowerCase() + "-certificate.svg");
+    await window.ProjectAvisRewards.downloadCertificatePdf(svg, "trial-of-the-houses-" + house.toLowerCase() + "-certificate.pdf", status);
   }
   async function lore(house){
     const source=await img("../aerie/assets/sigils/"+house.toLowerCase()+".png"),w=1240,h=1754,c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d");
@@ -83,7 +83,7 @@
       if(t==="academy-letter") await academyDoc("letter");
       if(t==="academy-timetable") await academyDoc("timetable");
       if(t==="academy-record") await academyDoc("record");
-      status.textContent="Your download is ready. Save it to your device.";
+      if(t!=="certificate") status.textContent="Your download is ready. Save it to your device.";
       document.dispatchEvent(new CustomEvent("projectAvis:rewardDownload", {detail:{reward:t,house:h||window.ProjectAvisJourney?.getHouse()||"unknown"}}));
     } catch (_) {
       status.textContent="The download could not be prepared. Please try again.";
