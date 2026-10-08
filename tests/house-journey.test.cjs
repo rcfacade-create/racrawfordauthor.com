@@ -68,6 +68,11 @@ test('all six certificates embed artwork and escape personalised names',async()=
     assert.ok(svg.includes(`HOUSE ${house.toUpperCase()}`));
     assert.equal((svg.match(/href="data:image\/png;base64,/g)||[]).length,7);
     assert.ok(svg.includes('width="3508" height="2480"'));
+    assert.equal((svg.match(/data-house="/g)||[]).length,6);
+    const canonical = fs.readFileSync(path.join(root,'aerie/assets/certificates/book-one',house.toLowerCase()+'.png')).toString('base64');
+    assert.ok(svg.includes(canonical));
+    assert.ok(svg.includes(env.context.ProjectAvisRewards.certificateHouses[house].motto));
+    assert.ok(svg.includes(env.context.ProjectAvisRewards.certificateHouses[house].primary));
   }
 });
 test('book filter hides unrelated products and supports All wares',()=>{
