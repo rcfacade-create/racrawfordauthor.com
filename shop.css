@@ -100,3 +100,9 @@ body.cart-open { overflow:hidden; }
 .bookmark-product { display:flex; align-items:center; justify-content:center; padding:14px; background:radial-gradient(circle,#2b2419,#080706 72%); }
 .bookmark-product>img { width:100%; height:100%; object-fit:contain; padding:0; background:transparent; }
 .product-card:hover .bookmark-product>img { transform:scale(1.015); }
+
+/* Colouring book: keep two checkout choices within their card at all widths. */
+#colouring-book .colouring-book-actions{display:flex;flex-direction:column;align-items:stretch;gap:14px;min-width:0}
+#colouring-book .colouring-book-actions>strong{display:block}
+#colouring-book .colouring-book-buttons{display:grid;grid-template-columns:1fr;gap:10px;min-width:0}
+#colouring-book .colouring-book-buttons .btn{display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:100%;min-width:0;max-width:100%;padding:12px 14px;text-align:center;white-space:normal;overflow-wrap:break-word;line-height:1.45}
