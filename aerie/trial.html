@@ -49,7 +49,7 @@
   </header>
 
   <main class="trial-page">
-<aside aria-label="Trial of the Houses giveaway" style="max-width:980px;margin:20px auto 0;padding:20px 22px;border:1px solid rgba(200,163,90,.5);background:linear-gradient(135deg,rgba(200,163,90,.14),rgba(45,18,62,.30));text-align:center"><p class="aerie-kicker" style="margin:0 0 8px">Project Avis · Giveaway</p><h2 style="margin:0 0 10px">Win a signed Book One bundle</h2><p style="margin:0 0 12px">Take the Trial, share your personalised House Certificate on Instagram, and comment your House on the competition post for a chance to win a signed paperback, stickers, bookmark and colouring book.</p><p style="margin:0 0 12px"><strong>Closes 28 November 2026 at 11:59pm GMT · UK 18+ · No purchase necessary</strong></p><p style="margin:0"><a href="../giveaway-terms.html" style="color:#e6c785;text-decoration:underline;font-weight:700">Read the full giveaway Terms &amp; Conditions</a> · <a href="https://www.instagram.com/racrawfordauthor/" style="color:#e6c785;text-decoration:underline">Instagram @racrawfordauthor</a></p></aside>
+<aside aria-label="Trial of the Houses giveaway" style="max-width:980px;margin:20px auto 0;padding:20px 22px;border:1px solid rgba(200,163,90,.5);background:linear-gradient(135deg,rgba(200,163,90,.14),rgba(45,18,62,.30));text-align:center"><p class="aerie-kicker" style="margin:0 0 8px">Project Avis · Giveaway</p><h2 style="margin:0 0 10px">Win a signed Book One bundle</h2><p style="margin:0 0 12px">Complete the free Trial and save your personalised certificate. Share a picture of it to your Instagram Story and add an @racrawfordauthor mention sticker (private account: send the certificate by DM instead). Then comment your House on the official competition post. Win a signed paperback, stickers, bookmark and colouring book.</p><p style="margin:0 0 12px"><strong>Closes 28 November 2026 at 11:59pm GMT · UK 18+ · No purchase necessary</strong></p><p style="margin:0"><a href="../giveaway-terms.html" style="color:#e6c785;text-decoration:underline;font-weight:700">Read the full giveaway Terms &amp; Conditions</a> · <a href="https://www.instagram.com/racrawfordauthor/" style="color:#e6c785;text-decoration:underline">Instagram @racrawfordauthor</a> · <a href="https://www.instagram.com/p/DfjteeINcp3/" style="color:#e6c785;text-decoration:underline;font-weight:700">Open the official competition post</a></p></aside>
 
 
     <section class="trial-shell">
@@ -91,11 +91,23 @@
           <label for="certificate-name">Name to appear on the certificate</label>
           <input maxlength="80" id="certificate-name" type="text" autocomplete="name" placeholder="Enter your name" />
           <div class="trial-actions">
+            <button class="aerie-button" id="download-certificate-image" type="button">Save Certificate Image for Instagram (PNG)</button>
             <button class="aerie-button" id="download-certificate" type="button">Download Personalised Certificate (PDF)</button>
             <button class="aerie-button aerie-button-secondary" id="print-certificate" type="button">Print / Save as PDF</button>
             <a class="aerie-button aerie-button-secondary" href="certificate.html?v=20261008-canon1">Blank Certificate</a>
           </div>
           <p class="certificate-note" id="certificate-note" role="status" aria-live="polite"></p>
+          <section class="trial-rewards" aria-label="Giveaway entry checklist">
+<h3>Finish your giveaway entry</h3>
+<ol style="text-align:left;line-height:1.8">
+<li>Enter your name above and tap <strong>Save Certificate Image for Instagram (PNG)</strong>.</li>
+<li>Save the image to Photos or your gallery. On iPhone, open the saved image and use Share → Save Image if needed. You can also take a screenshot of your personalised certificate preview.</li>
+<li>Upload the certificate picture to your Instagram Story and add an <strong>@racrawfordauthor mention sticker</strong> so we can see it. Private account? Send the certificate by DM to @racrawfordauthor instead.</li>
+<li><a href="https://www.instagram.com/p/DfjteeINcp3/" style="color:#e6c785;text-decoration:underline">Open the official competition post</a> and comment your assigned House.</li>
+</ol>
+<p><strong>Complete every step by 28 November 2026, 11:59pm GMT.</strong> UK residents 18+; one entry per person; no purchase necessary. Winner announced 29 November.</p>
+<p>Downloading a certificate or sharing a result card alone does not enter you. <a href="../giveaway-terms.html" style="color:#e6c785;text-decoration:underline">Full giveaway terms</a>.</p>
+</section>
           <div id="certificate-preview" style="margin:1.5rem auto 0;max-width:760px"></div>
         </div>
 
@@ -104,11 +116,12 @@
           <h3>Keep Your House With You</h3>
           <p>Your result unlocks a personalised certificate, a House phone wallpaper, your free House Starter Pack, and the opening chapter of <em>The War of Feather &amp; Shadow</em>.</p>
           <div class="trial-actions">
-            <button class="aerie-button" id="share-house-card" type="button">Share My House Result</button>
+            <button class="aerie-button" id="share-house-card" type="button">Share House Result Card (Extra)</button>
             <button class="aerie-button aerie-button-secondary" id="download-wallpaper" type="button">Download House Wallpaper</button>
             <a class="aerie-button aerie-button-secondary reward-link" data-reward="starter_pack" href="../downloads/free-house-starter.html">Free House Starter Pack</a>
             <a class="aerie-button aerie-button-secondary reward-link" data-reward="chapter_one" href="../chapter-one.html">Read Chapter One Free</a>
           </div>
+          <p>For the giveaway, share your personalised certificate using the checklist above. This optional result card is a separate reader extra.</p>
           <p class="certificate-note" id="share-note" role="status" aria-live="polite"></p>
           <p class="certificate-note" id="wallpaper-note" role="status" aria-live="polite"></p>
         </div>
@@ -526,6 +539,39 @@ document.getElementById("certificate-name").oninput=()=>{clearTimeout(window.__c
         }
       }
 
+
+      async function saveCertificateImage() {
+        const input = document.getElementById("certificate-name");
+        const note = document.getElementById("certificate-note");
+        const name = input.value.trim();
+        if (!name) { note.textContent = "Enter the name you want recorded on the certificate."; input.focus(); return; }
+        if (!currentWinningHouse) { note.textContent = "Complete the Trial first."; return; }
+        const house = currentWinningHouse;
+        note.textContent = "Preparing your certificate image…";
+        let renderUrl;
+        try {
+          const date = new Intl.DateTimeFormat("en-GB", {day:"numeric",month:"long",year:"numeric"}).format(new Date());
+          const svg = await buildCertificateSvg(name, house, date);
+          renderUrl = URL.createObjectURL(new Blob([svg], {type:"image/svg+xml;charset=utf-8"}));
+          const image = new Image(); image.src = renderUrl; await image.decode();
+          const canvas = document.createElement("canvas"); canvas.width = 2400; canvas.height = 1697;
+          const ctx = canvas.getContext("2d");
+          if (!ctx) throw new Error("Use a screenshot of the personalised certificate preview instead.");
+          ctx.fillStyle = "#fff"; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.drawImage(image,0,0,canvas.width,canvas.height);
+          const blob = await new Promise((resolve,reject) => canvas.toBlob(value => value ? resolve(value) : reject(new Error("Use a screenshot of your certificate preview instead.")), "image/png"));
+          const url = URL.createObjectURL(blob);
+          const previous = note.dataset.imageUrl;
+          if (previous) setTimeout(() => URL.revokeObjectURL(previous), 60000);
+          note.dataset.imageUrl = url;
+          const link = document.createElement("a"); link.href = url; link.download = "trial-certificate-" + house.toLowerCase() + ".png"; link.textContent = "Save certificate image";
+          link.style.cssText = "color:#e6c785;text-decoration:underline";
+          note.replaceChildren(document.createTextNode("Your certificate image is ready. If it did not save automatically, tap "), link, document.createTextNode(". Save it to Photos or your gallery, then follow the Story/DM and comment steps below. This download does not submit an entry."));
+          link.click();
+          document.dispatchEvent(new CustomEvent("projectAvis:rewardDownload", {detail:{reward:"certificate_image",house}}));
+        } catch (error) { note.textContent = error.message || "Please take a screenshot of your personalised certificate preview instead."; }
+        finally { if (renderUrl) URL.revokeObjectURL(renderUrl); }
+      }
+
       async function buildHouseShareCard() {
         if(!currentWinningHouse) throw new Error("Complete the Trial first.");
         const record=houseRecords[currentWinningHouse];
@@ -603,6 +649,7 @@ document.getElementById("certificate-name").oninput=()=>{clearTimeout(window.__c
       document.getElementById("download-wallpaper").addEventListener("click",downloadHouseWallpaper);
       document.querySelectorAll("[data-reward]").forEach(link=>link.addEventListener("click",()=>document.dispatchEvent(new CustomEvent("projectAvis:rewardClick",{detail:{reward:link.dataset.reward,house:currentWinningHouse}}))));
 
+      document.getElementById("download-certificate-image").addEventListener("click", saveCertificateImage);
       // Wire event listeners
       startButton.addEventListener('click', startTrial);
       restartButton.addEventListener('click', startTrial);
